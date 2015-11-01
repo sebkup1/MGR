@@ -1,0 +1,105 @@
+NET clk LOC = Ad14;
+#NET clk LOC = m21;
+NET "reset" LOC = AE24;# | CLOCK_DEDICATED_ROUTE = FALSE;
+#NET "reset" LOC = W19 | CLOCK_DEDICATED_ROUTE = FALSE;
+
+#NET "iSEL" LOC = U19;
+
+#Diody
+NET led<0>		LOC = N24;
+NET led<1>		LOC = N23;
+#NET led<2>		LOC = M24;
+#NET led<3>		LOC = L24;
+#NET led<4>		LOC = L23;
+#NET led<5>		LOC = K24;
+#NET led<6>		LOC = H24;
+#NET led<7>		LOC = D24;
+
+
+NET dip_switch<0> LOC = W19;
+NET dip_switch<1> LOC = Y24;
+NET dip_switch<2> LOC = K19;
+NET dip_switch<3> LOC = V24;
+NET dip_switch<4> LOC = U20;# | CLOCK_DEDICATED_ROUTE = FALSE
+NET dip_switch<5> LOC = U23;
+#NET dip_switch<6> LOC = U24;
+#NET dip_switch<7> LOC = U19;
+
+
+# Ethernet PHY constraints 
+NET Ethernet_Lite_COL 			LOC = "T23" | IOSTANDARD = "LVCMOS33"; 
+NET Ethernet_Lite_CRS 			LOC = "U22" | IOSTANDARD = "LVCMOS33"; 
+NET Ethernet_Lite_MDC 			LOC = "L19"; #| IOSTANDARD = "LVCMOS33"; 
+NET Ethernet_Lite_MDIO 			LOC = "L18";# | IOSTANDARD = "LVCMOS33"; 
+NET Ethernet_Lite_PHY_RST_N 	LOC = "T20";# | IOSTANDARD = "LVCMOS33" | TIG; 
+NET Ethernet_Lite_RXD<0> 		LOC = "N22" | IOSTANDARD = "LVCMOS33"; 
+NET Ethernet_Lite_RXD<1> 		LOC = "N21" | IOSTANDARD = "LVCMOS33"; 
+NET Ethernet_Lite_RXD<2> 		LOC = "M23" | IOSTANDARD = "LVCMOS33"; 
+NET Ethernet_Lite_RXD<3> 		LOC = "N20" | IOSTANDARD = "LVCMOS33"; 
+NET Ethernet_Lite_RX_CLK 		LOC = "C15" | IOSTANDARD = "LVCMOS33"; 
+NET Ethernet_Lite_RX_DV 		LOC = "M19" | IOSTANDARD = "LVCMOS33"; 
+NET Ethernet_Lite_RX_ER 		LOC = "N19" | IOSTANDARD = "LVCMOS33"; 
+NET Ethernet_Lite_TXD<0> 		LOC = "P21"; #| IOSTANDARD = "LVCMOS33"; 
+NET Ethernet_Lite_TXD<1> 		LOC = "P22"; #| IOSTANDARD = "LVCMOS33"; 
+NET Ethernet_Lite_TXD<2> 		LOC = "R20"; #| IOSTANDARD = "LVCMOS33"; 
+NET Ethernet_Lite_TXD<3> 		LOC = "T22"; #| IOSTANDARD = "LVCMOS33"; 
+NET Ethernet_Lite_TX_CLK 		LOC = "A15" | IOSTANDARD = "LVCMOS33"; 
+NET Ethernet_Lite_TX_EN 		LOC = "P20";# | IOSTANDARD = "LVCMOS33";
+
+# LPC2368 constraints (Inwestigated)
+NET ENET_TXD<0> 	LOC = AD6; 	#LA02_P --P1.0
+NET ENET_TXD<1> 	LOC = AF6; 	#LA02_N --P1.1
+NET ENET_TX_EN 	LOC = AD8;  #LA04_P--P1.4
+NET ENET_CRS 		LOC = AF8; 	#LA04_N --P1.8 
+NET ENET_RXD<0> 	LOC = AE11; #LA07_P --P1.9
+NET ENET_RXD<1> 	LOC = AF11; #LA07_N--P1.10
+NET ENET_RX_ER 	LOC = AA13;	#LA11_P--P1.14
+NET ENET_REF_CLK 	LOC = AB13;	#LA11_N--P1.15
+NET ENET_MDC 		LOC = U15 | CLOCK_DEDICATED_ROUTE = FALSE;	#LA15_P--P1.16
+NET ENET_MDIO 		LOC = V14;	#LA15_N--P1.17
+
+
+# UART 
+NET uart_rx LOC = A21;
+NET uart_tx LOC = A20;
+
+# LCD
+NET "oLCD_DAT_OPV[0]" LOC = W18;
+NET "oLCD_DAT_OPV[1]" LOC = V18;
+NET "oLCD_DAT_OPV[2]" LOC = D18;
+NET "oLCD_DAT_OPV[3]" LOC = T18;
+NET "oLCD_EN_OPV" 	 LOC = D21;
+NET "oLCD_RW_OPV" 	 LOC = C21;
+NET "oLCD_SEL_OPV" 	 LOC = F24;
+
+#NET "iSEL" LOC = U19;
+
+# LPC PicoBlaze Transfer
+NET LPC_Pico_Data_OUT<0> LOC = AE5;
+NET LPC_Pico_Data_OUT<1> LOC = AF5;
+NET LPC_Pico_Data_OUT<2> LOC = V11;
+NET LPC_Pico_Data_OUT<3> LOC = W11;
+NET LPC_Pico_Data_OUT<4> LOC = AA11;
+NET LPC_Pico_Data_OUT<5> LOC = AB11;
+NET LPC_Pico_Data_OUT<6> LOC = AD12;
+NET LPC_Pico_Data_OUT<7> LOC = AF12;
+#
+NET LPC_Pico_Data_IN<0> LOC = ae15;
+NET LPC_Pico_Data_IN<1> LOC = ac15;
+NET LPC_Pico_Data_IN<2> LOC = ad15;
+NET LPC_Pico_Data_IN<3> LOC = ac16;
+
+
+
+NET LPC_to_LCD_Pico_Ready_Receive  	LOC = Y14;  #LA16_P P2.10  ready to rad from pico
+NET LCD_Pico_to_LPC_D_V  				LOC = AA14; #LA16_N P2.12
+
+NET LPC_to_LCD_Pico_D_V					LOC = V12;	#P0.11
+NET LCD_Pico_to_LPC_Ready_Receive	LOC = W12;	#P0.15
+
+NET FPGA_LPC_EMAC_synch_1				LOC = ac9;	#P0.7		LA06_P
+NET FPGA_LPC_EMAC_synch_2				LOC = ad9;	#P0.8		LA06_N
+
+NET LPCreq9  								LOC = AA12;	#P09
+NET LPCreq10 								LOC = AC12;	#P0.10
+

@@ -1,0 +1,1377 @@
+Release 14.7 - xst P.20131013 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.48 secs
+ 
+--> Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.48 secs
+ 
+--> Reading design: main.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "main.prj"
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "main"
+Output Format                      : NGC
+Target Device                      : xc6slx45-3-fgg676
+
+---- Source Options
+Top Module Name                    : main
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Shift Register Extraction          : YES
+ROM Style                          : Auto
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Shift Register Minimum Size        : 2
+Use DSP Block                      : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+LUT Combining                      : Auto
+Reduce Control Sets                : Auto
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 100000
+Add Generic Clock Buffer(BUFG)     : 16
+Register Duplication               : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Auto
+Use Synchronous Set                : Auto
+Use Synchronous Reset              : Auto
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Power Reduction                    : NO
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+DSP48 Utilization Ratio            : 100
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Parsing VHDL file "C:\studia\MGR\FPGA\mgr\uart_tx6.vhd" into library work
+Parsing entity <uart_tx6>.
+Parsing architecture <low_level_definition> of entity <uart_tx6>.
+Parsing VHDL file "C:\studia\MGR\FPGA\mgr\uart_rx6.vhd" into library work
+Parsing entity <uart_rx6>.
+Parsing architecture <low_level_definition> of entity <uart_rx6>.
+Parsing VHDL file "C:\studia\MGR\FPGA\mgr\program.vhd" into library work
+Parsing package <jtag_loader_pkg>.
+Parsing package body <jtag_loader_pkg>.
+Parsing entity <program>.
+Parsing architecture <low_level_definition> of entity <program>.
+Parsing entity <jtag_loader_6>.
+Parsing architecture <Behavioral> of entity <jtag_loader_6>.
+Parsing VHDL file "C:\studia\MGR\FPGA\mgr\LCD_driver.vhd" into library work
+Parsing entity <LCD_DRIVER>.
+Parsing architecture <BEHAVIORAL> of entity <lcd_driver>.
+Parsing VHDL file "C:\studia\MGR\FPGA\mgr\lcd_clk_gen.vhd" into library work
+Parsing entity <lcd_clk_gen>.
+Parsing architecture <Behavioral> of entity <lcd_clk_gen>.
+Parsing VHDL file "C:\studia\MGR\FPGA\mgr\kcpsm6.vhd" into library work
+Parsing entity <kcpsm6>.
+Parsing architecture <low_level_definition> of entity <kcpsm6>.
+Parsing VHDL file "C:\studia\MGR\FPGA\mgr\main.vhd" into library work
+Parsing entity <main>.
+Parsing architecture <Behavioral> of entity <main>.
+
+=========================================================================
+*                            HDL Elaboration                            *
+=========================================================================
+
+Elaborating entity <main> (architecture <Behavioral>) from library <work>.
+
+Elaborating entity <kcpsm6> (architecture <low_level_definition>) with generics from library <work>.
+
+Elaborating entity <program> (architecture <low_level_definition>) with generics from library <work>.
+
+Elaborating entity <jtag_loader_6> (architecture <Behavioral>) with generics from library <work>.
+
+Elaborating entity <uart_tx6> (architecture <low_level_definition>) from library <work>.
+
+Elaborating entity <uart_rx6> (architecture <low_level_definition>) from library <work>.
+
+Elaborating entity <lcd_clk_gen> (architecture <Behavioral>) from library <work>.
+
+Elaborating entity <LCD_DRIVER> (architecture <BEHAVIORAL>) with generics from library <work>.
+INFO:HDLCompiler:679 - "C:\studia\MGR\FPGA\mgr\LCD_driver.vhd" Line 315. Case statement is complete. others clause is never selected
+WARNING:HDLCompiler:92 - "C:\studia\MGR\FPGA\mgr\LCD_driver.vhd" Line 334: reg_setup_1t should be on the sensitivity list of the process
+WARNING:HDLCompiler:92 - "C:\studia\MGR\FPGA\mgr\LCD_driver.vhd" Line 336: reg_setup_2t should be on the sensitivity list of the process
+WARNING:HDLCompiler:92 - "C:\studia\MGR\FPGA\mgr\LCD_driver.vhd" Line 338: clr_t should be on the sensitivity list of the process
+WARNING:HDLCompiler:92 - "C:\studia\MGR\FPGA\mgr\LCD_driver.vhd" Line 340: set_t should be on the sensitivity list of the process
+INFO:HDLCompiler:679 - "C:\studia\MGR\FPGA\mgr\LCD_driver.vhd" Line 700. Case statement is complete. others clause is never selected
+WARNING:HDLCompiler:1127 - "C:\studia\MGR\FPGA\mgr\main.vhd" Line 556: Assignment to inspector ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "C:\studia\MGR\FPGA\mgr\main.vhd" Line 581: Assignment to inspector ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "C:\studia\MGR\FPGA\mgr\main.vhd" Line 690: Assignment to frame ignored, since the identifier is never used
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <main>.
+    Related source file is "C:\studia\MGR\FPGA\mgr\main.vhd".
+WARNING:Xst:647 - Input <dip_switch> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <Ethernet_Lite_COL> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <Ethernet_Lite_CRS> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:2935 - Signal 'led', unconnected in block 'main', is tied to its initial value (00000000).
+WARNING:Xst:2935 - Signal 'Ethernet_Lite_PHY_RST_N', unconnected in block 'main', is tied to its initial value (1).
+    Found 1-bit register for signal <en_16_x_baud>.
+    Found 8-bit register for signal <in_port>.
+    Found 1-bit register for signal <read_from_uart_rx>.
+    Found 1-bit register for signal <uart_tx_reset>.
+    Found 1-bit register for signal <uart_rx_reset>.
+    Found 1-bit register for signal <sEN>.
+    Found 1-bit register for signal <LCD_Pico_to_LPC_D_V>.
+    Found 1-bit register for signal <LCD_Pico_to_LPC_Ready_Receive>.
+    Found 8-bit register for signal <LPC_Pico_Data_OUT>.
+    Found 1-bit register for signal <ENET_CRS>.
+    Found 2-bit register for signal <ENET_RXD>.
+    Found 1-bit register for signal <rx_sel>.
+    Found 2-bit register for signal <tx0_data>.
+    Found 2-bit register for signal <tx_state>.
+    Found 4-bit register for signal <Ethernet_Lite_TXD>.
+    Found 1-bit register for signal <Ethernet_Lite_TX_EN>.
+    Found 1-bit register for signal <start>.
+    Found 12-bit register for signal <g_counter>.
+    Found 4-bit register for signal <stato>.
+    Found 5-bit register for signal <bit_counter>.
+    Found 1-bit register for signal <Ethernet_Lite_MDIO_ENET_MDC_DFF_108_q>.
+    Found 1-bit register for signal <dir>.
+    Found 1-bit register for signal <stato[3]_ENET_MDC_DFF_110>.
+    Found 5-bit register for signal <baud_count>.
+    Found finite state machine <FSM_0> for signal <tx_state>.
+    -----------------------------------------------------------------------
+    | States             | 3                                              |
+    | Transitions        | 6                                              |
+    | Inputs             | 2                                              |
+    | Outputs            | 2                                              |
+    | Clock              | ENET_REF_CLK (falling_edge)                    |
+    | Power Up State     | idle                                           |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+INFO:Xst:1799 - State waitstart is never reached in FSM <stato>.
+INFO:Xst:1799 - State turnaround is never reached in FSM <stato>.
+    Found finite state machine <FSM_1> for signal <stato>.
+    -----------------------------------------------------------------------
+    | States             | 10                                             |
+    | Transitions        | 35                                             |
+    | Inputs             | 7                                              |
+    | Outputs            | 5                                              |
+    | Clock              | Ethernet_Lite_MDC (falling_edge)               |
+    | Power Up State     | preamble                                       |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 5-bit adder for signal <baud_count[4]_GND_5_o_add_1_OUT> created at line 367.
+    Found 12-bit adder for signal <g_counter[11]_GND_5_o_add_29_OUT> created at line 712.
+    Found 5-bit subtractor for signal <GND_5_o_GND_5_o_sub_61_OUT<4:0>> created at line 803.
+WARNING:Xst:737 - Found 1-bit latch for signal <uart_tx_data_in<7>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <uart_tx_data_in<6>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <uart_tx_data_in<5>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <uart_tx_data_in<4>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <uart_tx_data_in<3>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <uart_tx_data_in<2>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <uart_tx_data_in<1>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <uart_tx_data_in<0>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <sDATA<7>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <sDATA<6>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <sDATA<5>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <sDATA<4>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <sDATA<3>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <sDATA<2>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <sDATA<1>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <sDATA<0>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+    Found 1-bit tristate buffer for signal <Ethernet_Lite_MDIO> created at line 690
+    Found 12-bit comparator greater for signal <GND_5_o_g_counter[11]_LessThan_32_o> created at line 716
+    Summary:
+	inferred   3 Adder/Subtractor(s).
+	inferred  60 D-type flip-flop(s).
+	inferred  16 Latch(s).
+	inferred   1 Comparator(s).
+	inferred  28 Multiplexer(s).
+	inferred   1 Tristate(s).
+	inferred   2 Finite State Machine(s).
+Unit <main> synthesized.
+
+Synthesizing Unit <kcpsm6>.
+    Related source file is "C:\studia\MGR\FPGA\mgr\kcpsm6.vhd".
+        hwbuild = "00000000"
+        interrupt_vector = "001111111111"
+        scratch_pad_memory_size = 256
+    Set property "HBLKNM = KCPSM6_CONTROL" for instance <reset_lut>.
+    Set property "HBLKNM = KCPSM6_CONTROL" for instance <run_flop>.
+    Set property "HBLKNM = KCPSM6_CONTROL" for instance <internal_reset_flop>.
+    Set property "HBLKNM = KCPSM6_DECODE2" for instance <sync_sleep_flop>.
+    Set property "HBLKNM = KCPSM6_CONTROL" for instance <t_state_lut>.
+    Set property "HBLKNM = KCPSM6_CONTROL" for instance <t_state1_flop>.
+    Set property "HBLKNM = KCPSM6_CONTROL" for instance <t_state2_flop>.
+    Set property "HBLKNM = KCPSM6_DECODE0" for instance <int_enable_type_lut>.
+    Set property "HBLKNM = KCPSM6_DECODE0" for instance <interrupt_enable_lut>.
+    Set property "HBLKNM = KCPSM6_DECODE0" for instance <interrupt_enable_flop>.
+    Set property "HBLKNM = KCPSM6_DECODE2" for instance <sync_interrupt_flop>.
+    Set property "HBLKNM = KCPSM6_CONTROL" for instance <active_interrupt_lut>.
+    Set property "HBLKNM = KCPSM6_CONTROL" for instance <active_interrupt_flop>.
+    Set property "HBLKNM = KCPSM6_DECODE1" for instance <interrupt_ack_flop>.
+    Set property "HBLKNM = KCPSM6_DECODE0" for instance <pc_move_is_valid_lut>.
+    Set property "HBLKNM = KCPSM6_DECODE0" for instance <move_type_lut>.
+    Set property "HBLKNM = KCPSM6_VECTOR1" for instance <pc_mode1_lut>.
+    Set property "HBLKNM = KCPSM6_VECTOR1" for instance <pc_mode2_lut>.
+    Set property "HBLKNM = KCPSM6_STACK1" for instance <push_pop_lut>.
+    Set property "HBLKNM = KCPSM6_DECODE2" for instance <alu_decode0_lut>.
+    Set property "HBLKNM = KCPSM6_DECODE2" for instance <alu_mux_sel0_flop>.
+    Set property "HBLKNM = KCPSM6_DECODE1" for instance <alu_decode1_lut>.
+    Set property "HBLKNM = KCPSM6_DECODE1" for instance <alu_mux_sel1_flop>.
+    Set property "HBLKNM = KCPSM6_DECODE2" for instance <alu_decode2_lut>.
+    Set property "HBLKNM = KCPSM6_STROBES" for instance <register_enable_type_lut>.
+    Set property "HBLKNM = KCPSM6_STROBES" for instance <register_enable_lut>.
+    Set property "HBLKNM = KCPSM6_STROBES" for instance <flag_enable_flop>.
+    Set property "HBLKNM = KCPSM6_STROBES" for instance <register_enable_flop>.
+    Set property "HBLKNM = KCPSM6_STROBES" for instance <spm_enable_lut>.
+    Set property "HBLKNM = KCPSM6_STROBES" for instance <k_write_strobe_flop>.
+    Set property "HBLKNM = KCPSM6_STROBES" for instance <spm_enable_flop>.
+    Set property "HBLKNM = KCPSM6_STROBES" for instance <read_strobe_lut>.
+    Set property "HBLKNM = KCPSM6_STROBES" for instance <write_strobe_flop>.
+    Set property "HBLKNM = KCPSM6_STROBES" for instance <read_strobe_flop>.
+    Set property "HBLKNM = KCPSM6_STACK1" for instance <regbank_type_lut>.
+    Set property "HBLKNM = KCPSM6_STACK1" for instance <bank_lut>.
+    Set property "HBLKNM = KCPSM6_STACK1" for instance <bank_flop>.
+    Set property "HBLKNM = KCPSM6_CONTROL" for instance <sx_addr4_flop>.
+    Set property "HBLKNM = KCPSM6_CONTROL" for instance <arith_carry_xorcy>.
+    Set property "HBLKNM = KCPSM6_CONTROL" for instance <arith_carry_flop>.
+    Set property "HBLKNM = KCPSM6_DECODE2" for instance <lower_parity_lut>.
+    Set property "HBLKNM = KCPSM6_DECODE2" for instance <parity_muxcy>.
+    Set property "HBLKNM = KCPSM6_DECODE2" for instance <upper_parity_lut>.
+    Set property "HBLKNM = KCPSM6_DECODE2" for instance <parity_xorcy>.
+    Set property "HBLKNM = KCPSM6_DECODE1" for instance <shift_carry_lut>.
+    Set property "HBLKNM = KCPSM6_DECODE1" for instance <shift_carry_flop>.
+    Set property "HBLKNM = KCPSM6_FLAGS" for instance <carry_flag_lut>.
+    Set property "HBLKNM = KCPSM6_FLAGS" for instance <carry_flag_flop>.
+    Set property "HBLKNM = KCPSM6_FLAGS" for instance <init_zero_muxcy>.
+    Set property "HBLKNM = KCPSM6_DECODE1" for instance <use_zero_flag_lut>.
+    Set property "HBLKNM = KCPSM6_DECODE1" for instance <use_zero_flag_flop>.
+    Set property "HBLKNM = KCPSM6_FLAGS" for instance <lower_zero_lut>.
+    Set property "HBLKNM = KCPSM6_FLAGS" for instance <lower_zero_muxcy>.
+    Set property "HBLKNM = KCPSM6_FLAGS" for instance <middle_zero_lut>.
+    Set property "HBLKNM = KCPSM6_FLAGS" for instance <middle_zero_muxcy>.
+    Set property "HBLKNM = KCPSM6_FLAGS" for instance <upper_zero_lut>.
+    Set property "HBLKNM = KCPSM6_FLAGS" for instance <upper_zero_muxcy>.
+    Set property "HBLKNM = KCPSM6_FLAGS" for instance <zero_flag_flop>.
+    Set property "HBLKNM = KCPSM6_STACK_RAM0" for instance <address_loop[0].return_vector_flop>.
+    Set property "HBLKNM = KCPSM6_VECTOR0" for instance <address_loop[0].output_data.pc_vector_mux_lut>.
+    Set property "HBLKNM = KCPSM6_PC0" for instance <address_loop[0].pc_flop>.
+    Set property "HBLKNM = KCPSM6_PC0" for instance <address_loop[0].lsb_pc.high_int_vector.pc_lut>.
+    Set property "HBLKNM = KCPSM6_PC0" for instance <address_loop[0].lsb_pc.pc_xorcy>.
+    Set property "HBLKNM = KCPSM6_PC0" for instance <address_loop[0].lsb_pc.pc_muxcy>.
+    Set property "HBLKNM = KCPSM6_STACK_RAM0" for instance <address_loop[1].return_vector_flop>.
+    Set property "HBLKNM = KCPSM6_PC0" for instance <address_loop[1].pc_flop>.
+    Set property "HBLKNM = KCPSM6_PC0" for instance <address_loop[1].upper_pc.high_int_vector.pc_lut>.
+    Set property "HBLKNM = KCPSM6_PC0" for instance <address_loop[1].upper_pc.pc_xorcy>.
+    Set property "HBLKNM = KCPSM6_PC0" for instance <address_loop[1].upper_pc.mid_pc.pc_muxcy>.
+    Set property "HBLKNM = KCPSM6_STACK_RAM0" for instance <address_loop[2].return_vector_flop>.
+    Set property "HBLKNM = KCPSM6_VECTOR0" for instance <address_loop[2].output_data.pc_vector_mux_lut>.
+    Set property "HBLKNM = KCPSM6_PC0" for instance <address_loop[2].pc_flop>.
+    Set property "HBLKNM = KCPSM6_PC0" for instance <address_loop[2].upper_pc.high_int_vector.pc_lut>.
+    Set property "HBLKNM = KCPSM6_PC0" for instance <address_loop[2].upper_pc.pc_xorcy>.
+    Set property "HBLKNM = KCPSM6_PC0" for instance <address_loop[2].upper_pc.mid_pc.pc_muxcy>.
+    Set property "HBLKNM = KCPSM6_STACK_RAM0" for instance <address_loop[3].return_vector_flop>.
+    Set property "HBLKNM = KCPSM6_PC0" for instance <address_loop[3].pc_flop>.
+    Set property "HBLKNM = KCPSM6_PC0" for instance <address_loop[3].upper_pc.high_int_vector.pc_lut>.
+    Set property "HBLKNM = KCPSM6_PC0" for instance <address_loop[3].upper_pc.pc_xorcy>.
+    Set property "HBLKNM = KCPSM6_PC0" for instance <address_loop[3].upper_pc.mid_pc.pc_muxcy>.
+    Set property "HBLKNM = KCPSM6_STACK_RAM1" for instance <address_loop[4].return_vector_flop>.
+    Set property "HBLKNM = KCPSM6_VECTOR0" for instance <address_loop[4].output_data.pc_vector_mux_lut>.
+    Set property "HBLKNM = KCPSM6_PC1" for instance <address_loop[4].pc_flop>.
+    Set property "HBLKNM = KCPSM6_PC1" for instance <address_loop[4].upper_pc.high_int_vector.pc_lut>.
+    Set property "HBLKNM = KCPSM6_PC1" for instance <address_loop[4].upper_pc.pc_xorcy>.
+    Set property "HBLKNM = KCPSM6_PC1" for instance <address_loop[4].upper_pc.mid_pc.pc_muxcy>.
+    Set property "HBLKNM = KCPSM6_STACK_RAM1" for instance <address_loop[5].return_vector_flop>.
+    Set property "HBLKNM = KCPSM6_PC1" for instance <address_loop[5].pc_flop>.
+    Set property "HBLKNM = KCPSM6_PC1" for instance <address_loop[5].upper_pc.high_int_vector.pc_lut>.
+    Set property "HBLKNM = KCPSM6_PC1" for instance <address_loop[5].upper_pc.pc_xorcy>.
+    Set property "HBLKNM = KCPSM6_PC1" for instance <address_loop[5].upper_pc.mid_pc.pc_muxcy>.
+    Set property "HBLKNM = KCPSM6_STACK_RAM1" for instance <address_loop[6].return_vector_flop>.
+    Set property "HBLKNM = KCPSM6_VECTOR0" for instance <address_loop[6].output_data.pc_vector_mux_lut>.
+    Set property "HBLKNM = KCPSM6_PC1" for instance <address_loop[6].pc_flop>.
+    Set property "HBLKNM = KCPSM6_PC1" for instance <address_loop[6].upper_pc.high_int_vector.pc_lut>.
+    Set property "HBLKNM = KCPSM6_PC1" for instance <address_loop[6].upper_pc.pc_xorcy>.
+    Set property "HBLKNM = KCPSM6_PC1" for instance <address_loop[6].upper_pc.mid_pc.pc_muxcy>.
+    Set property "HBLKNM = KCPSM6_STACK_RAM1" for instance <address_loop[7].return_vector_flop>.
+    Set property "HBLKNM = KCPSM6_PC1" for instance <address_loop[7].pc_flop>.
+    Set property "HBLKNM = KCPSM6_PC1" for instance <address_loop[7].upper_pc.high_int_vector.pc_lut>.
+    Set property "HBLKNM = KCPSM6_PC1" for instance <address_loop[7].upper_pc.pc_xorcy>.
+    Set property "HBLKNM = KCPSM6_PC1" for instance <address_loop[7].upper_pc.mid_pc.pc_muxcy>.
+    Set property "HBLKNM = KCPSM6_STACK_RAM1" for instance <address_loop[8].return_vector_flop>.
+    Set property "HBLKNM = KCPSM6_VECTOR1" for instance <address_loop[8].output_data.pc_vector_mux_lut>.
+    Set property "HBLKNM = KCPSM6_PC2" for instance <address_loop[8].pc_flop>.
+    Set property "HBLKNM = KCPSM6_PC2" for instance <address_loop[8].upper_pc.high_int_vector.pc_lut>.
+    Set property "HBLKNM = KCPSM6_PC2" for instance <address_loop[8].upper_pc.pc_xorcy>.
+    Set property "HBLKNM = KCPSM6_PC2" for instance <address_loop[8].upper_pc.mid_pc.pc_muxcy>.
+    Set property "HBLKNM = KCPSM6_STACK_RAM1" for instance <address_loop[9].return_vector_flop>.
+    Set property "HBLKNM = KCPSM6_PC2" for instance <address_loop[9].pc_flop>.
+    Set property "HBLKNM = KCPSM6_PC2" for instance <address_loop[9].upper_pc.high_int_vector.pc_lut>.
+    Set property "HBLKNM = KCPSM6_PC2" for instance <address_loop[9].upper_pc.pc_xorcy>.
+    Set property "HBLKNM = KCPSM6_PC2" for instance <address_loop[9].upper_pc.mid_pc.pc_muxcy>.
+    Set property "HBLKNM = KCPSM6_STACK_RAM1" for instance <address_loop[10].return_vector_flop>.
+    Set property "HBLKNM = KCPSM6_VECTOR1" for instance <address_loop[10].output_data.pc_vector_mux_lut>.
+    Set property "HBLKNM = KCPSM6_PC2" for instance <address_loop[10].pc_flop>.
+    Set property "HBLKNM = KCPSM6_PC2" for instance <address_loop[10].upper_pc.low_int_vector.pc_lut>.
+    Set property "HBLKNM = KCPSM6_PC2" for instance <address_loop[10].upper_pc.pc_xorcy>.
+    Set property "HBLKNM = KCPSM6_PC2" for instance <address_loop[10].upper_pc.mid_pc.pc_muxcy>.
+    Set property "HBLKNM = KCPSM6_STACK_RAM1" for instance <address_loop[11].return_vector_flop>.
+    Set property "HBLKNM = KCPSM6_PC2" for instance <address_loop[11].pc_flop>.
+    Set property "HBLKNM = KCPSM6_PC2" for instance <address_loop[11].upper_pc.low_int_vector.pc_lut>.
+    Set property "HBLKNM = KCPSM6_PC2" for instance <address_loop[11].upper_pc.pc_xorcy>.
+    Set property "HBLKNM = KCPSM6_STACK_RAM0" for instance <shadow_carry_flag_flop>.
+    Set property "HBLKNM = KCPSM6_STACK_RAM0" for instance <stack_zero_flop>.
+    Set property "HBLKNM = KCPSM6_DECODE1" for instance <shadow_zero_flag_flop>.
+    Set property "HBLKNM = KCPSM6_STACK_RAM0" for instance <shadow_bank_flop>.
+    Set property "HBLKNM = KCPSM6_STACK_RAM0" for instance <stack_bit_flop>.
+    Set property "HBLKNM = KCPSM6_STACK_RAM0" for instance <stack_ram_low>.
+    Set property "HBLKNM = KCPSM6_STACK_RAM1" for instance <stack_ram_high>.
+    Set property "HBLKNM = KCPSM6_STACK0" for instance <stack_loop[0].lsb_stack.pointer_flop>.
+    Set property "HBLKNM = KCPSM6_STACK0" for instance <stack_loop[0].lsb_stack.stack_pointer_lut>.
+    Set property "HBLKNM = KCPSM6_STACK0" for instance <stack_loop[0].lsb_stack.stack_xorcy>.
+    Set property "HBLKNM = KCPSM6_STACK0" for instance <stack_loop[0].lsb_stack.stack_muxcy>.
+    Set property "HBLKNM = KCPSM6_STACK0" for instance <stack_loop[1].upper_stack.pointer_flop>.
+    Set property "HBLKNM = KCPSM6_STACK0" for instance <stack_loop[1].upper_stack.stack_pointer_lut>.
+    Set property "HBLKNM = KCPSM6_STACK0" for instance <stack_loop[1].upper_stack.stack_xorcy>.
+    Set property "HBLKNM = KCPSM6_STACK0" for instance <stack_loop[1].upper_stack.stack_muxcy>.
+    Set property "HBLKNM = KCPSM6_STACK0" for instance <stack_loop[2].upper_stack.pointer_flop>.
+    Set property "HBLKNM = KCPSM6_STACK0" for instance <stack_loop[2].upper_stack.stack_pointer_lut>.
+    Set property "HBLKNM = KCPSM6_STACK0" for instance <stack_loop[2].upper_stack.stack_xorcy>.
+    Set property "HBLKNM = KCPSM6_STACK0" for instance <stack_loop[2].upper_stack.stack_muxcy>.
+    Set property "HBLKNM = KCPSM6_STACK0" for instance <stack_loop[3].upper_stack.pointer_flop>.
+    Set property "HBLKNM = KCPSM6_STACK0" for instance <stack_loop[3].upper_stack.stack_pointer_lut>.
+    Set property "HBLKNM = KCPSM6_STACK0" for instance <stack_loop[3].upper_stack.stack_xorcy>.
+    Set property "HBLKNM = KCPSM6_STACK0" for instance <stack_loop[3].upper_stack.stack_muxcy>.
+    Set property "HBLKNM = KCPSM6_STACK1" for instance <stack_loop[4].upper_stack.pointer_flop>.
+    Set property "HBLKNM = KCPSM6_STACK1" for instance <stack_loop[4].upper_stack.stack_pointer_lut>.
+    Set property "HBLKNM = KCPSM6_STACK1" for instance <stack_loop[4].upper_stack.stack_xorcy>.
+    Set property "HBLKNM = KCPSM6_STACK1" for instance <stack_loop[4].upper_stack.stack_muxcy>.
+    Set property "HBLKNM = KCPSM6_PORT_ID" for instance <data_path_loop[0].output_data.sy_kk_mux_lut>.
+    Set property "HBLKNM = KCPSM6_OUT_PORT" for instance <data_path_loop[0].second_operand.out_port_lut>.
+    Set property "HBLKNM = KCPSM6_ADD0" for instance <data_path_loop[0].arith_logical_lut>.
+    Set property "HBLKNM = KCPSM6_ADD0" for instance <data_path_loop[0].arith_logical_flop>.
+    Set property "HBLKNM = KCPSM6_ADD0" for instance <data_path_loop[0].lsb_arith_logical.arith_logical_muxcy>.
+    Set property "HBLKNM = KCPSM6_ADD0" for instance <data_path_loop[0].lsb_arith_logical.arith_logical_xorcy>.
+    Set property "HBLKNM = KCPSM6_SANDR" for instance <data_path_loop[0].low_hwbuild.shift_rotate_flop>.
+    Set property "HBLKNM = KCPSM6_DECODE1" for instance <data_path_loop[0].lsb_shift_rotate.shift_bit_lut>.
+    Set property "HBLKNM = KCPSM6_SANDR" for instance <data_path_loop[0].lsb_shift_rotate.shift_rotate_lut>.
+    Set property "HBLKNM = KCPSM6_ALU0" for instance <data_path_loop[0].alu_mux_lut>.
+    Set property "HBLKNM = KCPSM6_SPM0" for instance <data_path_loop[0].large_spm.spm_ram>.
+    Set property "HBLKNM = KCPSM6_SPM0" for instance <data_path_loop[0].large_spm.spm_flop>.
+    Set property "HBLKNM = KCPSM6_ADD0" for instance <data_path_loop[1].arith_logical_lut>.
+    Set property "HBLKNM = KCPSM6_ADD0" for instance <data_path_loop[1].arith_logical_flop>.
+    Set property "HBLKNM = KCPSM6_ADD0" for instance <data_path_loop[1].upper_arith_logical.arith_logical_muxcy>.
+    Set property "HBLKNM = KCPSM6_ADD0" for instance <data_path_loop[1].upper_arith_logical.arith_logical_xorcy>.
+    Set property "HBLKNM = KCPSM6_SANDR" for instance <data_path_loop[1].low_hwbuild.shift_rotate_flop>.
+    Set property "HBLKNM = KCPSM6_ALU0" for instance <data_path_loop[1].alu_mux_lut>.
+    Set property "HBLKNM = KCPSM6_SPM1" for instance <data_path_loop[1].large_spm.spm_ram>.
+    Set property "HBLKNM = KCPSM6_SPM1" for instance <data_path_loop[1].large_spm.spm_flop>.
+    Set property "HBLKNM = KCPSM6_PORT_ID" for instance <data_path_loop[2].output_data.sy_kk_mux_lut>.
+    Set property "HBLKNM = KCPSM6_OUT_PORT" for instance <data_path_loop[2].second_operand.out_port_lut>.
+    Set property "HBLKNM = KCPSM6_ADD0" for instance <data_path_loop[2].arith_logical_lut>.
+    Set property "HBLKNM = KCPSM6_ADD0" for instance <data_path_loop[2].arith_logical_flop>.
+    Set property "HBLKNM = KCPSM6_ADD0" for instance <data_path_loop[2].upper_arith_logical.arith_logical_muxcy>.
+    Set property "HBLKNM = KCPSM6_ADD0" for instance <data_path_loop[2].upper_arith_logical.arith_logical_xorcy>.
+    Set property "HBLKNM = KCPSM6_SANDR" for instance <data_path_loop[2].low_hwbuild.shift_rotate_flop>.
+    Set property "HBLKNM = KCPSM6_SANDR" for instance <data_path_loop[2].mid_shift_rotate.shift_rotate_lut>.
+    Set property "HBLKNM = KCPSM6_ALU0" for instance <data_path_loop[2].alu_mux_lut>.
+    Set property "HBLKNM = KCPSM6_SPM2" for instance <data_path_loop[2].large_spm.spm_ram>.
+    Set property "HBLKNM = KCPSM6_SPM2" for instance <data_path_loop[2].large_spm.spm_flop>.
+    Set property "HBLKNM = KCPSM6_ADD0" for instance <data_path_loop[3].arith_logical_lut>.
+    Set property "HBLKNM = KCPSM6_ADD0" for instance <data_path_loop[3].arith_logical_flop>.
+    Set property "HBLKNM = KCPSM6_ADD0" for instance <data_path_loop[3].upper_arith_logical.arith_logical_muxcy>.
+    Set property "HBLKNM = KCPSM6_ADD0" for instance <data_path_loop[3].upper_arith_logical.arith_logical_xorcy>.
+    Set property "HBLKNM = KCPSM6_SANDR" for instance <data_path_loop[3].low_hwbuild.shift_rotate_flop>.
+    Set property "HBLKNM = KCPSM6_ALU0" for instance <data_path_loop[3].alu_mux_lut>.
+    Set property "HBLKNM = KCPSM6_SPM3" for instance <data_path_loop[3].large_spm.spm_ram>.
+    Set property "HBLKNM = KCPSM6_SPM3" for instance <data_path_loop[3].large_spm.spm_flop>.
+    Set property "HBLKNM = KCPSM6_PORT_ID" for instance <data_path_loop[4].output_data.sy_kk_mux_lut>.
+    Set property "HBLKNM = KCPSM6_OUT_PORT" for instance <data_path_loop[4].second_operand.out_port_lut>.
+    Set property "HBLKNM = KCPSM6_ADD1" for instance <data_path_loop[4].arith_logical_lut>.
+    Set property "HBLKNM = KCPSM6_ADD1" for instance <data_path_loop[4].arith_logical_flop>.
+    Set property "HBLKNM = KCPSM6_ADD1" for instance <data_path_loop[4].upper_arith_logical.arith_logical_muxcy>.
+    Set property "HBLKNM = KCPSM6_ADD1" for instance <data_path_loop[4].upper_arith_logical.arith_logical_xorcy>.
+    Set property "HBLKNM = KCPSM6_SANDR" for instance <data_path_loop[4].low_hwbuild.shift_rotate_flop>.
+    Set property "HBLKNM = KCPSM6_SANDR" for instance <data_path_loop[4].mid_shift_rotate.shift_rotate_lut>.
+    Set property "HBLKNM = KCPSM6_ALU1" for instance <data_path_loop[4].alu_mux_lut>.
+    Set property "HBLKNM = KCPSM6_SPM4" for instance <data_path_loop[4].large_spm.spm_ram>.
+    Set property "HBLKNM = KCPSM6_SPM4" for instance <data_path_loop[4].large_spm.spm_flop>.
+    Set property "HBLKNM = KCPSM6_ADD1" for instance <data_path_loop[5].arith_logical_lut>.
+    Set property "HBLKNM = KCPSM6_ADD1" for instance <data_path_loop[5].arith_logical_flop>.
+    Set property "HBLKNM = KCPSM6_ADD1" for instance <data_path_loop[5].upper_arith_logical.arith_logical_muxcy>.
+    Set property "HBLKNM = KCPSM6_ADD1" for instance <data_path_loop[5].upper_arith_logical.arith_logical_xorcy>.
+    Set property "HBLKNM = KCPSM6_SANDR" for instance <data_path_loop[5].low_hwbuild.shift_rotate_flop>.
+    Set property "HBLKNM = KCPSM6_ALU1" for instance <data_path_loop[5].alu_mux_lut>.
+    Set property "HBLKNM = KCPSM6_SPM5" for instance <data_path_loop[5].large_spm.spm_ram>.
+    Set property "HBLKNM = KCPSM6_SPM5" for instance <data_path_loop[5].large_spm.spm_flop>.
+    Set property "HBLKNM = KCPSM6_PORT_ID" for instance <data_path_loop[6].output_data.sy_kk_mux_lut>.
+    Set property "HBLKNM = KCPSM6_OUT_PORT" for instance <data_path_loop[6].second_operand.out_port_lut>.
+    Set property "HBLKNM = KCPSM6_ADD1" for instance <data_path_loop[6].arith_logical_lut>.
+    Set property "HBLKNM = KCPSM6_ADD1" for instance <data_path_loop[6].arith_logical_flop>.
+    Set property "HBLKNM = KCPSM6_ADD1" for instance <data_path_loop[6].upper_arith_logical.arith_logical_muxcy>.
+    Set property "HBLKNM = KCPSM6_ADD1" for instance <data_path_loop[6].upper_arith_logical.arith_logical_xorcy>.
+    Set property "HBLKNM = KCPSM6_SANDR" for instance <data_path_loop[6].low_hwbuild.shift_rotate_flop>.
+    Set property "HBLKNM = KCPSM6_SANDR" for instance <data_path_loop[6].msb_shift_rotate.shift_rotate_lut>.
+    Set property "HBLKNM = KCPSM6_ALU1" for instance <data_path_loop[6].alu_mux_lut>.
+    Set property "HBLKNM = KCPSM6_SPM6" for instance <data_path_loop[6].large_spm.spm_ram>.
+    Set property "HBLKNM = KCPSM6_SPM6" for instance <data_path_loop[6].large_spm.spm_flop>.
+    Set property "HBLKNM = KCPSM6_ADD1" for instance <data_path_loop[7].arith_logical_lut>.
+    Set property "HBLKNM = KCPSM6_ADD1" for instance <data_path_loop[7].arith_logical_flop>.
+    Set property "HBLKNM = KCPSM6_ADD1" for instance <data_path_loop[7].upper_arith_logical.arith_logical_muxcy>.
+    Set property "HBLKNM = KCPSM6_ADD1" for instance <data_path_loop[7].upper_arith_logical.arith_logical_xorcy>.
+    Set property "HBLKNM = KCPSM6_SANDR" for instance <data_path_loop[7].low_hwbuild.shift_rotate_flop>.
+    Set property "HBLKNM = KCPSM6_ALU1" for instance <data_path_loop[7].alu_mux_lut>.
+    Set property "HBLKNM = KCPSM6_SPM7" for instance <data_path_loop[7].large_spm.spm_ram>.
+    Set property "HBLKNM = KCPSM6_SPM7" for instance <data_path_loop[7].large_spm.spm_flop>.
+    Set property "HBLKNM = KCPSM6_REG0" for instance <lower_reg_banks>.
+    Set property "HBLKNM = KCPSM6_REG1" for instance <upper_reg_banks>.
+    Summary:
+	no macro.
+Unit <kcpsm6> synthesized.
+
+Synthesizing Unit <program>.
+    Related source file is "C:\studia\MGR\FPGA\mgr\program.vhd".
+        C_FAMILY = "S6"
+        C_RAM_SIZE_KWORDS = 1
+        C_JTAG_LOADER_ENABLE = 1
+    Summary:
+	no macro.
+Unit <program> synthesized.
+
+Synthesizing Unit <jtag_loader_6>.
+    Related source file is "C:\studia\MGR\FPGA\mgr\program.vhd".
+        C_JTAG_LOADER_ENABLE = 1
+        C_FAMILY = "S6"
+        C_NUM_PICOBLAZE = 1
+        C_BRAM_MAX_ADDR_WIDTH = 10
+        C_PICOBLAZE_INSTRUCTION_DATA_WIDTH = 18
+        C_JTAG_CHAIN = 2
+        C_ADDR_WIDTH_0 = 10
+        C_ADDR_WIDTH_1 = 10
+        C_ADDR_WIDTH_2 = 10
+        C_ADDR_WIDTH_3 = 10
+        C_ADDR_WIDTH_4 = 10
+        C_ADDR_WIDTH_5 = 10
+        C_ADDR_WIDTH_6 = 10
+        C_ADDR_WIDTH_7 = 10
+    Found 1-bit register for signal <bram_ce>.
+    Found 1-bit register for signal <jtag_we_int>.
+    Found 10-bit register for signal <jtag_addr_int>.
+    Found 18-bit register for signal <jtag_din_int>.
+    Found 8-bit register for signal <control_dout_int>.
+    Found 1-bit register for signal <picoblaze_reset_int>.
+    Found 1-bit register for signal <control_reg_ce>.
+    Summary:
+	inferred  40 D-type flip-flop(s).
+	inferred  11 Multiplexer(s).
+Unit <jtag_loader_6> synthesized.
+
+Synthesizing Unit <uart_tx6>.
+    Related source file is "C:\studia\MGR\FPGA\mgr\uart_tx6.vhd".
+    Set property "HBLKNM = UART_TX6_5" for instance <data_width_loop[0].storage_srl>.
+    Set property "HBLKNM = UART_TX6_5" for instance <data_width_loop[0].storage_flop>.
+    Set property "HBLKNM = UART_TX6_5" for instance <data_width_loop[1].storage_srl>.
+    Set property "HBLKNM = UART_TX6_5" for instance <data_width_loop[1].storage_flop>.
+    Set property "HBLKNM = UART_TX6_5" for instance <data_width_loop[2].storage_srl>.
+    Set property "HBLKNM = UART_TX6_5" for instance <data_width_loop[2].storage_flop>.
+    Set property "HBLKNM = UART_TX6_5" for instance <data_width_loop[3].storage_srl>.
+    Set property "HBLKNM = UART_TX6_5" for instance <data_width_loop[3].storage_flop>.
+    Set property "HBLKNM = UART_TX6_5" for instance <data_width_loop[4].storage_srl>.
+    Set property "HBLKNM = UART_TX6_5" for instance <data_width_loop[4].storage_flop>.
+    Set property "HBLKNM = UART_TX6_5" for instance <data_width_loop[5].storage_srl>.
+    Set property "HBLKNM = UART_TX6_5" for instance <data_width_loop[5].storage_flop>.
+    Set property "HBLKNM = UART_TX6_5" for instance <data_width_loop[6].storage_srl>.
+    Set property "HBLKNM = UART_TX6_5" for instance <data_width_loop[6].storage_flop>.
+    Set property "HBLKNM = UART_TX6_5" for instance <data_width_loop[7].storage_srl>.
+    Set property "HBLKNM = UART_TX6_5" for instance <data_width_loop[7].storage_flop>.
+    Set property "HBLKNM = UART_TX6_1" for instance <pointer3_lut>.
+    Set property "HBLKNM = UART_TX6_1" for instance <pointer3_flop>.
+    Set property "HBLKNM = UART_TX6_1" for instance <pointer2_lut>.
+    Set property "HBLKNM = UART_TX6_1" for instance <pointer2_flop>.
+    Set property "HBLKNM = UART_TX6_1" for instance <pointer01_lut>.
+    Set property "HBLKNM = UART_TX6_1" for instance <pointer1_flop>.
+    Set property "HBLKNM = UART_TX6_1" for instance <pointer0_flop>.
+    Set property "HBLKNM = UART_TX6_1" for instance <data_present_lut>.
+    Set property "HBLKNM = UART_TX6_1" for instance <data_present_flop>.
+    Set property "HBLKNM = UART_TX6_4" for instance <full_lut>.
+    Set property "HBLKNM = UART_TX6_4" for instance <lsb_data_lut>.
+    Set property "HBLKNM = UART_TX6_4" for instance <msb_data_lut>.
+    Set property "HBLKNM = UART_TX6_4" for instance <serial_lut>.
+    Set property "HBLKNM = UART_TX6_4" for instance <serial_flop>.
+    Set property "HBLKNM = UART_TX6_2" for instance <sm0_lut>.
+    Set property "HBLKNM = UART_TX6_2" for instance <sm0_flop>.
+    Set property "HBLKNM = UART_TX6_2" for instance <sm1_lut>.
+    Set property "HBLKNM = UART_TX6_2" for instance <sm1_flop>.
+    Set property "HBLKNM = UART_TX6_2" for instance <sm2_lut>.
+    Set property "HBLKNM = UART_TX6_2" for instance <sm2_flop>.
+    Set property "HBLKNM = UART_TX6_2" for instance <sm3_lut>.
+    Set property "HBLKNM = UART_TX6_2" for instance <sm3_flop>.
+    Set property "HBLKNM = UART_TX6_3" for instance <div01_lut>.
+    Set property "HBLKNM = UART_TX6_3" for instance <div0_flop>.
+    Set property "HBLKNM = UART_TX6_3" for instance <div1_flop>.
+    Set property "HBLKNM = UART_TX6_3" for instance <div23_lut>.
+    Set property "HBLKNM = UART_TX6_3" for instance <div2_flop>.
+    Set property "HBLKNM = UART_TX6_3" for instance <div3_flop>.
+    Set property "HBLKNM = UART_TX6_3" for instance <next_lut>.
+    Set property "HBLKNM = UART_TX6_3" for instance <next_flop>.
+    Set property "HBLKNM = UART_TX6_3" for instance <read_flop>.
+    Summary:
+	no macro.
+Unit <uart_tx6> synthesized.
+
+Synthesizing Unit <uart_rx6>.
+    Related source file is "C:\studia\MGR\FPGA\mgr\uart_rx6.vhd".
+    Set property "HBLKNM = UART_RX6_5" for instance <data_width_loop[0].storage_srl>.
+    Set property "HBLKNM = UART_RX6_5" for instance <data_width_loop[1].storage_srl>.
+    Set property "HBLKNM = UART_RX6_5" for instance <data_width_loop[2].storage_srl>.
+    Set property "HBLKNM = UART_RX6_5" for instance <data_width_loop[3].storage_srl>.
+    Set property "HBLKNM = UART_RX6_5" for instance <data_width_loop[4].storage_srl>.
+    Set property "HBLKNM = UART_RX6_5" for instance <data_width_loop[5].storage_srl>.
+    Set property "HBLKNM = UART_RX6_5" for instance <data_width_loop[6].storage_srl>.
+    Set property "HBLKNM = UART_RX6_5" for instance <data_width_loop[7].storage_srl>.
+    Set property "HBLKNM = UART_RX6_1" for instance <pointer3_lut>.
+    Set property "HBLKNM = UART_RX6_1" for instance <pointer3_flop>.
+    Set property "HBLKNM = UART_RX6_1" for instance <pointer2_lut>.
+    Set property "HBLKNM = UART_RX6_1" for instance <pointer2_flop>.
+    Set property "HBLKNM = UART_RX6_1" for instance <pointer01_lut>.
+    Set property "HBLKNM = UART_RX6_1" for instance <pointer1_flop>.
+    Set property "HBLKNM = UART_RX6_1" for instance <pointer0_flop>.
+    Set property "HBLKNM = UART_RX6_1" for instance <data_present_lut>.
+    Set property "HBLKNM = UART_RX6_1" for instance <data_present_flop>.
+    Set property "HBLKNM = UART_RX6_3" for instance <full_lut>.
+    Set property "HBLKNM = UART_RX6_4" for instance <sample_lut>.
+    Set property "HBLKNM = UART_RX6_4" for instance <sample_flop>.
+    Set property "HBLKNM = UART_RX6_4" for instance <sample_dly_flop>.
+    Set property "HBLKNM = UART_RX6_4" for instance <stop_bit_lut>.
+    Set property "HBLKNM = UART_RX6_4" for instance <buffer_write_flop>.
+    Set property "HBLKNM = UART_RX6_4" for instance <stop_bit_flop>.
+    Set property "HBLKNM = UART_RX6_2" for instance <data01_lut>.
+    Set property "HBLKNM = UART_RX6_2" for instance <data0_flop>.
+    Set property "HBLKNM = UART_RX6_2" for instance <data1_flop>.
+    Set property "HBLKNM = UART_RX6_2" for instance <data23_lut>.
+    Set property "HBLKNM = UART_RX6_2" for instance <data2_flop>.
+    Set property "HBLKNM = UART_RX6_2" for instance <data3_flop>.
+    Set property "HBLKNM = UART_RX6_2" for instance <data45_lut>.
+    Set property "HBLKNM = UART_RX6_2" for instance <data4_flop>.
+    Set property "HBLKNM = UART_RX6_2" for instance <data5_flop>.
+    Set property "HBLKNM = UART_RX6_2" for instance <data67_lut>.
+    Set property "HBLKNM = UART_RX6_2" for instance <data6_flop>.
+    Set property "HBLKNM = UART_RX6_2" for instance <data7_flop>.
+    Set property "HBLKNM = UART_RX6_4" for instance <run_lut>.
+    Set property "HBLKNM = UART_RX6_4" for instance <run_flop>.
+    Set property "HBLKNM = UART_RX6_4" for instance <start_bit_lut>.
+    Set property "HBLKNM = UART_RX6_4" for instance <start_bit_flop>.
+    Set property "HBLKNM = UART_RX6_3" for instance <div01_lut>.
+    Set property "HBLKNM = UART_RX6_3" for instance <div0_flop>.
+    Set property "HBLKNM = UART_RX6_3" for instance <div1_flop>.
+    Set property "HBLKNM = UART_RX6_3" for instance <div23_lut>.
+    Set property "HBLKNM = UART_RX6_3" for instance <div2_flop>.
+    Set property "HBLKNM = UART_RX6_3" for instance <div3_flop>.
+    Set property "HBLKNM = UART_RX6_3" for instance <sample_input_lut>.
+    Set property "HBLKNM = UART_RX6_3" for instance <sample_input_flop>.
+    Summary:
+	no macro.
+Unit <uart_rx6> synthesized.
+
+Synthesizing Unit <lcd_clk_gen>.
+    Related source file is "C:\studia\MGR\FPGA\mgr\lcd_clk_gen.vhd".
+    Found 1-bit register for signal <snRST>.
+    Found 8-bit register for signal <sCLK_DIV>.
+    Found 8-bit adder for signal <sCLK_DIV[7]_GND_38_o_add_0_OUT> created at line 37.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred   9 D-type flip-flop(s).
+Unit <lcd_clk_gen> synthesized.
+
+Synthesizing Unit <LCD_DRIVER>.
+    Related source file is "C:\studia\MGR\FPGA\mgr\LCD_driver.vhd".
+        WIDTH = 4
+        WIDTH_DISPLAY = 16
+        WIDTH_OUTSIDE = 8
+        SIMULATION = false
+    Found 1-bit register for signal <CLR_IP_S>.
+    Found 8-bit register for signal <MSG_IPV_INT>.
+    Found 1-bit register for signal <EN_IP_DB>.
+    Found 13-bit register for signal <CNT_SV>.
+    Found 6-bit register for signal <POS32_SV>.
+    Found 5-bit register for signal <STATE>.
+    Found 1-bit register for signal <Q1>.
+    Found finite state machine <FSM_2> for signal <STATE>.
+    -----------------------------------------------------------------------
+    | States             | 20                                             |
+    | Transitions        | 43                                             |
+    | Inputs             | 8                                              |
+    | Outputs            | 7                                              |
+    | Clock              | CLK_IP_DR (rising_edge)                        |
+    | Power Up State     | start_up1                                      |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 13-bit adder for signal <CNT_SV[12]_GND_39_o_add_8_OUT> created at line 327.
+    Found 6-bit adder for signal <POS32_SV[5]_GND_39_o_add_25_OUT> created at line 368.
+    Summary:
+	inferred   2 Adder/Subtractor(s).
+	inferred  30 D-type flip-flop(s).
+	inferred  29 Multiplexer(s).
+	inferred   1 Finite State Machine(s).
+Unit <LCD_DRIVER> synthesized.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 6
+ 12-bit adder                                          : 1
+ 13-bit adder                                          : 1
+ 5-bit adder                                           : 1
+ 5-bit subtractor                                      : 1
+ 6-bit adder                                           : 1
+ 8-bit adder                                           : 1
+# Registers                                            : 37
+ 1-bit register                                        : 22
+ 10-bit register                                       : 1
+ 12-bit register                                       : 1
+ 13-bit register                                       : 1
+ 18-bit register                                       : 1
+ 2-bit register                                        : 2
+ 4-bit register                                        : 1
+ 5-bit register                                        : 2
+ 6-bit register                                        : 1
+ 8-bit register                                        : 5
+# Latches                                              : 16
+ 1-bit latch                                           : 16
+# Comparators                                          : 1
+ 12-bit comparator greater                             : 1
+# Multiplexers                                         : 68
+ 1-bit 2-to-1 multiplexer                              : 34
+ 12-bit 2-to-1 multiplexer                             : 1
+ 18-bit 2-to-1 multiplexer                             : 2
+ 2-bit 2-to-1 multiplexer                              : 3
+ 3-bit 2-to-1 multiplexer                              : 3
+ 5-bit 2-to-1 multiplexer                              : 8
+ 8-bit 2-to-1 multiplexer                              : 17
+# Tristates                                            : 1
+ 1-bit tristate buffer                                 : 1
+# FSMs                                                 : 3
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+
+Synthesizing (advanced) Unit <LCD_DRIVER>.
+The following registers are absorbed into counter <CNT_SV>: 1 register on signal <CNT_SV>.
+The following registers are absorbed into counter <POS32_SV>: 1 register on signal <POS32_SV>.
+Unit <LCD_DRIVER> synthesized (advanced).
+
+Synthesizing (advanced) Unit <lcd_clk_gen>.
+The following registers are absorbed into counter <sCLK_DIV>: 1 register on signal <sCLK_DIV>.
+Unit <lcd_clk_gen> synthesized (advanced).
+
+Synthesizing (advanced) Unit <main>.
+The following registers are absorbed into counter <g_counter>: 1 register on signal <g_counter>.
+The following registers are absorbed into counter <baud_count>: 1 register on signal <baud_count>.
+Unit <main> synthesized (advanced).
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 2
+ 12-bit adder                                          : 1
+ 5-bit subtractor                                      : 1
+# Counters                                             : 5
+ 12-bit up counter                                     : 1
+ 13-bit up counter                                     : 1
+ 5-bit up counter                                      : 1
+ 6-bit up counter                                      : 1
+ 8-bit up counter                                      : 1
+# Registers                                            : 225
+ Flip-Flops                                            : 225
+# Comparators                                          : 1
+ 12-bit comparator greater                             : 1
+# Multiplexers                                         : 92
+ 1-bit 2-to-1 multiplexer                              : 60
+ 12-bit 2-to-1 multiplexer                             : 1
+ 18-bit 2-to-1 multiplexer                             : 1
+ 2-bit 2-to-1 multiplexer                              : 3
+ 3-bit 2-to-1 multiplexer                              : 3
+ 5-bit 2-to-1 multiplexer                              : 8
+ 8-bit 2-to-1 multiplexer                              : 16
+# FSMs                                                 : 3
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <FSM_0> on signal <tx_state[1:2]> with user encoding.
+-------------------
+ State | Encoding
+-------------------
+ idle  | 00
+ tx0   | 01
+ tx1   | 10
+-------------------
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <FSM_1> on signal <stato[1:3]> with gray encoding.
+---------------------------------
+ State               | Encoding
+---------------------------------
+ waitstart           | unreached
+ preamble            | 000
+ startopcode         | 001
+ mdioaddress         | 011
+ deviceaddress       | 010
+ turnarounddataread  | 110
+ turnarounddatawrite | 111
+ turnaround          | unreached
+ dataread            | 101
+ datawrite           | 100
+---------------------------------
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <i_lcd_driver/FSM_2> on signal <STATE[1:5]> with sequential encoding.
+---------------------------
+ State         | Encoding
+---------------------------
+ start_up1     | 00000
+ start_up2     | 00001
+ start_up3     | 00010
+ start_up4     | 00011
+ function_set  | 00100
+ display       | 00110
+ entry_mode    | 01000
+ clear         | 01010
+ address_set   | 01100
+ waiting       | 01110
+ verify        | 01111
+ put_char      | 10000
+ home_cursor   | 10001
+ function_set2 | 00101
+ display2      | 00111
+ entry_mode2   | 01001
+ clear2        | 01011
+ address_set2  | 01101
+ put_char2     | 10010
+ home_cursor2  | 10011
+---------------------------
+INFO:Xst:2261 - The FF/Latch <control_dout_int_1> in Unit <jtag_loader_6> is equivalent to the following 3 FFs/Latches, which will be removed : <control_dout_int_2> <control_dout_int_5> <control_dout_int_6> 
+
+Optimizing unit <kcpsm6> ...
+
+Optimizing unit <uart_tx6> ...
+
+Optimizing unit <uart_rx6> ...
+
+Optimizing unit <main> ...
+
+Optimizing unit <jtag_loader_6> ...
+
+Optimizing unit <LCD_DRIVER> ...
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block main, actual ratio is 1.
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 276
+ Flip-Flops                                            : 276
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Design Summary                             *
+=========================================================================
+
+Top Level Output File Name         : main.ngc
+
+Primitive and Black Box Usage:
+------------------------------
+# BELS                             : 463
+#      GND                         : 1
+#      INV                         : 9
+#      LUT1                        : 42
+#      LUT2                        : 16
+#      LUT3                        : 20
+#      LUT4                        : 18
+#      LUT5                        : 28
+#      LUT6                        : 118
+#      LUT6_2                      : 69
+#      MUXCY                       : 70
+#      MUXF7                       : 4
+#      VCC                         : 1
+#      XORCY                       : 67
+# FlipFlops/Latches                : 292
+#      FD                          : 108
+#      FD_1                        : 11
+#      FDC                         : 9
+#      FDE                         : 49
+#      FDE_1                       : 14
+#      FDR                         : 53
+#      FDRE                        : 32
+#      LD                          : 16
+# RAMS                             : 13
+#      RAM256X1S                   : 8
+#      RAM32M                      : 4
+#      RAMB16BWER                  : 1
+# Shift Registers                  : 16
+#      SRL16E                      : 16
+# Clock Buffers                    : 4
+#      BUFG                        : 4
+# IO Buffers                       : 63
+#      IBUF                        : 22
+#      IOBUF                       : 1
+#      OBUF                        : 40
+# Others                           : 1
+#      BSCAN_SPARTAN6              : 1
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 6slx45fgg676-3 
+
+
+Slice Logic Utilization: 
+ Number of Slice Registers:             292  out of  54576     0%  
+ Number of Slice LUTs:                  384  out of  27288     1%  
+    Number used as Logic:               320  out of  27288     1%  
+    Number used as Memory:               64  out of   6408     0%  
+       Number used as RAM:               48
+       Number used as SRL:               16
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:    473
+   Number with an unused Flip Flop:     181  out of    473    38%  
+   Number with an unused LUT:            89  out of    473    18%  
+   Number of fully used LUT-FF pairs:   203  out of    473    42%  
+   Number of unique control sets:        28
+
+IO Utilization: 
+ Number of IOs:                          73
+ Number of bonded IOBs:                  63  out of    358    17%  
+
+Specific Feature Utilization:
+ Number of Block RAM/FIFO:                1  out of    116     0%  
+    Number using Block RAM only:          1
+ Number of BUFG/BUFGCTRLs:                4  out of     16    25%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+Timing Report
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+------------------------------------------------------------------------+---------------------------------------------------------------------------+-------+
+Clock Signal                                                            | Clock buffer(FF name)                                                     | Load  |
+------------------------------------------------------------------------+---------------------------------------------------------------------------+-------+
+clk                                                                     | IBUF+BUFG                                                                 | 209   |
+write_to_uart_tx(write_to_uart_tx<0>1:O)                                | NONE(*)(uart_tx_data_in_7)                                                | 8     |
+write_strobe_port_id[2]_AND_19_o(write_strobe_port_id[2]_AND_19_o<1>1:O)| NONE(*)(sDATA_7)                                                          | 8     |
+ENET_MDC                                                                | IBUF+BUFG                                                                 | 24    |
+program_rom/jtag_clk                                                    | NONE(program_rom/instantiate_loader.jtag_loader_6_inst/control_dout_int_7)| 7     |
+program_rom/instantiate_loader.jtag_loader_6_inst/drck                  | BUFG                                                                      | 31    |
+i_lcd_clk_gen/sCLK_DIV_7                                                | BUFG                                                                      | 35    |
+------------------------------------------------------------------------+---------------------------------------------------------------------------+-------+
+(*) These 2 clock signal(s) are generated by combinatorial logic,
+and XST is not able to identify which are the primary clock signals.
+Please use the CLOCK_SIGNAL constraint to specify the clock signal(s) generated by combinatorial logic.
+INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -3
+
+   Minimum period: 7.954ns (Maximum Frequency: 125.721MHz)
+   Minimum input arrival time before clock: 4.665ns
+   Maximum output required time after clock: 8.440ns
+   Maximum combinational path delay: 4.372ns
+
+Timing Details:
+---------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'clk'
+  Clock period: 7.954ns (frequency: 125.721MHz)
+  Total number of paths / destination ports: 9028 / 486
+-------------------------------------------------------------------------
+Delay:               7.954ns (Levels of Logic = 4)
+  Source:            program_rom/ram_1k_generate.s6.kcpsm6_rom (RAM)
+  Destination:       tx/pointer0_flop (FF)
+  Source Clock:      clk rising
+  Destination Clock: clk rising
+
+  Data Path: program_rom/ram_1k_generate.s6.kcpsm6_rom to tx/pointer0_flop
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     RAMB16BWER:CLKA->DOA12   16   1.850   1.004  program_rom/ram_1k_generate.s6.kcpsm6_rom (instruction<12>)
+     LUT6_2:I4->O5        24   0.568   1.420  processor/data_path_loop[0].output_data.sy_kk_mux_lut (port_id<0>)
+     LUT4:I0->O           20   0.203   1.092  write_to_uart_tx<0>1 (write_to_uart_tx)
+     LUT6_2:I2->O5         1   0.568   0.579  tx/data_present_lut (tx/en_pointer)
+     LUT6_2:I2->O6         1   0.568   0.000  tx/pointer01_lut (tx/pointer_value<1>)
+     FDR:D                     0.102          tx/pointer1_flop
+    ----------------------------------------
+    Total                      7.954ns (3.859ns logic, 4.095ns route)
+                                       (48.5% logic, 51.5% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'ENET_MDC'
+  Clock period: 6.399ns (frequency: 156.271MHz)
+  Total number of paths / destination ports: 1829 / 41
+-------------------------------------------------------------------------
+Delay:               6.399ns (Levels of Logic = 12)
+  Source:            g_counter_0 (FF)
+  Destination:       g_counter_0 (FF)
+  Source Clock:      ENET_MDC falling
+  Destination Clock: ENET_MDC falling
+
+  Data Path: g_counter_0 to g_counter_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDRE:C->Q             2   0.447   0.616  g_counter_0 (g_counter_0)
+     INV:I->O              1   0.206   0.000  Madd_g_counter[11]_GND_5_o_add_29_OUT_lut<0>_INV_0 (Madd_g_counter[11]_GND_5_o_add_29_OUT_lut<0>)
+     MUXCY:S->O            1   0.172   0.000  Madd_g_counter[11]_GND_5_o_add_29_OUT_cy<0> (Madd_g_counter[11]_GND_5_o_add_29_OUT_cy<0>)
+     MUXCY:CI->O           1   0.019   0.000  Madd_g_counter[11]_GND_5_o_add_29_OUT_cy<1> (Madd_g_counter[11]_GND_5_o_add_29_OUT_cy<1>)
+     MUXCY:CI->O           1   0.019   0.000  Madd_g_counter[11]_GND_5_o_add_29_OUT_cy<2> (Madd_g_counter[11]_GND_5_o_add_29_OUT_cy<2>)
+     MUXCY:CI->O           1   0.019   0.000  Madd_g_counter[11]_GND_5_o_add_29_OUT_cy<3> (Madd_g_counter[11]_GND_5_o_add_29_OUT_cy<3>)
+     MUXCY:CI->O           1   0.019   0.000  Madd_g_counter[11]_GND_5_o_add_29_OUT_cy<4> (Madd_g_counter[11]_GND_5_o_add_29_OUT_cy<4>)
+     MUXCY:CI->O           1   0.019   0.000  Madd_g_counter[11]_GND_5_o_add_29_OUT_cy<5> (Madd_g_counter[11]_GND_5_o_add_29_OUT_cy<5>)
+     XORCY:CI->O           1   0.180   0.684  Madd_g_counter[11]_GND_5_o_add_29_OUT_xor<6> (g_counter[11]_GND_5_o_add_29_OUT<6>)
+     LUT2:I0->O            1   0.203   0.580  _n03071_SW0 (N0)
+     LUT6:I5->O            4   0.205   0.684  _n03071 (_n03071)
+     LUT6:I5->O            1   0.205   0.580  _n03073 (_n03073)
+     LUT3:I2->O           12   0.205   0.908  _n03074 (_n0307)
+     FDRE:R                    0.430          g_counter_0
+    ----------------------------------------
+    Total                      6.399ns (2.348ns logic, 4.051ns route)
+                                       (36.7% logic, 63.3% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'program_rom/jtag_clk'
+  Clock period: 1.747ns (frequency: 572.328MHz)
+  Total number of paths / destination ports: 2 / 2
+-------------------------------------------------------------------------
+Delay:               1.747ns (Levels of Logic = 1)
+  Source:            program_rom/instantiate_loader.jtag_loader_6_inst/picoblaze_reset_int_0 (FF)
+  Destination:       program_rom/instantiate_loader.jtag_loader_6_inst/picoblaze_reset_int_0 (FF)
+  Source Clock:      program_rom/jtag_clk rising
+  Destination Clock: program_rom/jtag_clk rising
+
+  Data Path: program_rom/instantiate_loader.jtag_loader_6_inst/picoblaze_reset_int_0 to program_rom/instantiate_loader.jtag_loader_6_inst/picoblaze_reset_int_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FD:C->Q               3   0.447   0.995  program_rom/instantiate_loader.jtag_loader_6_inst/picoblaze_reset_int_0 (program_rom/instantiate_loader.jtag_loader_6_inst/picoblaze_reset_int_0)
+     LUT5:I0->O            1   0.203   0.000  program_rom/instantiate_loader.jtag_loader_6_inst/picoblaze_reset_int_0_rstpot (program_rom/instantiate_loader.jtag_loader_6_inst/picoblaze_reset_int_0_rstpot)
+     FD:D                      0.102          program_rom/instantiate_loader.jtag_loader_6_inst/picoblaze_reset_int_0
+    ----------------------------------------
+    Total                      1.747ns (0.752ns logic, 0.995ns route)
+                                       (43.0% logic, 57.0% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'program_rom/instantiate_loader.jtag_loader_6_inst/drck'
+  Clock period: 3.385ns (frequency: 295.425MHz)
+  Total number of paths / destination ports: 110 / 48
+-------------------------------------------------------------------------
+Delay:               3.385ns (Levels of Logic = 1)
+  Source:            program_rom/instantiate_loader.jtag_loader_6_inst/bram_ce_0 (FF)
+  Destination:       program_rom/instantiate_loader.jtag_loader_6_inst/jtag_din_int_17 (FF)
+  Source Clock:      program_rom/instantiate_loader.jtag_loader_6_inst/drck rising
+  Destination Clock: program_rom/instantiate_loader.jtag_loader_6_inst/drck rising
+
+  Data Path: program_rom/instantiate_loader.jtag_loader_6_inst/bram_ce_0 to program_rom/instantiate_loader.jtag_loader_6_inst/jtag_din_int_17
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDE:C->Q             22   0.447   1.362  program_rom/instantiate_loader.jtag_loader_6_inst/bram_ce_0 (program_rom/instantiate_loader.jtag_loader_6_inst/bram_ce_0)
+     LUT4:I1->O           18   0.205   1.049  program_rom/instantiate_loader.jtag_loader_6_inst/_n0112_inv1 (program_rom/instantiate_loader.jtag_loader_6_inst/_n0112_inv)
+     FDE:CE                    0.322          program_rom/instantiate_loader.jtag_loader_6_inst/jtag_din_int_0
+    ----------------------------------------
+    Total                      3.385ns (0.974ns logic, 2.411ns route)
+                                       (28.8% logic, 71.2% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'i_lcd_clk_gen/sCLK_DIV_7'
+  Clock period: 6.445ns (frequency: 155.171MHz)
+  Total number of paths / destination ports: 1585 / 59
+-------------------------------------------------------------------------
+Delay:               6.445ns (Levels of Logic = 5)
+  Source:            i_lcd_driver/CNT_SV_2 (FF)
+  Destination:       i_lcd_driver/CNT_SV_12 (FF)
+  Source Clock:      i_lcd_clk_gen/sCLK_DIV_7 rising
+  Destination Clock: i_lcd_clk_gen/sCLK_DIV_7 rising
+
+  Data Path: i_lcd_driver/CNT_SV_2 to i_lcd_driver/CNT_SV_12
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q              4   0.447   0.912  i_lcd_driver/CNT_SV_2 (i_lcd_driver/CNT_SV_2)
+     LUT3:I0->O            1   0.205   0.684  i_lcd_driver/REG_SETUP_1T[30]_GND_39_o_equal_12_o<12>1_SW0 (N20)
+     LUT6:I4->O            4   0.203   0.684  i_lcd_driver/REG_SETUP_1T[30]_GND_39_o_equal_12_o<12>1 (i_lcd_driver/REG_SETUP_1T[30]_GND_39_o_equal_12_o<12>1)
+     LUT4:I3->O            3   0.205   0.755  i_lcd_driver/CNT_MSG[2]_GND_39_o_equal_74_o<2>1 (i_lcd_driver/CNT_MSG[2]_GND_39_o_equal_74_o)
+     LUT6:I4->O            1   0.203   0.580  i_lcd_driver/Mmux_CLR_CNT_S22 (i_lcd_driver/Mmux_CLR_CNT_S21)
+     LUT2:I1->O           13   0.205   0.932  i_lcd_driver/Mmux_CLR_CNT_S23 (i_lcd_driver/CLR_CNT_S)
+     FDR:R                     0.430          i_lcd_driver/CNT_SV_0
+    ----------------------------------------
+    Total                      6.445ns (1.898ns logic, 4.547ns route)
+                                       (29.5% logic, 70.5% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
+  Total number of paths / destination ports: 40 / 30
+-------------------------------------------------------------------------
+Offset:              3.294ns (Levels of Logic = 2)
+  Source:            ENET_TX_EN (PAD)
+  Destination:       tx0_data_0 (FF)
+  Destination Clock: clk falling
+
+  Data Path: ENET_TX_EN to tx0_data_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             4   1.222   0.931  ENET_TX_EN_IBUF (ENET_TX_EN_IBUF)
+     LUT5:I1->O            2   0.203   0.616  _n0365_inv1 (_n0365_inv)
+     FDE_1:CE                  0.322          tx0_data_0
+    ----------------------------------------
+    Total                      3.294ns (1.747ns logic, 1.547ns route)
+                                       (53.0% logic, 47.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'ENET_MDC'
+  Total number of paths / destination ports: 122 / 48
+-------------------------------------------------------------------------
+Offset:              4.665ns (Levels of Logic = 3)
+  Source:            ENET_MDIO (PAD)
+  Destination:       g_counter_0 (FF)
+  Destination Clock: ENET_MDC falling
+
+  Data Path: ENET_MDIO to g_counter_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             7   1.222   1.118  ENET_MDIO_IBUF (ENET_MDIO_IBUF)
+     LUT6:I1->O            1   0.203   0.580  _n03073 (_n03073)
+     LUT3:I2->O           12   0.205   0.908  _n03074 (_n0307)
+     FDRE:R                    0.430          g_counter_0
+    ----------------------------------------
+    Total                      4.665ns (2.060ns logic, 2.605ns route)
+                                       (44.2% logic, 55.8% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'program_rom/jtag_clk'
+  Total number of paths / destination ports: 7 / 7
+-------------------------------------------------------------------------
+Offset:              2.463ns (Levels of Logic = 1)
+  Source:            program_rom/instantiate_loader.jtag_loader_6_inst/jtag_loader_gen.BSCAN_SPARTAN6_gen.BSCAN_BLOCK_inst:SEL (PAD)
+  Destination:       program_rom/instantiate_loader.jtag_loader_6_inst/control_dout_int_7 (FF)
+  Destination Clock: program_rom/jtag_clk rising
+
+  Data Path: program_rom/instantiate_loader.jtag_loader_6_inst/jtag_loader_gen.BSCAN_SPARTAN6_gen.BSCAN_BLOCK_inst:SEL to program_rom/instantiate_loader.jtag_loader_6_inst/control_dout_int_7
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+    BSCAN_SPARTAN6:SEL    21   0.000   1.114  program_rom/instantiate_loader.jtag_loader_6_inst/jtag_loader_gen.BSCAN_SPARTAN6_gen.BSCAN_BLOCK_inst (program_rom/instantiate_loader.jtag_loader_6_inst/bram_ce_valid)
+     LUT3:I2->O            5   0.205   0.714  program_rom/instantiate_loader.jtag_loader_6_inst/bram_ce_valid_control_reg_ce_AND_4_o_inv1 (program_rom/instantiate_loader.jtag_loader_6_inst/bram_ce_valid_control_reg_ce_AND_4_o_inv)
+     FDR:R                     0.430          program_rom/instantiate_loader.jtag_loader_6_inst/control_dout_int_0
+    ----------------------------------------
+    Total                      2.463ns (0.635ns logic, 1.828ns route)
+                                       (25.8% logic, 74.2% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'program_rom/instantiate_loader.jtag_loader_6_inst/drck'
+  Total number of paths / destination ports: 86 / 50
+-------------------------------------------------------------------------
+Offset:              2.813ns (Levels of Logic = 2)
+  Source:            program_rom/instantiate_loader.jtag_loader_6_inst/jtag_loader_gen.BSCAN_SPARTAN6_gen.BSCAN_BLOCK_inst:CAPTURE (PAD)
+  Destination:       program_rom/instantiate_loader.jtag_loader_6_inst/jtag_din_int_17 (FF)
+  Destination Clock: program_rom/instantiate_loader.jtag_loader_6_inst/drck rising
+
+  Data Path: program_rom/instantiate_loader.jtag_loader_6_inst/jtag_loader_gen.BSCAN_SPARTAN6_gen.BSCAN_BLOCK_inst:CAPTURE to program_rom/instantiate_loader.jtag_loader_6_inst/jtag_din_int_17
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+    BSCAN_SPARTAN6:CAPTURE   12   0.000   1.137  program_rom/instantiate_loader.jtag_loader_6_inst/jtag_loader_gen.BSCAN_SPARTAN6_gen.BSCAN_BLOCK_inst (program_rom/instantiate_loader.jtag_loader_6_inst/capture)
+     LUT3:I0->O            8   0.205   1.167  program_rom/instantiate_loader.jtag_loader_6_inst/Mmux_din_load11 (program_rom/instantiate_loader.jtag_loader_6_inst/din_load)
+     LUT6:I0->O            1   0.203   0.000  program_rom/instantiate_loader.jtag_loader_6_inst/mux191 (program_rom/instantiate_loader.jtag_loader_6_inst/jtag_din_int[17]_bram_dout_int[17]_mux_3_OUT<10>)
+     FDE:D                     0.102          program_rom/instantiate_loader.jtag_loader_6_inst/jtag_din_int_10
+    ----------------------------------------
+    Total                      2.813ns (0.510ns logic, 2.303ns route)
+                                       (18.1% logic, 81.9% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
+  Total number of paths / destination ports: 19 / 19
+-------------------------------------------------------------------------
+Offset:              3.634ns (Levels of Logic = 1)
+  Source:            LCD_Pico_to_LPC_D_V (FF)
+  Destination:       LCD_Pico_to_LPC_D_V (PAD)
+  Source Clock:      clk rising
+
+  Data Path: LCD_Pico_to_LPC_D_V to LCD_Pico_to_LPC_D_V
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FD:C->Q               2   0.447   0.616  LCD_Pico_to_LPC_D_V (LCD_Pico_to_LPC_D_V_OBUF)
+     OBUF:I->O                 2.571          LCD_Pico_to_LPC_D_V_OBUF (LCD_Pico_to_LPC_D_V)
+    ----------------------------------------
+    Total                      3.634ns (3.018ns logic, 0.616ns route)
+                                       (83.0% logic, 17.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'i_lcd_clk_gen/sCLK_DIV_7'
+  Total number of paths / destination ports: 269 / 6
+-------------------------------------------------------------------------
+Offset:              8.440ns (Levels of Logic = 5)
+  Source:            i_lcd_driver/STATE_FSM_FFd1 (FF)
+  Destination:       oLCD_DAT_OPV<3> (PAD)
+  Source Clock:      i_lcd_clk_gen/sCLK_DIV_7 rising
+
+  Data Path: i_lcd_driver/STATE_FSM_FFd1 to oLCD_DAT_OPV<3>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FD:C->Q              21   0.447   1.458  i_lcd_driver/STATE_FSM_FFd1 (i_lcd_driver/STATE_FSM_FFd1)
+     LUT6:I1->O            1   0.203   0.944  i_lcd_driver/Mmux_SEL_LCD_DAT<0>11 (i_lcd_driver/Mmux_SEL_LCD_DAT<0>1)
+     LUT6:I0->O            1   0.203   0.580  i_lcd_driver/Mmux_SEL_LCD_DAT<0>12 (i_lcd_driver/Mmux_SEL_LCD_DAT<0>11)
+     LUT6:I5->O            4   0.205   1.048  i_lcd_driver/Mmux_SEL_LCD_DAT<0>13 (i_lcd_driver/SEL_LCD_DAT<0>)
+     LUT6:I0->O            1   0.203   0.579  i_lcd_driver/LCD_DAT_OPV<1>1 (oLCD_DAT_OPV_3_OBUF)
+     OBUF:I->O                 2.571          oLCD_DAT_OPV_3_OBUF (oLCD_DAT_OPV<3>)
+    ----------------------------------------
+    Total                      8.440ns (3.832ns logic, 4.608ns route)
+                                       (45.4% logic, 54.6% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'ENET_MDC'
+  Total number of paths / destination ports: 2 / 1
+-------------------------------------------------------------------------
+Offset:              4.419ns (Levels of Logic = 2)
+  Source:            stato[3]_ENET_MDC_DFF_110 (FF)
+  Destination:       Ethernet_Lite_MDIO (PAD)
+  Source Clock:      ENET_MDC falling
+
+  Data Path: stato[3]_ENET_MDC_DFF_110 to Ethernet_Lite_MDIO
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FD_1:C->Q             2   0.447   0.616  stato[3]_ENET_MDC_DFF_110 (stato[3]_ENET_MDC_DFF_110)
+     INV:I->O              1   0.206   0.579  stato[3]_ENET_MDC_DFF_110_inv1_INV_0 (stato[3]_ENET_MDC_DFF_110_inv)
+     IOBUF:T->IO               2.571          Ethernet_Lite_MDIO_IOBUF (Ethernet_Lite_MDIO)
+    ----------------------------------------
+    Total                      4.419ns (3.224ns logic, 1.195ns route)
+                                       (73.0% logic, 27.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'program_rom/instantiate_loader.jtag_loader_6_inst/drck'
+  Total number of paths / destination ports: 1 / 1
+-------------------------------------------------------------------------
+Offset:              1.026ns (Levels of Logic = 0)
+  Source:            program_rom/instantiate_loader.jtag_loader_6_inst/jtag_din_int_17 (FF)
+  Destination:       program_rom/instantiate_loader.jtag_loader_6_inst/jtag_loader_gen.BSCAN_SPARTAN6_gen.BSCAN_BLOCK_inst:TDO (PAD)
+  Source Clock:      program_rom/instantiate_loader.jtag_loader_6_inst/drck rising
+
+  Data Path: program_rom/instantiate_loader.jtag_loader_6_inst/jtag_din_int_17 to program_rom/instantiate_loader.jtag_loader_6_inst/jtag_loader_gen.BSCAN_SPARTAN6_gen.BSCAN_BLOCK_inst:TDO
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDE:C->Q              1   0.447   0.579  program_rom/instantiate_loader.jtag_loader_6_inst/jtag_din_int_17 (program_rom/instantiate_loader.jtag_loader_6_inst/jtag_din_int_17)
+    BSCAN_SPARTAN6:TDO         0.000          program_rom/instantiate_loader.jtag_loader_6_inst/jtag_loader_gen.BSCAN_SPARTAN6_gen.BSCAN_BLOCK_inst
+    ----------------------------------------
+    Total                      1.026ns (0.447ns logic, 0.579ns route)
+                                       (43.6% logic, 56.4% route)
+
+=========================================================================
+Timing constraint: Default path analysis
+  Total number of paths / destination ports: 3 / 3
+-------------------------------------------------------------------------
+Delay:               4.372ns (Levels of Logic = 2)
+  Source:            ENET_MDC (PAD)
+  Destination:       Ethernet_Lite_MDC (PAD)
+
+  Data Path: ENET_MDC to Ethernet_Lite_MDC
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             1   1.222   0.579  ENET_MDC_IBUF (Ethernet_Lite_MDC_OBUF)
+     OBUF:I->O                 2.571          Ethernet_Lite_MDC_OBUF (Ethernet_Lite_MDC)
+    ----------------------------------------
+    Total                      4.372ns (3.793ns logic, 0.579ns route)
+                                       (86.8% logic, 13.2% route)
+
+=========================================================================
+
+Cross Clock Domains Report:
+--------------------------
+
+Clock to Setup on destination clock ENET_MDC
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+ENET_MDC       |         |         |    6.399|         |
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock clk
+------------------------+---------+---------+---------+---------+
+                        | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock            |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+------------------------+---------+---------+---------+---------+
+clk                     |    7.954|         |    2.735|         |
+i_lcd_clk_gen/sCLK_DIV_7|    3.336|         |         |         |
+program_rom/jtag_clk    |    1.767|         |         |         |
+write_to_uart_tx        |         |    1.077|         |         |
+------------------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock i_lcd_clk_gen/sCLK_DIV_7
+--------------------------------+---------+---------+---------+---------+
+                                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock                    |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+--------------------------------+---------+---------+---------+---------+
+clk                             |    2.258|         |         |         |
+i_lcd_clk_gen/sCLK_DIV_7        |    6.445|         |         |         |
+write_strobe_port_id[2]_AND_19_o|         |    1.179|         |         |
+--------------------------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock program_rom/instantiate_loader.jtag_loader_6_inst/drck
+------------------------------------------------------+---------+---------+---------+---------+
+                                                      | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock                                          |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+------------------------------------------------------+---------+---------+---------+---------+
+program_rom/instantiate_loader.jtag_loader_6_inst/drck|    3.385|         |         |         |
+program_rom/jtag_clk                                  |    3.079|         |         |         |
+------------------------------------------------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock program_rom/jtag_clk
+------------------------------------------------------+---------+---------+---------+---------+
+                                                      | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock                                          |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+------------------------------------------------------+---------+---------+---------+---------+
+program_rom/instantiate_loader.jtag_loader_6_inst/drck|    3.006|         |         |         |
+program_rom/jtag_clk                                  |    1.747|         |         |         |
+------------------------------------------------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock write_strobe_port_id[2]_AND_19_o
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+clk            |         |         |    3.459|         |
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock write_to_uart_tx
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+clk            |         |         |    3.459|         |
+---------------+---------+---------+---------+---------+
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 32.00 secs
+Total CPU time to Xst completion: 31.94 secs
+ 
+--> 
+
+Total memory usage is 307308 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :   28 (   0 filtered)
+Number of infos    :    4 (   0 filtered)
+

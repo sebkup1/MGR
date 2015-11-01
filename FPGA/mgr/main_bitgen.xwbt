@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=C:\studia\MGR\FPGA\mgr\main.ncd
+OUTFILE=C:\studia\MGR\FPGA\mgr\main.bit
+FAMILY=Spartan6
+PART=xc6slx45-3fgg676
+WORKINGDIR=C:\studia\MGR\FPGA\mgr
+LICENSE=WebPack
+USER_INFO=210986862_0_0_355

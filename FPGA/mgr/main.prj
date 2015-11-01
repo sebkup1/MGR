@@ -1,0 +1,7 @@
+vhdl work "uart_tx6.vhd"
+vhdl work "uart_rx6.vhd"
+vhdl work "program.vhd"
+vhdl work "LCD_driver.vhd"
+vhdl work "lcd_clk_gen.vhd"
+vhdl work "kcpsm6.vhd"
+vhdl work "main.vhd"

@@ -1,0 +1,22 @@
+Release 14.7 - par P.20131013 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+Sun Nov 01 11:37:49 2015
+
+All signals are completely routed.
+
+WARNING:ParHelpers:361 - There are 10 loadless signals in this design. This design will cause Bitgen to issue DRC
+   warnings.
+
+   Ethernet_Lite_COL_IBUF
+   Ethernet_Lite_CRS_IBUF
+   Ethernet_Lite_RX_CLK_IBUF
+   Ethernet_Lite_TX_CLK_IBUF
+   dip_switch<0>_IBUF
+   dip_switch<1>_IBUF
+   dip_switch<2>_IBUF
+   dip_switch<3>_IBUF
+   dip_switch<4>_IBUF
+   dip_switch<5>_IBUF
+
+

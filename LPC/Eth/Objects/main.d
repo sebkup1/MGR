@@ -1,0 +1,14 @@
+.\objects\main.o: main.c
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\main.o: easyweb.h
+.\objects\main.o: EMAC.h
+.\objects\main.o: tcpip.h
+.\objects\main.o: inc\LPC23xx.h
+.\objects\main.o: webpage.h
+.\objects\main.o: inc\type.h
+.\objects\main.o: inc\irq.h
+.\objects\main.o: inc\target.h
+.\objects\main.o: fio.h
+.\objects\main.o: Pico.h

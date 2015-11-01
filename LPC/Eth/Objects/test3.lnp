@@ -1,0 +1,12 @@
+--cpu ARM7TDMI
+".\objects\pico.o"
+".\objects\main.o"
+".\objects\emac.o"
+".\objects\retarget.o"
+".\objects\tcpip.o"
+".\objects\fio.o"
+".\objects\lpc2300.o"
+--library_type=microlib --strict --scatter ".\Objects\test3.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\test3.map" -o .\Objects\test3.axf

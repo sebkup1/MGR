@@ -104,6 +104,11 @@
                     CONSTANT decimal2, 04                    ;   65,536
                     CONSTANT decimal3, 05
                     CONSTANT decimal4, 06
+                    ; banery
+                    CONSTANT green, 03
+                    CONSTANT red, 07
+                    CONSTANT blue, 01
+                    CONSTANT clear, 0F
                     ;
                     ;
                     ;------------------------------------------------------------------------------------------
@@ -162,14 +167,10 @@
         LPC_THREAD: OUTPUTK LPC_ready_syg, LPC_IN_ready_port
                     INPUT s0, LPC_IN_data_valid_port
                     TEST s0, LPC_data_valid_syg              ;Z=0 and C=1 when data present
-                    JUMP Z, LPC_THREAD
+                    JUMP Z, UART_THREAD
                     INPUT s5, LPC_IN_data_port
-                    ;INPUT sf, LPC_IN_data_port
-                    ;load sf,s5
-                    ;LOAD sF, "z"
-                    ;load s5,sf
-                    ;CALL LCD_send
                     CALL UART_TX
+                    CALL which_banner
                     ;LOAD s5, "C"
        LPC_DV_down: OUTPUTK 00000000'b, LPC_IN_ready_port
                     INPUT s0, LPC_IN_data_valid_port         ;Sprawdza czy driver odebra³ dane
@@ -181,12 +182,49 @@
                     JUMP LPC_THREAD
        UART_THREAD: INPUT s0, UART_status_port
                     TEST s0, UART_Rx_data_present            ;Z=0 and C=1 when data present
-                    JUMP Z, UART_THREAD
+                    JUMP Z, LPC_THREAD
                     INPUT s5, UART_RX6_input_port
                     LOAD sF, s5
                     CALL LPC_send
-                    ;CALL LCD_send
+                    CALL LCD_send
                     JUMP UART_THREAD
+      which_banner: LOAD s6, s5
+                    SUB s6, green
+                    JUMP C, next_banner1
+                    TEST s6, 11111111'b                      ;16hex'
+                    JUMP NZ, next_banner1
+                    LOAD sF, ESC
+                    CALL LCD_send
+                    CALL banner_message
+                    RETURN 
+      next_banner1: LOAD s6, s5
+                    SUB s6, blue
+                    JUMP C, next_banner2
+                    TEST s6, 11111111'b                      ;16hex'
+                    JUMP NZ, next_banner2
+                    LOAD sF, ESC
+                    CALL LCD_send
+                    CALL banner2_message
+                    RETURN 
+      next_banner2: LOAD s6, s5
+                    SUB s6, red
+                    JUMP C, next_banner3
+                    TEST s6, 11111111'b                      ;16hex'
+                    JUMP NZ, next_banner3
+                    LOAD sF, ESC
+                    CALL LCD_send
+                    CALL banner3_message
+                    RETURN 
+      next_banner3: LOAD s6, s5
+                    SUB s6, clear
+                    JUMP C, just_return
+                    TEST s6, 11111111'b                      ;16hex'
+                    JUMP NZ, just_return
+                    LOAD sF, ESC
+                    CALL LCD_send
+                    CALL banner4_message
+                    RETURN 
+       just_return: RETURN 
      bad_hex_input: CALL send_CR
                     LOAD sB, bad_hex_msg'upper               ;tell user input was invalid hex
                     LOAD sA, bad_hex_msg'lower
@@ -334,6 +372,64 @@
                     LOAD&RETURN s5, CR
                     LOAD&RETURN s5, welcome5$
                     LOAD&RETURN s5, NUL
+    banner_message: LOAD sB, banner_msg'upper
+                    LOAD sA, banner_msg'lower
+                    CALL send_banner
+                    HWBUILD sF                               ;hardware version defines ASCII letter
+                    ;CALL send_CR
+                    RETURN 
+                    ;
+                    ; Welcome message
+                    ;
+                    STRING bannert$, "greeen"
+                    ;
+                    ;
+        banner_msg: LOAD&RETURN sF, bannert$
+                    LOAD&RETURN sF, NUL
+                    ;
+                    ;
+                    ;
+   banner2_message: LOAD sB, banner2_msg'upper
+                    LOAD sA, banner2_msg'lower
+                    CALL send_banner
+                    HWBUILD sF                               ;hardware version defines ASCII letter
+                    RETURN 
+                    ;
+                    ; Welcome message
+                    ;
+                    STRING bannert2$, "blue"
+                    ;
+                    ;
+       banner2_msg: LOAD&RETURN sF, bannert2$
+                    LOAD&RETURN sF, NUL
+   banner3_message: LOAD sB, banner3_msg'upper
+                    LOAD sA, banner3_msg'lower
+                    CALL send_banner
+                    HWBUILD sF                               ;hardware version defines ASCII letter
+                    ;CALL send_CR
+                    RETURN 
+                    ;
+                    ; Welcome message
+                    ;
+                    STRING bannert3$, "red"
+                    ;
+                    ;
+       banner3_msg: LOAD&RETURN sF, bannert3$
+                    LOAD&RETURN sF, NUL
+   banner4_message: LOAD sB, banner4_msg'upper
+                    LOAD sA, banner4_msg'lower
+                    CALL send_banner
+                    HWBUILD sF                               ;hardware version defines ASCII letter
+                    ;CALL send_CR
+                    RETURN 
+                    ;
+                    ; Welcome message
+                    ;
+                    STRING bannert4$, "i czyszcze sobiecale UOP"
+                    ;
+                    ;
+       banner4_msg: LOAD&RETURN sF, bannert4$
+                    LOAD&RETURN sF, NUL
                     ;
                     ;
                     ;------------------------------------------------------------------------------------------
@@ -351,6 +447,21 @@
                     ADD sA, 1'd
                     ADDCY sB, 0'd
                     JUMP send_message
+                    ; Send a banner to LCD
+                    ;------------------------------------------------------------------------------------------
+                    ;
+                    ; A message is transmitted to the USB-UART.
+                    ; The start address of the message must be provided in [sB,sA].
+                    ; Terminate the transmission with a NULL character (00 hex).
+                    ;
+       send_banner: CALL@ (sB, sA)
+                    COMPARE sF, 00                           ;terminate on NUL character
+                    RETURN Z
+                    ;LOAD sF,s5
+                    CALL LCD_send
+                    ADD sA, 1'd
+                    ADDCY sB, 0'd
+                    JUMP send_banner
                     ;
                     ;
                     ;------------------------------------------------------------------------------------------

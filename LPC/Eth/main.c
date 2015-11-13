@@ -23,8 +23,10 @@
   Main Program
  *----------------------------------------------------------------------------*/
 int main (void) {
+	
 	DWORD REG;	
 	BOOL set=0;
+	streamsSet=0;
 	TCPRxDataCount =0;
 	PicoLCDReceiveDataCounter=0;
 	PicoSendViaTCPReady=0;
@@ -131,6 +133,7 @@ int main (void) {
 //		SendToPico(118);
 //	}
     ProcessData();
+
 		SendEcho();
 		PicoBlazesThread();
 		 
@@ -147,7 +150,7 @@ void PicoBlazesThread(){
 		PicoData = (FIO2PIN>>2);
 		PicoDataBuffer[PicoLCDReceiveDataCounter]=PicoData;
 		PicoLCDReceiveDataCounter++;
-		if(PicoData ==35)PicoSendViaTCPReady=1;
+		if(PicoData ==35)PicoSendViaTCPReady=1;		//jesli hasz to wyslij bo koniec wiadomosci
 		
 		FIO2PIN &= NotReadyReadFromPico;
 		
@@ -233,6 +236,7 @@ void SendToPico(short int mes)
 
 void SendFromPico(void)
 {  
+	int i=0;
 	if(PicoSendViaTCPReady>0){
 		if (SocketStatus & SOCK_CONNECTED)             // check if somebody has connected to our TCP
 		{
@@ -241,8 +245,22 @@ void SendFromPico(void)
 		
 			if (SocketStatus & SOCK_TX_BUF_RELEASED)     // check if buffer is free for TX 
 			{
-				memcpy(TCP_TX_BUF, PicoDataBuffer, PicoLCDReceiveDataCounter);
-				TCPTxDataCount = PicoLCDReceiveDataCounter;
+//				memcpy(TCP_TX_BUF, PicoDataBuffer, PicoLCDReceiveDataCounter+4);
+//				memcpy(TCP_TX_BUF, JavaSerializationPrompt, 4);
+//				TCPTxDataCount = PicoLCDReceiveDataCounter+4;
+//				TCPTransmitTxBuffer();
+//				PicoLCDReceiveDataCounter=0;
+//				PicoSendViaTCPReady=0;
+				
+				for (i=0;i<PicoLCDReceiveDataCounter;i++)
+				{
+						TempRxTCPBuffer[i+4]=PicoDataBuffer[i];
+				}
+				
+				//memcpy(TCP_TX_BUF, TempRxTCPBuffer, PicoLCDReceiveDataCounter+4);
+				//memcpy(JavaSerializationPrompt, PicoDataBuffer ,4);
+				memcpy(TCP_TX_BUF, TempRxTCPBuffer, PicoLCDReceiveDataCounter+4);
+				TCPTxDataCount = PicoLCDReceiveDataCounter+4;
 				TCPTransmitTxBuffer();
 				PicoLCDReceiveDataCounter=0;
 				PicoSendViaTCPReady=0;
@@ -263,9 +281,19 @@ void SendEcho(void)
 			{
 				//_RxTCPBuffer[4] = 0x41;
 				memcpy(TCP_TX_BUF, TCP_RX_BUF, TCPRxDataCount);
+				memcpy(TempRxTCPBuffer, TCP_RX_BUF, TCPRxDataCount);
 				TCPTxDataCount = TCPRxDataCount;
-				TCPTransmitTxBuffer();
+				
+				if(streamsSet==0){
+					TCPTransmitTxBuffer();
+					streamsSet=1;
+				}
+				
+				
+				tempCount = TCPRxDataCount;
 				TCPRxDataCount=0;
+				
+				
 				//SendToPico(3);
 			}
 		}
@@ -277,24 +305,26 @@ void ProcessData(void)
 	if(TCPRxDataCount>0){
 		if (SocketStatus & SOCK_CONNECTED)             // check if somebody has connected to our TCP
 		{
-			if(_RxTCPBuffer[4] ==0x62)
+			memcpy(JavaSerializationPrompt, _RxTCPBuffer, 3);
+			
+			if(_RxTCPBuffer[5] ==0x62)
 			{
 				FIO1SET2 = 0x20;//niebieska
 				SendToPico(1);
 			}
 			
-			if(_RxTCPBuffer[4] ==0x67)
+			if(_RxTCPBuffer[5] ==0x67)
 				{
 					FIO1SET2 = 0x10;//zielony	
 					SendToPico(2);
 				}
 				
-			if(_RxTCPBuffer[4] ==0x72)
+			if(_RxTCPBuffer[5] ==0x72)
 				{
 					FIO1SET2 = 0x08;//czerwony	
 					SendToPico(3);
 				}
-				if(_RxTCPBuffer[4] ==0x63)
+			if(_RxTCPBuffer[5] ==0x63)
 				{
 					FIO1CLR2 = 0x38;//clear all	
 					SendToPico(4);

@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2015-11-01T11:34:29</DateModified>
+  <DateModified>2015-11-11T13:09:17</DateModified>
   <ModuleName>main</ModuleName>
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
   <SavedFilePath>C:/studia/MGR/FPGA/mgr/iseconfig/main.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>C:/studia/MGR/FPGA/mgr</ImplementationReportsDirectory>
+  <ImplementationReportsDirectory>C:/studia/MGR/FPGA/mgr\</ImplementationReportsDirectory>
   <DateInitialized>2015-11-01T11:34:29</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>

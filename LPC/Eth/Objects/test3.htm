@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\test3.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\test3.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050169: Last Updated: Sun Nov 01 12:35:07 2015
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050169: Last Updated: Thu Nov 12 20:39:40 2015
 <BR><P>
 <H3>Maximum Stack Usage =        104 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -76,8 +76,8 @@ Global Symbols
 
 <P><STRONG><a name="[56]"></a>__rt_final_exit</STRONG> (ARM, 0 bytes, Stack size unknown bytes, entry11a.o(.ARM.Collect$$$$0000000F))
 
-<P><STRONG><a name="[e]"></a>SendFromPico</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, main.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = SendFromPico
+<P><STRONG><a name="[e]"></a>SendFromPico</STRONG> (Thumb, 92 bytes, Stack size 16 bytes, main.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = SendFromPico
 </UL>
 <BR>[Calls]<UL><LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 <LI><a href="#[11]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TCPTransmitTxBuffer
@@ -87,14 +87,14 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[12]"></a>PicoBlazesThread</STRONG> (Thumb, 68 bytes, Stack size 16 bytes, main.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = PicoBlazesThread &rArr; SendFromPico
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = PicoBlazesThread &rArr; SendFromPico
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendFromPico
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[13]"></a>SendEcho</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, main.o(.text))
+<P><STRONG><a name="[13]"></a>SendEcho</STRONG> (Thumb, 88 bytes, Stack size 8 bytes, main.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = SendEcho
 </UL>
 <BR>[Calls]<UL><LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
@@ -110,15 +110,16 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[14]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProcessData
 </UL>
 
-<P><STRONG><a name="[14]"></a>ProcessData</STRONG> (Thumb, 94 bytes, Stack size 12 bytes, main.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = ProcessData &rArr; SendToPico
+<P><STRONG><a name="[14]"></a>ProcessData</STRONG> (Thumb, 104 bytes, Stack size 16 bytes, main.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = ProcessData &rArr; SendToPico
 </UL>
-<BR>[Calls]<UL><LI><a href="#[15]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendToPico
+<BR>[Calls]<UL><LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
+<LI><a href="#[15]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendToPico
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[8]"></a>main</STRONG> (Thumb, 188 bytes, Stack size 0 bytes, main.o(.text))
+<P><STRONG><a name="[8]"></a>main</STRONG> (Thumb, 190 bytes, Stack size 0 bytes, main.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = main &rArr; DoNetworkStuff &rArr; ReadFrame &rArr; ProcessEthIAFrame &rArr; ProcessTCPFrame &rArr; PrepareTCP_FRAME &rArr; CalcChecksum
 </UL>
 <BR>[Calls]<UL><LI><a href="#[18]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TCPStartRetryTimer
@@ -152,7 +153,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[1f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HTTPServer
 </UL>
 
-<P><STRONG><a name="[1f]"></a>HTTPServer</STRONG> (Thumb, 174 bytes, Stack size 24 bytes, main.o(.text), UNUSED)
+<P><STRONG><a name="[1f]"></a>HTTPServer</STRONG> (Thumb, 232 bytes, Stack size 24 bytes, main.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 <LI><a href="#[11]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TCPTransmitTxBuffer
 <LI><a href="#[f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TCPReleaseRxBuffer
@@ -531,6 +532,7 @@ Global Symbols
 <LI><a href="#[19]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PrepareARP_REQUEST
 <LI><a href="#[1f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HTTPServer
 <LI><a href="#[1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InsertDynamicValues
+<LI><a href="#[14]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProcessData
 <LI><a href="#[13]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendEcho
 <LI><a href="#[e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendFromPico
 </UL>

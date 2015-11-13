@@ -1,5 +1,5 @@
 extern unsigned char PicoLCDStatus;
-#define PicoLCDDataPresent                    0x01      // state machine NOT closed
+#define PicoLCDDataPresent             0x01      // state machine NOT closed
 
 #define SOCK_CONNECTED                 0x02      // user may send & receive data
 #define SOCK_DATA_AVAILABLE            0x04      // new data available
@@ -17,8 +17,14 @@ extern unsigned int PicoLCDReceiveDataCounter;
 extern unsigned char PicoData;
 extern short int PicoSendViaTCPReady;
 extern unsigned char PicoDataBuffer[64];
+extern unsigned char JavaSerializationPrompt[4];
+extern char TempRxTCPBuffer[64];
+extern int tempCount;
+
+#define ToPicoData   (*(unsigned char *)(PicoDataBuffer + 0x004))
 extern int data;
 extern int mask;
+extern int streamsSet;
 
 void PicoBlazesThread(void);
 void SendFromPico(void);

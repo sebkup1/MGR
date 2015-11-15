@@ -172,7 +172,7 @@ void Init_EMAC(void)
 //	write_PHY (PHY_REG_BMCR, 0x8000);
 //	for (tout = 100; tout; tout--);
 //	read_PHY (PHY_REG_BMCR);
-	write_PHY (PHY_REG_BMCR, 0x3100);
+	write_PHY (PHY_REG_BMCR, 0x3100); // reset mode chipu i konfiguracja
 	for (tout = 50; tout; tout--);
 	//read_PHY (PHY_REG_BMCR);
 

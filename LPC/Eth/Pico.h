@@ -19,12 +19,14 @@ extern short int PicoSendViaTCPReady;
 extern unsigned char PicoDataBuffer[64];
 extern unsigned char JavaSerializationPrompt[4];
 extern char TempRxTCPBuffer[64];
-extern int tempCount;
+
 
 #define ToPicoData   (*(unsigned char *)(PicoDataBuffer + 0x004))
 extern int data;
 extern int mask;
 extern int streamsSet;
+extern int tempCount;
+extern int ARPWhoHasSend;
 
 void PicoBlazesThread(void);
 void SendFromPico(void);

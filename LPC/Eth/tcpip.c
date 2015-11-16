@@ -16,6 +16,7 @@
 #include "EMAC.h"         // Keil: Line added
 #include <string.h>       // Keil: Line added
 #include <LPC23xx.h>      // Keil: Register definition file for LPC2378
+#include "Pico.h"
 
 const unsigned char MyMAC[6] =   // "M1-M2-M3-M4-M5-M6"
 {
@@ -63,7 +64,7 @@ void TCPPassiveOpen(void)
 // does an active open (tries to establish a connection between
 // 'MyIP:TCPLocalPort' and 'RemoteIP:TCPRemotePort')
 
-void TCPActiveOpen(void)
+void TCPActiveOpen_obsolete(void)
 {
   if ((TCPStateMachine == CLOSED) || (TCPStateMachine == LISTENING))
   {
@@ -75,6 +76,28 @@ void TCPActiveOpen(void)
     TCPStartRetryTimer();
     SocketStatus = SOCK_ACTIVE;                  // reset, socket now active    
   }
+}
+
+void TCPActiveOpen(void)
+{
+	if (!(TCPFlags & IP_ADDR_RESOLVED)){
+		
+		if(ARPWhoHasSend<1)
+		{
+			TCPStartRetryTimer();
+			PrepareARP_REQUEST();                        // ask for MAC by sending a broadcast
+			LastFrameSent = ARP_REQUEST;
+		}
+			
+		if ((TCPStateMachine == CLOSED) || (TCPStateMachine == LISTENING))
+		{
+			TCPFlags |= TCP_ACTIVE_OPEN;                 // let's do an active open!
+			TCPFlags &= ~IP_ADDR_RESOLVED;               // we haven't opponents MAC yet
+			SocketStatus = SOCK_ACTIVE;                  // reset, socket now active    
+			ARPWhoHasSend=1;
+		}
+	}
+	else{ARPWhoHasSend=0;}
 }
 
 // easyWEB-API function

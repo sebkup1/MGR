@@ -289,7 +289,8 @@ void WriteDWBE(unsigned char *Add, unsigned long Data);
 // easyWEB-API functions
 void TCPLowLevelInit(void);                      // setup timer, LAN-controller, flags...
 void TCPPassiveOpen(void);                       // listen for a connection
-void TCPActiveOpen(void);                        // open connection
+void TCPActiveOpen_obsolete(void);               // open connection
+void TCPActiveOpen(void);            					   // open connection
 void TCPClose(void);                             // close connection
 void TCPReleaseRxBuffer(void);                   // indicate to discard rec'd packet
 void TCPTransmitTxBuffer(void);                  // initiate transfer after TxBuffer is filled

@@ -25,7 +25,7 @@
 int main (void) {
 	
 	DWORD REG;	
-	BOOL set=0;
+	ARPWhoHasSend=0;
 	streamsSet=0;
 	TCPRxDataCount =0;
 	PicoLCDReceiveDataCounter=0;
@@ -57,87 +57,28 @@ int main (void) {
 		FIO1SET2 = 0x08;//czerwony
 		REG = FIO0PIN | 0xfffffe7f;
 	}
-	
-	
-	FIO1SET2 = 0x20;//niebieska
-	FIO1CLR2 = 0x08;//czerwony
-	
-																	
-	
+															
 	TCPLowLevelInit();
 	
-		//PINSEL3 |= 0xC0000000; 						// Enable ad0[5] converter
-																			// so it could read value from P1.31 potentiometer 
-	
-	//HTTPStatus = 0;                                 // clear HTTP-server's flag register
-
 	FIO1CLR = 0xFFFFFFFF;	
 	FIO1SET |= 0x0040000;
 	FIO0CLR = ToPicoDataValid;
 	
-    TCPLocalPort = 50001;
-  //TCPLocalPort = TCP_PORT_HTTP;
+  TCPLocalPort = 50001;
 
 	TCPRemotePort = 50000;
 
-  while (1)                                       // repeat forever
+  while (1)                                       					// repeat forever
   {
+    DoNetworkStuff();                                       // handle network and easyWEB-stack events
 
+		TCPActiveOpen();
 			
-    //if (!(SocketStatus & SOCK_ACTIVE)) TCPPassiveOpen();  // listen for incoming TCP-connection
-    DoNetworkStuff();                                       // handle network and easyWEB-stack
-															// events
-		
-	  
-//	  if (!(TCPFlags & IP_ADDR_RESOLVED)) 
-//		TCPActiveOpen();
-		
-		
-		
-	if (!(TCPFlags & IP_ADDR_RESOLVED)){
-		
-		if(set<1)
-		{
-			TCPStartRetryTimer();
-			PrepareARP_REQUEST();                        // ask for MAC by sending a broadcast
-			LastFrameSent = ARP_REQUEST;
-		}
-			
-		if ((TCPStateMachine == CLOSED) || (TCPStateMachine == LISTENING))
-		{
-			TCPFlags |= TCP_ACTIVE_OPEN;                 // let's do an active open!
-			TCPFlags &= ~IP_ADDR_RESOLVED;               // we haven't opponents MAC yet
-			SocketStatus = SOCK_ACTIVE;                  // reset, socket now active    
-			set=1;
-		}
-	}
-	else{set=0;}
-		
-		
-
-		
-		
-//		if ((SocketStatus & SOCK_DATA_AVAILABLE)){
-//			
-//			SocketStatus &= ~SOCK_DATA_AVAILABLE;
-//			MAC_RXCONSUMEINDEX = 0;
-//			MAC_RXPRODUCEINDEX = 0;
-//			//TCPTransmitTxBuffer();
-//		}
-		
-		
-
-		//HTTPServer();
-//		while(1)
-//	{
-//		SendToPico(118);
-//	}
     ProcessData();
 
 		SendEcho();
 		PicoBlazesThread();
 		 
-
   }
 }
 

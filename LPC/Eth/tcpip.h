@@ -22,7 +22,7 @@
 #define REMIP_1              192                 // our internet protocol (IP) address
 #define REMIP_2              168
 #define REMIP_3              1
-#define REMIP_4              112
+#define REMIP_4              103
 
 #define SUBMASK_1            255                 // subnet mask
 #define SUBMASK_2            255
@@ -40,11 +40,9 @@
 #define MAX_RETRYS           4                   // nr. of resendings before reset conn.
                                                  // total nr. of transmissions = MAX_RETRYS + 1
 
-//#define MAX_TCP_TX_DATA_SIZE 512                 // max. outgoing TCP data size (even!)
-//#define MAX_TCP_RX_DATA_SIZE 256                 // max. incoming TCP data size (even!)
-
 #define MAX_TCP_TX_DATA_SIZE 512                 // max. outgoing TCP data size (even!)
-#define MAX_TCP_RX_DATA_SIZE 128                 // max. incoming TCP data size (even!)
+#define MAX_TCP_RX_DATA_SIZE 256                 // max. incoming TCP data size (even!)
+
                                                  // (increasing the buffer-size dramatically
                                                  // increases the transfer-speed!)
                                         

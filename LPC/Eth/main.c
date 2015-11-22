@@ -74,15 +74,17 @@ int main (void) {
 
 		TCPActiveOpen();
 			
-    ProcessData();
-
-		SendEcho();
 		PicoBlazesThread();
 		 
   }
 }
 
 void PicoBlazesThread(){
+		
+	ProcessData();
+
+	
+	
 	if(FIO2PIN & PicoDataValid)
 	{
 		(*(volatile unsigned long *)(HS_PORT_DIR_BASE 
@@ -102,6 +104,7 @@ void PicoBlazesThread(){
 	}
 	FIO2PIN |= ReadyReadFromPico;
 	SendFromPico();
+	SendEcho();
 }
 
 void SendToPico(short int mes)
@@ -154,8 +157,8 @@ void SendToPico(short int mes)
 			FIO0SET = ToPicoDataValid;
 		}
 		FIO0CLR = ToPicoDataValid;
-		}
 		break;
+		}
 		
 		case 4:
 		{
@@ -186,25 +189,20 @@ void SendFromPico(void)
 		
 			if (SocketStatus & SOCK_TX_BUF_RELEASED)     // check if buffer is free for TX 
 			{
-//				memcpy(TCP_TX_BUF, PicoDataBuffer, PicoLCDReceiveDataCounter+4);
-//				memcpy(TCP_TX_BUF, JavaSerializationPrompt, 4);
-//				TCPTxDataCount = PicoLCDReceiveDataCounter+4;
-//				TCPTransmitTxBuffer();
-//				PicoLCDReceiveDataCounter=0;
-//				PicoSendViaTCPReady=0;
-				
 				for (i=0;i<PicoLCDReceiveDataCounter;i++)
 				{
-						TempRxTCPBuffer[i+4]=PicoDataBuffer[i];
+						TempRxTCPBuffer[i+3]=PicoDataBuffer[i];
 				}
-				
-				//memcpy(TCP_TX_BUF, TempRxTCPBuffer, PicoLCDReceiveDataCounter+4);
-				//memcpy(JavaSerializationPrompt, PicoDataBuffer ,4);
+
+				//memcpy(TempRxTCPBuffer, TCP_RX_BUF, TCPRxDataCount);
 				memcpy(TCP_TX_BUF, TempRxTCPBuffer, PicoLCDReceiveDataCounter+4);
-				TCPTxDataCount = PicoLCDReceiveDataCounter+4;
+				
+				//TCPTxDataCount = PicoLCDReceiveDataCounter+4;		//normalne echo
+				TCPTxDataCount =tempCount;												//
 				TCPTransmitTxBuffer();
 				PicoLCDReceiveDataCounter=0;
 				PicoSendViaTCPReady=0;
+				
 			}
 		}
 	}
@@ -220,22 +218,24 @@ void SendEcho(void)
 		
 			if (SocketStatus & SOCK_TX_BUF_RELEASED)     // check if buffer is free for TX
 			{
-				//_RxTCPBuffer[4] = 0x41;
-				memcpy(TCP_TX_BUF, TCP_RX_BUF, TCPRxDataCount);
-				memcpy(TempRxTCPBuffer, TCP_RX_BUF, TCPRxDataCount);
-				TCPTxDataCount = TCPRxDataCount;
-				
 				if(streamsSet==0){
-					TCPTransmitTxBuffer();
 					streamsSet=1;
 				}
+				else
+				{
+				_RxTCPBuffer[3] = 0x52;//R
+				_RxTCPBuffer[4] = 0x45;//E
+				_RxTCPBuffer[5] = 0x51;//Q
+				}
 				
-				
+				memcpy(TCP_TX_BUF, TCP_RX_BUF, TCPRxDataCount);
+				memcpy(TempRxTCPBuffer, TCP_RX_BUF, TCPRxDataCount);//przechownaie prompta Javy do serializacji
+				TCPTxDataCount = TCPRxDataCount;
+
+				TCPTransmitTxBuffer();
 				tempCount = TCPRxDataCount;
 				TCPRxDataCount=0;
 				
-				
-				//SendToPico(3);
 			}
 		}
 	}
@@ -246,31 +246,32 @@ void ProcessData(void)
 	if(TCPRxDataCount>0){
 		if (SocketStatus & SOCK_CONNECTED)             // check if somebody has connected to our TCP
 		{
-			memcpy(JavaSerializationPrompt, _RxTCPBuffer, 3);
+			//memcpy(JavaSerializationPrompt, _RxTCPBuffer, 3);
 			
-			if(_RxTCPBuffer[5] ==0x62)
+			if(_RxTCPBuffer[3] ==0x62)
 			{
 				FIO1SET2 = 0x20;//niebieska
 				SendToPico(1);
 			}
 			
-			if(_RxTCPBuffer[5] ==0x67)
+			if(_RxTCPBuffer[3] ==0x67)
 				{
 					FIO1SET2 = 0x10;//zielony	
 					SendToPico(2);
 				}
 				
-			if(_RxTCPBuffer[5] ==0x72)
+			if(_RxTCPBuffer[3] ==0x72)
 				{
 					FIO1SET2 = 0x08;//czerwony	
 					SendToPico(3);
 				}
-			if(_RxTCPBuffer[5] ==0x63)
+			if(_RxTCPBuffer[3] ==0x63)
 				{
 					FIO1CLR2 = 0x38;//clear all	
 					SendToPico(4);
 				}
 		}
+
 	}
 }
 

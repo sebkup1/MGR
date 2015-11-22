@@ -113,6 +113,7 @@ void TCPClose(void)
       TCPStateMachine = CLOSED;
       TCPFlags = 0;
       SocketStatus = 0;
+			
       break;
     }
     case SYN_RECD :
@@ -260,6 +261,8 @@ void DoNetworkStuff(void)
             TCPStateMachine = SYN_SENT;
 						
           }
+					streamsSet=0;
+					//ARPWhoHasSend=0;
       break;
     }
     case SYN_RECD :

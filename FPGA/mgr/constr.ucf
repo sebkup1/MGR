@@ -1,11 +1,11 @@
-NET clk LOC = Ad14;
-#NET clk LOC = m21;
+NET clk LOC = Ad14;		# 50MHz
 NET "reset" LOC = AE24;# | CLOCK_DEDICATED_ROUTE = FALSE;
 #NET "reset" LOC = W19 | CLOCK_DEDICATED_ROUTE = FALSE;
 
-#NET "iSEL" LOC = U19;
+# IR port
+NET IR LOC = AE23;
 
-#Diody
+# Diods
 NET led<0>		LOC = N24;
 NET led<1>		LOC = N23;
 #NET led<2>		LOC = M24;
@@ -15,7 +15,7 @@ NET led<1>		LOC = N23;
 #NET led<6>		LOC = H24;
 #NET led<7>		LOC = D24;
 
-
+# Dip Switches
 NET dip_switch<0> LOC = W19;
 NET dip_switch<1> LOC = Y24;
 NET dip_switch<2> LOC = K19;
@@ -74,29 +74,27 @@ NET "oLCD_SEL_OPV" 	 LOC = F24;
 
 #NET "iSEL" LOC = U19;
 
-# LPC PicoBlaze Transfer
-NET LPC_Pico_Data_OUT<0> LOC = AE5;
-NET LPC_Pico_Data_OUT<1> LOC = AF5;
-NET LPC_Pico_Data_OUT<2> LOC = V11;
-NET LPC_Pico_Data_OUT<3> LOC = W11;
-NET LPC_Pico_Data_OUT<4> LOC = AA11;
-NET LPC_Pico_Data_OUT<5> LOC = AB11;
-NET LPC_Pico_Data_OUT<6> LOC = AD12;
-NET LPC_Pico_Data_OUT<7> LOC = AF12;
+# LPC - PicoBlaze Data Transfer
+NET LPC_Pico_Data_OUT<0> 	LOC = AE5;
+NET LPC_Pico_Data_OUT<1> 	LOC = AF5;
+NET LPC_Pico_Data_OUT<2> 	LOC = V11;
+NET LPC_Pico_Data_OUT<3> 	LOC = W11;
+NET LPC_Pico_Data_OUT<4> 	LOC = AA11;
+NET LPC_Pico_Data_OUT<5> 	LOC = AB11;
+NET LPC_Pico_Data_OUT<6> 	LOC = AD12;
+NET LPC_Pico_Data_OUT<7> 	LOC = AF12;
 #
-NET LPC_Pico_Data_IN<0> LOC = ae15;
-NET LPC_Pico_Data_IN<1> LOC = ac15;
-NET LPC_Pico_Data_IN<2> LOC = ad15;
-NET LPC_Pico_Data_IN<3> LOC = ac16;
-
-
-
-NET LPC_to_LCD_Pico_Ready_Receive  	LOC = Y14;  #LA16_P P2.10  ready to rad from pico
+NET LPC_Pico_Data_IN<0> 	LOC = ae15;
+NET LPC_Pico_Data_IN<1> 	LOC = ac15;
+NET LPC_Pico_Data_IN<2> 	LOC = ad15;
+NET LPC_Pico_Data_IN<3> 	LOC = ac16;
+# 
+NET LPC_to_LCD_Pico_Ready_Receive  	LOC = Y14;  #LA16_P P2.10  ready to read from pico
 NET LCD_Pico_to_LPC_D_V  				LOC = AA14; #LA16_N P2.12
-
 NET LPC_to_LCD_Pico_D_V					LOC = V12;	#P0.11
 NET LCD_Pico_to_LPC_Ready_Receive	LOC = W12;	#P0.15
 
+# LPC's EMAC Synchronization with 50MHz clock
 NET FPGA_LPC_EMAC_synch_1				LOC = ac9;	#P0.7		LA06_P
 NET FPGA_LPC_EMAC_synch_2				LOC = ad9;	#P0.8		LA06_N
 

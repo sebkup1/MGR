@@ -35,6 +35,7 @@ entity main is
 					Port ( 
 							 clk : in  STD_LOGIC;
 						  reset : in  STD_LOGIC;
+						  
 							 led : out std_logic_vector(7 downto 0):=x"00";
 							 
 	 FPGA_LPC_EMAC_synch_1 : out STD_LOGIC;
@@ -44,6 +45,8 @@ entity main is
 					  LPCreq10 : in std_logic :='1'; --P0.10
 						  
 					dip_switch : in std_logic_vector(5 downto 0);
+					
+							  IR : in STD_LOGIC;
 						  
 --				LPC_Pico_Data : inout STD_LOGIC_VECTOR(7 DOWNTO 0);
 		  LPC_Pico_Data_OUT : out STD_LOGIC_VECTOR(7 DOWNTO 0);
@@ -142,13 +145,13 @@ architecture Behavioral of main is
 	
 -- Signals used to connect UART_TX6
 --
-	signal      uart_tx_data_in : std_logic_vector(7 downto 0);
-	signal     write_to_uart_tx : std_logic;
-	signal        pipe_port_id0 : std_logic := '0';
-	signal uart_tx_data_present : std_logic;
-	signal    uart_tx_half_full : std_logic;
-	signal         uart_tx_full : std_logic;
-	signal         uart_tx_reset : std_logic;
+	signal      uart_tx_data_in 	: std_logic_vector(7 downto 0);
+	signal     write_to_uart_tx 	: std_logic;
+	signal        pipe_port_id0 	: std_logic := '0';
+	signal uart_tx_data_present 	: std_logic;
+	signal    uart_tx_half_full 	: std_logic;
+	signal         uart_tx_full 	: std_logic;
+	signal         uart_tx_reset 	: std_logic;
 	--
 	-- Signals used to connect UART_RX6
 	--
@@ -158,16 +161,15 @@ architecture Behavioral of main is
 	signal    uart_rx_half_full : std_logic;
 	signal         uart_rx_full : std_logic;
 	signal        uart_rx_reset : std_logic;
-	--
-	-- Signals used to define baud rate
+	
 
+	-- Signals used to define baud rate
 	signal           baud_count : integer range 0 to 26 := 0; 
 	signal         en_16_x_baud : std_logic := '0';
 
 	signal 			 uart_status : std_logic_vector (7 downto 0);
 	
 	-- LCD sygna³y 
-	
 	signal sCLK : std_logic;
 	signal snRST : std_logic;
 	signal sDATA : std_logic_vector(7 downto 0);
@@ -201,10 +203,10 @@ architecture Behavioral of main is
 
 
     component lcd_clk_gen is
-    Port ( iCLK : in  STD_LOGIC;
-           inRST : in  STD_LOGIC;
-           oCLK : out  STD_LOGIC;
-           onRST : out  STD_LOGIC);
+    Port ( iCLK 	: in  STD_LOGIC;
+           inRST 	: in  STD_LOGIC;
+           oCLK 	: out  STD_LOGIC;
+           onRST 	: out  STD_LOGIC);
     end component;
 
 
@@ -216,26 +218,26 @@ architecture Behavioral of main is
             ); 
     port
     (
-        CLR_IP		: in  STD_LOGIC;
-        CLK_IP_DR	: in  STD_LOGIC; -- Running at 187500 kHz
+        CLR_IP			: in  STD_LOGIC;
+        CLK_IP_DR		: in  STD_LOGIC; -- Running at 187500 kHz
         EN_IP			: in  STD_LOGIC; -- Detect if there is any incoming message
         MSG_IPV		: in  STD_LOGIC_VECTOR(WIDTH_OUTSIDE-1 downto 0); -- Message from outside
         LCD_DAT_OPV	: out STD_LOGIC_VECTOR(WIDTH-1 downto 0); -- LCD Data Bus Line
-        LCD_EN_OP	: out STD_LOGIC; -- LCD Enable
+        LCD_EN_OP		: out STD_LOGIC; -- LCD Enable
         LCD_SEL_OP	: out STD_LOGIC; -- LCD Regiser Select
-        LCD_RW_OP	: out STD_LOGIC;  -- LCD Data Read/Write
-        READY 		: out std_logic 
+        LCD_RW_OP		: out STD_LOGIC;  -- LCD Data Read/Write
+        READY 			: out std_logic 
     );
     end component;
 
--- Ethernet signals
+	-- Help signals
 	signal COUNTER: std_logic_vector(7 downto 0) :=x"00";
 	signal PRESCALER: std_logic_vector(25 downto 0);
 	signal FRAME: std_logic_vector(31 downto 0);
 	signal RXTX_STAT: std_logic_vector(7 downto 0) :=x"00";
 	signal INSPECTOR: std_logic_vector(9 downto 0) :="00" & x"00";
 
-
+	-- MDIO State Machine
    type tipo_stato is ( WaitStart, Preamble, StartOpcode, MdioAddress, DeviceAddress, TurnAroundDataRead, TurnAroundDataWrite, TurnAround, DataRead, DataWrite );
 
    signal stato       	: tipo_stato := Preamble;
@@ -246,7 +248,6 @@ architecture Behavioral of main is
 	signal mdio2 : std_logic;
 	
 	signal test : std_logic :='0';
-	
 	
 	type tx_state_type is (IDLE, TX0, TX1);
 	signal tx_state : tx_state_type := IDLE;
@@ -260,10 +261,10 @@ architecture Behavioral of main is
 	
 	
 	
-	
+----------------------------------------------------------------------
+--Begin of behavioral
+----------------------------------------------------------------------
 begin
-----------------------------------------------------------------------
-----------------------------------------------------------------------
 
 processor: kcpsm6
     generic map (  hwbuild => X"00", 
@@ -401,8 +402,12 @@ processor: kcpsm6
 								
 		  -- input data to LCD Pico from LPC
 		  when "1000" =>  in_port <= "0000" & LPC_Pico_Data_IN;
+		  
+		  when "1011" =>  in_port <= "0000000" & IR;
+--								in_port <= uart_rx_data_out;
 								
-        when others =>  in_port <= "00000000";  
+        when others =>  in_port <= "XXXXXXXX"; 
+								
 
       end case;
 
@@ -449,8 +454,6 @@ processor: kcpsm6
 			--Pico(lcd) ready port
 		  elsif (port_id(3) = '1') and (port_id(2) = '0') and (port_id(1) = '1') and (port_id(0) = '0') then 
 				LCD_Pico_to_LPC_Ready_Receive <= out_port(0);
---				led <= "0000000" & out_port(0);
---				led(0)<=out_port(0);
         end if;
 		 end if;
 		
@@ -458,90 +461,10 @@ processor: kcpsm6
 				--Pico to LPC data
 				if (port_id(3) = '0') and (port_id(2) = '1') and (port_id(1) = '0') and (port_id(0) = '1') then
 					LPC_Pico_Data_OUT <= out_port;
-					--led <= out_port;
 				end if;
 		 end if; 
 	 end if;
   end process constant_output_ports;
-
-
-
-
-
-
-
-
-
-
---    input_ports: process(clk)
---  begin
---    if clk'event and clk = '1' then
---      case port_id(2 downto 0) is
---
---        -- Read UART status at port address 00 hex
---        when "000" => in_port(0) <= uart_tx_data_present;
---                      in_port(1) <= uart_tx_half_full;
---                      in_port(2) <= uart_tx_full; 
---                      in_port(3) <= uart_rx_data_present;
---                      in_port(4) <= uart_rx_half_full;
---                      in_port(5) <= uart_rx_full;
---
---        -- Read UART_RX6 data at port address 01 hex
---        -- (see 'buffer_read' pulse generation below) 
---        when "001" =>  in_port <= uart_rx_data_out;
---		  
---		  -- ready syg z lcd drivera
---		  when "100" =>  in_port <= "0000000" & sREADY;
---		  
--- 
---        when others =>    in_port <= "XXXXXXXX";  
---
---      end case;
---
---      -- Generate 'buffer_read' pulse following read from port address 01
---
---      if (read_strobe = '1') and (port_id(0) = '1') and (port_id(1) = '0') then
---        read_from_uart_rx <= '1';
---       else
---        read_from_uart_rx <= '0';
---      end if;
--- 
---    end if;
---  end process input_ports;
---
---
---
--- 
---	uart_tx_data_in <= out_port when (write_strobe = '1') and (port_id(0) = '1') and (port_id(1) = '0');
---
---
---	write_to_uart_tx  <= '1' when (write_strobe = '1') and (port_id(0) = '1') and (port_id(1) = '0') 
---								else '0'; 
---			  
---	sDATA <= out_port when (write_strobe = '1') and (port_id(0) = '0') and (port_id(1) = '1');
-----	led <= out_port when (write_strobe = '1') and (port_id(0) = '0') and (port_id(1) = '1');
-----	sEN <= '1'  when (port_id(0) = '1') and (port_id(1) = '1') 
-----		else '0'; 
---  
---	
---  constant_output_ports: process(clk)
---  begin
---    if clk'event and clk = '1' then
---      if k_write_strobe = '1' then
---
---        if port_id(0) = '1' and (port_id(1) = '0') then
---				uart_tx_reset <= out_port(0);
---				uart_rx_reset <= out_port(1);
---		  elsif (port_id(0) = '1') and (port_id(1) = '1') then 
---				sEN <= out_port(0);
---				led <= out_port;
---        end if;
---
---      end if;
---    end if; 
---  end process constant_output_ports;
-
-
 
 
 
@@ -686,7 +609,7 @@ end process;
 
 
 --------------------------------------------------------------------
--- MDIO Interface 
+-- MDIO Interface (State Machine)
 	process(ENET_MDC)
       variable bit_counter : natural range 0 to 31 := 31;
 		variable dir : std_logic;
@@ -694,8 +617,6 @@ end process;
 		variable frame_counter : natural range 0 to 3323 :=0;
 		variable g_counter : natural range 0 to 3323 :=0;
 	begin
-		
-
 		
       if falling_edge(ENET_MDC) then
 
@@ -740,7 +661,6 @@ end process;
 
 
 	       when StartOpcode =>
---		led(0) <= '1';
 		if ENET_MDIO = '0' and start = '0' then
 			start := '1';
 		end if;
@@ -774,10 +694,8 @@ end process;
 		     bit_counter := bit_counter - 1;
 		  else
 		     if dir = '1' then
---			 led(1) <= '1';
 			stato <= TurnAroundDataWrite;
 		     else
---			 led(2) <= '1';
 			stato <= TurnAroundDataRead;
 		     end if;
 		  end if;
@@ -791,11 +709,9 @@ end process;
 		  else 
 		     Ethernet_Lite_MDIO <= '0';
 		     stato <= DataWrite;
---			  led(3) <= '1';
 		  end if;
 
 	       when DataWrite =>
---			led(4) <= '1';
 		  Ethernet_Lite_MDIO <= ENET_MDIO;
 		  FRAME(bit_counter+16) <=  ENET_MDIO;
 
@@ -808,7 +724,6 @@ end process;
 			 when TurnAroundDataRead =>
 
 		  Ethernet_Lite_MDIO <= 'Z';
---		  led(5) <= '1';
 		  if bit_counter = 0 then
   	         bit_counter := 15;
 				
@@ -818,10 +733,7 @@ end process;
 	--			  
 			  else
 				  stato <= Preamble; -- ERRORE!
---				  led(6) <= '1';
-				  -- stato <= DataRead;
-	--		        error_code <= "001";
-	--		        hexint <= x"4";
+
 			  end if;
 		  end if;
 
@@ -839,7 +751,6 @@ end process;
 		     bit_counter := bit_counter - 1;
 		  else
 		     stato <= Preamble;
---				led(7) <= '1';
 		  end if;
 		  
 	       when others =>

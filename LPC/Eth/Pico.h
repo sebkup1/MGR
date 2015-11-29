@@ -5,9 +5,9 @@ extern unsigned char PicoLCDStatus;
 #define SOCK_DATA_AVAILABLE            0x04      // new data available
 #define SOCK_TX_BUF_RELEASED           0x08      // user may fill buffer
 
-#define ReadyReadFromPico 						0x00000400
+#define ReadyReadFromPico 						0x00000400			//P2.10
 #define NotReadyReadFromPico 					0xFFFFFBFF			//P2.10
-#define PicoDataValid 								0x00001000
+#define PicoDataValid 								0x00001000			//P2.12
 #define PicoDataNotValid							0xFFFFeFFF   		//P2.12
 #define PicoDataOutMask 							0xfffffc03
 #define ToPicoDataValid 							0x00000800			//P0.11

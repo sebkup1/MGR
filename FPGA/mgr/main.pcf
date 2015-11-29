@@ -1,5 +1,5 @@
 //! **************************************************************************
-// Written by: Map P.20131013 on Wed Nov 11 13:12:33 2015
+// Written by: Map P.20131013 on Fri Nov 27 22:51:59 2015
 //! **************************************************************************
 
 SCHEMATIC START;
@@ -7,6 +7,7 @@ COMP "ENET_TXD<0>" LOCATE = SITE "AD6" LEVEL 1;
 COMP "ENET_TXD<1>" LOCATE = SITE "AF6" LEVEL 1;
 COMP "LPCreq9" LOCATE = SITE "AA12" LEVEL 1;
 COMP "LPCreq10" LOCATE = SITE "AC12" LEVEL 1;
+COMP "IR" LOCATE = SITE "AE23" LEVEL 1;
 COMP "LCD_Pico_to_LPC_D_V" LOCATE = SITE "AA14" LEVEL 1;
 COMP "clk" LOCATE = SITE "AD14" LEVEL 1;
 COMP "LPC_Pico_Data_IN<0>" LOCATE = SITE "AE15" LEVEL 1;

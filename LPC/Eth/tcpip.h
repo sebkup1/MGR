@@ -22,7 +22,7 @@
 #define REMIP_1              192                 // our internet protocol (IP) address
 #define REMIP_2              168
 #define REMIP_3              1
-#define REMIP_4              103
+#define REMIP_4              105
 
 #define SUBMASK_1            255                 // subnet mask
 #define SUBMASK_2            255

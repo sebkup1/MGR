@@ -85,17 +85,21 @@
                    ; -----------
                    ;
                    CONSTANT UART_status_port, 00             ; Read status
-                   CONSTANT UART_Tx_data_present, 	00000001'b 		; Tx   data_present - bit0
-                   CONSTANT UART_Tx_half_full, 		00000010'b    	;         half_full - bit1
-                   CONSTANT UART_Tx_full, 			00000100'b      ;              full - bit2
-                   CONSTANT UART_Rx_data_present, 	00001000'b 		; Rx   data_present - bit3
-                   CONSTANT UART_Rx_half_full, 		00010000'b    	;         half_full - bit4
-                   CONSTANT UART_Rx_full, 			00100000'b      ;              full - bit5
+                   CONSTANT UART_Tx_data_present, 00000001'b ; Tx   data_present - bit0
+                   CONSTANT UART_Tx_half_full, 00000010'b    ;         half_full - bit1
+                   CONSTANT UART_Tx_full, 00000100'b         ;              full - bit2
+                   CONSTANT UART_Rx_data_present, 00001000'b ; Rx   data_present - bit3
+                   CONSTANT UART_Rx_half_full, 00010000'b    ;         half_full - bit4
+                   CONSTANT UART_Rx_full, 00100000'b         ;              full - bit5
                    ;
                    ; Write data to UART_TX6
                    ; ----------------------
                    ;
                    CONSTANT UART_TX6_output_port, 01
+				   
+				   CONSTANT IR_PORT, 01
+				   
+				   CONSTANT LED_PORT, 02
                    ;
                    ; Read data from UART_RX6
                    ; -----------------------
@@ -110,30 +114,16 @@
 				   CONSTANT LCD_driver_en_port, 03
 				   CONSTANT LCD_driver_ready_port, 04
 				   
-				   CONSTANT LPC_data_port, 05
-				   CONSTANT LPC_data_valid_port, 06
-				   CONSTANT LPC_ready_port, 07
-				   CONSTANT LPC_IN_data_port, 08			 ; from LPC
-				   CONSTANT LPC_IN_data_valid_port, 09		 ; from LPC
-				   CONSTANT LPC_IN_ready_port, 0A		 	 ; to LPC
-				   
-				   CONSTANT IR_PORT, 0B
-				   
-				   
 				   
                    CONSTANT reset_UART_port, 01
-                   CONSTANT UART_tx_reset, 		00000001'b        ; uart_tx6 reset - bit0
-                   CONSTANT UART_rx_reset, 		00000010'b        ; uart_rx6 reset - bit1
-                   CONSTANT UART_reset, 		00000011'b           ; reset Tx and Rx
-                   CONSTANT UART_operate, 		00000000'b         ; Tx and Rx free to operate
-				   CONSTANT LCD_en_reset, 		00000000'b         ; reset lcd en 
-				   CONSTANT LCD_en_syg, 		00000001'b           ; send lcd en 
-				   CONSTANT LCD_ready_syg, 		00000001'b        ; send lcd en 
-				   CONSTANT LCD_odebral_syg,	00000000'b
-				   
-				   CONSTANT LPC_ready_syg, 		00000001'b        ; LPC ready to get data
-				   CONSTANT LPC_data_valid_syg, 00000001'b   ; Pico data valid 
-				   CONSTANT LPC_dv_reset, 		00000000'b         ; reset Eth en 
+                   CONSTANT UART_tx_reset, 00000001'b        ; uart_tx6 reset - bit0
+                   CONSTANT UART_rx_reset, 00000010'b        ; uart_rx6 reset - bit1
+                   CONSTANT UART_reset, 00000011'b           ; reset Tx and Rx
+                   CONSTANT UART_operate, 00000000'b         ; Tx and Rx free to operate
+				   CONSTANT LCD_en_reset, 00000000'b         ; reset lcd en 
+				   CONSTANT LCD_en_syg, 00000001'b           ; send lcd en 
+				   CONSTANT LCD_ready_syg, 00000001'b        ; send lcd en 
+				   CONSTANT LCD_odebral_syg, 00000000'b
                    ;
                    ;
                    ;--------------------------------------------------------------------------------------
@@ -152,9 +142,6 @@ reset_UART_macros: OUTPUTK UART_reset, reset_UART_port
                    RETURN 
 				   
 reset_lcd_en_status: OUTPUTK LCD_en_reset, LCD_driver_en_port
-					RETURN
-					
-reset_Eth_en_status: OUTPUTK LPC_dv_reset, LPC_data_valid_port
 					RETURN
                    ;
                    ;
@@ -186,37 +173,25 @@ reset_Eth_en_status: OUTPUTK LPC_dv_reset, LPC_data_valid_port
                    ; Routine to wywsy³anie znaków do drivera lcd
                    ;--------------------------------------------------------------------------------------  
 				   
-		LCD_send:  INPUT s0, LCD_driver_ready_port             ;Sprawdza czy driver mo¿e odbieraæ dane
+		 LCD_send: ;LOAD s8, "i"
+				   ;CALL UART_TX2
+				   INPUT s0, LCD_driver_ready_port              ;Sprawdza czy driver mo¿e odbieraæ dane
 				   TEST s0, LCD_ready_syg
                    JUMP Z, LCD_send                            ;czeka a¿ bêdzie gotowy
 				   OUTPUT sF, LCD_driver_send_port
                    OUTPUTK LCD_en_syg, LCD_driver_en_port
+				   ;LOAD s8, "j"
+				   ;CALL UART_TX2
 				   
- LCD_czy_odebral:  INPUT s0, LCD_driver_ready_port             ;Sprawdza czy driver odebra³ dane
+ LCD_czy_odebral:  ;LOAD s8, "h"
+				   ;CALL UART_TX2
+				   INPUT s0, LCD_driver_ready_port              ;Sprawdza czy driver odebra³ dane
 				   TEST s0, LCD_ready_syg
 				   JUMP C, LCD_czy_odebral
 				   OUTPUTK LCD_en_reset, LCD_driver_en_port
-				   RETURN 
-					
-	    LPC_send:  CALL UART_TX
-					INPUT s0, LPC_ready_port	        	       ;Sprawdza czy LPC mo¿e odbieraæ dane
-				   TEST s0, LPC_ready_syg
-				   
-				   ;INPUT s5, LPC_ready_port	
-				   ;CALL UART_TX
-                   JUMP Z, LPC_send 
-				   OUTPUT sF, LPC_data_port
-                   OUTPUTK LPC_data_valid_syg, LPC_data_valid_port
-				   
- LPC_czy_odebral:  INPUT s0, LPC_ready_port                    ;Sprawdza czy LPC odebra³ dane
-				   TEST s0, LPC_ready_syg
-				   JUMP C, LPC_czy_odebral
-				   OUTPUTK LPC_dv_reset, LPC_data_valid_port
-				   RETURN 
-				   
-				   petla:                      
-				   CALL UART_TX
-				   jump petla
+				   ;LOAD s8, "y"
+				   ;CALL UART_TX2
+				   ;RETURN 
                    ;
                    ;
                    ;--------------------------------------------------------------------------------------
@@ -251,6 +226,8 @@ reset_Eth_en_status: OUTPUTK LPC_dv_reset, LPC_data_valid_port
                    ;
           read_Rx: INPUT s5, UART_RX6_input_port             ;read character from buffer
                    RETURN 
+				   
+				   
                    ;
                    ;
                    ;------------------------------------------------------------------------------------------

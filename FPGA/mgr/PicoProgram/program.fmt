@@ -104,7 +104,6 @@
                     CONSTANT decimal2, 04                    ;   65,536
                     CONSTANT decimal3, 05
                     CONSTANT decimal4, 06
-                    ; banery
                     CONSTANT green, 03
                     CONSTANT red, 07
                     CONSTANT blue, 01
@@ -142,9 +141,7 @@
                     ;------------------------------------------------------------------------------------------
                     ;
                     ;
-                    CALL send_CR
-                    CALL send_CR
-              main: 
+              main: CALL send_CR
                     LOAD sF, ESC
                     LOAD s5, ESC
                     CALL LCD_send
@@ -164,10 +161,72 @@
                     LOAD sF, "3"
                     CALL LCD_send
                     CALL UART_TX
+                    ;jump UART_THREAD
+                    ;jump LPC_THREAD
+          IR_petla: 
+                    ;CALL send_CR
+                    ;load s4, sA
+                    ;call send_hex_byte
+                    ;CALL send_space
+                    ;load s4, sB
+                    ;call send_hex_byte
+                    ;CALL send_space
+                    ;load s4, sC
+                    ;call send_hex_byte
+                    LOAD sA, 00000000'b
+                    LOAD sB, 00000000'b
+                    LOAD sC, 00000000'b
+                    ;CALL delay_200ms
+         IR_czekaj: INPUT s0, IR_PORT
+                    TEST s0, 00000001'b
+                    JUMP C, IR_czekaj
+                    CALL delay_ir_1_8_bit
+            IR_rx1: LOAD s4, 03                              ;8-bits to transmit and receive
+      next_IR_bit1: CALL my_delay_ir_bit                     ;prepare next bit to transmit
+                    INPUT s3, IR_PORT                        ;read input bit
+                    TEST s3, 00000001'b                      ;carry flag becomes value of received bit
+                    SLA sA                                   ;shift new data into result and move to next transmit bit
+                    SUB s4, 01                               ;count bits
+                    JUMP NZ, next_IR_bit1                    ;repeat until last bit
+            IR_rx2: LOAD s4, 05                              ;8-bits to transmit and receive
+      next_IR_bit2: CALL my_delay_ir_bit                     ;prepare next bit to transmit
+                    INPUT s3, IR_PORT                        ;read input bit
+                    TEST s3, 00000001'b                      ;carry flag becomes value of received bit
+                    SLA sB                                   ;shift new data into result and move to next transmit bit
+                    SUB s4, 01                               ;count bits
+                    JUMP NZ, next_IR_bit2                    ;repeat until last bit
+            IR_rx3: LOAD s4, 06                              ;8-bits to transmit and receive
+      next_IR_bit3: CALL my_delay_ir_bit                     ;prepare next bit to transmit
+                    INPUT s3, IR_PORT                        ;read input bit
+                    TEST s3, 00000001'b                      ;carry flag becomes value of received bit
+                    SLA sC                                   ;shift new data into result and move to next transmit bit
+                    SUB s4, 01                               ;count bits
+                    JUMP NZ, next_IR_bit3                    ;repeat until last bit
+                    CALL send_CR
+                    LOAD s4, sA
+                    CALL send_hex_byte
+                    CALL send_space
+                    LOAD s4, sB
+                    CALL send_hex_byte
+                    CALL send_space
+                    LOAD s4, sC
+                    CALL send_hex_byte
+                    LOAD sF, sC
+                    CALL LPC_send
+                    JUMP IR_petla
+                    ;jump LPC_THREAD
+                    ;LOAD s5, sA
+                    ;CALL UART_TX
+                    ;LOAD s5, sB
+                    ;CALL UART_TX
+                    ;LOAD s5, sC
+                    ;CALL UART_TX
+                    LOAD sF, sC
+                    CALL LCD_send
         LPC_THREAD: OUTPUTK LPC_ready_syg, LPC_IN_ready_port
                     INPUT s0, LPC_IN_data_valid_port
                     TEST s0, LPC_data_valid_syg              ;Z=0 and C=1 when data present
-                    JUMP Z, UART_THREAD
+                    JUMP Z, LPC_THREAD
                     INPUT s5, LPC_IN_data_port
                     CALL UART_TX
                     CALL which_banner
@@ -179,12 +238,13 @@
                     ;CALL LPC_send
                     ;CALL LCD_send
                     ;CALL UART_TX
-                    JUMP LPC_THREAD
+                    JUMP IR_czekaj
        UART_THREAD: INPUT s0, UART_status_port
                     TEST s0, UART_Rx_data_present            ;Z=0 and C=1 when data present
-                    JUMP Z, LPC_THREAD
+                    JUMP Z, UART_THREAD
                     INPUT s5, UART_RX6_input_port
                     LOAD sF, s5
+                    ;CALL UART_TX
                     CALL LPC_send
                     CALL LCD_send
                     JUMP UART_THREAD
@@ -225,6 +285,13 @@
                     CALL banner4_message
                     RETURN 
        just_return: RETURN 
+          UART_RX2: INPUT s0, UART_status_port
+                    TEST s0, UART_Rx_data_present            ;Z=0 and C=1 when data present
+                    JUMP Z, UART_RX2
+                    INPUT s5, UART_RX6_input_port
+                    CALL UART_TX
+                    JUMP UART_RX2
+                    ;
      bad_hex_input: CALL send_CR
                     LOAD sB, bad_hex_msg'upper               ;tell user input was invalid hex
                     LOAD sA, bad_hex_msg'lower
@@ -260,33 +327,6 @@
                     ;
                     ;1ms is 50,000 clock cycles requiring 6,250 delay iterations
                     ;
-         delay_1ms: LOAD s2, 00
-                    LOAD s1, 18
-                    LOAD s0, 6A
-                    JUMP software_delay
-                    ;
-                    ;20ms is 1,000,000 clock cycles requiring 125,000 delay iterations
-                    ;
-        delay_20ms: LOAD s2, 01
-                    LOAD s1, E8
-                    LOAD s0, 48
-                    JUMP software_delay
-                    ;
-                    ;1s is 50,000,000 clock cycles requiring 6,250,000 delay iterations
-                    ;
-          delay_1s: LOAD s2, 5F
-                    LOAD s1, 5E
-                    LOAD s0, 10
-                    JUMP software_delay
-                    ;
-                    ; The delay loop decrements [s2,s1,s0] until it reaches zero
-                    ; Each decrement cycle is 4 instructions which is 8 clock cycles (160ns at 50MHz)
-                    ;
-    software_delay: SUB s0, 1'd
-                    SUBCY s1, 0'd
-                    SUBCY s2, 0'd
-                    JUMP NZ, software_delay
-                    RETURN 
                     ;
                     ;
                     ;------------------------------------------------------------------------------------------
@@ -341,10 +381,11 @@
                     ;
                     ; Welcome message
                     ;
-                    STRING welcome1$, "Example using the 'uart_tx6' and 'uart_rx6' macros"
-                    STRING welcome2$, "Assembly Date: "
-                    STRING welcome3$, "   Time: "
-                    STRING welcome4$, "Assembler Version: "
+                    STRING welcome1$, "Przyklad aplikacji obslugujacej portu IR z wykorzystaniem Picoblaze"
+                    STRING welcome11$, "Autor: Sebastian Kupis"
+                    STRING welcome2$, "Data zbudoawania: "
+                    STRING welcome3$, "   Czas: "
+                    STRING welcome4$, "Version: "
                     STRING welcome5$, "Hardware Design: "
                     ;
                     ;
@@ -361,6 +402,8 @@
                     LOAD&RETURN s5, CR
                     LOAD&RETURN s5, welcome1$
                     LOAD&RETURN s5, CR
+                    LOAD&RETURN s5, welcome11$
+                    LOAD&RETURN s5, CR
                     LOAD&RETURN s5, CR
                     LOAD&RETURN s5, welcome2$
                     LOAD&RETURN s5, datestamp$
@@ -372,6 +415,31 @@
                     LOAD&RETURN s5, CR
                     LOAD&RETURN s5, welcome5$
                     LOAD&RETURN s5, NUL
+                    ;
+                    ;
+                    ;------------------------------------------------------------------------------------------
+                    ; Send a message to the UART
+                    ;------------------------------------------------------------------------------------------
+                    ;
+                    ; A message is transmitted to the USB-UART.
+                    ; The start address of the message must be provided in [sB,sA].
+                    ; Terminate the transmission with a NULL character (00 hex).
+                    ;
+      send_message: CALL@ (sB, sA)
+                    COMPARE s5, 00                           ;terminate on NUL character
+                    RETURN Z
+                    CALL UART_TX
+                    ADD sA, 1'd
+                    ADDCY sB, 0'd
+                    JUMP send_message
+                    ;
+                    ;
+                    ;------------------------------------------------------------------------------------------
+                    ; Send Carriage Return to UART
+                    ;------------------------------------------------------------------------------------------
+                    ;
+                    ; Registers used s0, s1, s2, and s5.
+                    ;
     banner_message: LOAD sB, banner_msg'upper
                     LOAD sA, banner_msg'lower
                     CALL send_banner
@@ -432,21 +500,6 @@
                     LOAD&RETURN sF, NUL
                     ;
                     ;
-                    ;------------------------------------------------------------------------------------------
-                    ; Send a message to the UART
-                    ;------------------------------------------------------------------------------------------
-                    ;
-                    ; A message is transmitted to the USB-UART.
-                    ; The start address of the message must be provided in [sB,sA].
-                    ; Terminate the transmission with a NULL character (00 hex).
-                    ;
-      send_message: CALL@ (sB, sA)
-                    COMPARE s5, 00                           ;terminate on NUL character
-                    RETURN Z
-                    CALL UART_TX
-                    ADD sA, 1'd
-                    ADDCY sB, 0'd
-                    JUMP send_message
                     ; Send a banner to LCD
                     ;------------------------------------------------------------------------------------------
                     ;
@@ -468,8 +521,7 @@
                     ; Send Carriage Return to UART
                     ;------------------------------------------------------------------------------------------
                     ;
-                    ; Registers used s0, s1, s2, and s5.
-                    ;
+                    ; Registers used s0, s1, s2, and s
            send_CR: LOAD s5, CR
                     JUMP UART_TX                             ;includes RETURN
                     ;
@@ -591,12 +643,9 @@
       obtain_value: LOAD sA, 00                              ;initialise potentially unused bits to zero
       obtain_digit: CALL UART_RX                             ;wait for a character and return in s5
                     JUMP Z, obtain_digit                     ;continue to wait if timeout occurs
-                    LOAD sF, ESC
-                    CALL LCD_send
-                    LOAD sF, s5
-                    CALL LCD_send
                     CALL UART_TX                             ;echo character as entered
-                    CALL UART_TX                             ;echo character as entered
+                    CALL UART_TX
+                    CALL UART_TX
                     CALL upper_case                          ;convert to upper case if necessary
                     CALL ASCII_to_hex                        ;convert value in s5 to hex nibble
                     RETURN C                                 ;If invalid hex digit then return immediately
@@ -707,6 +756,61 @@ divide_16bit_by_10: LOAD sA, s2                              ;copy input value i
                     ; each PSM to remain a more manageable size.
                     ;
                     ;
+   my_delay_ir_bit: LOAD s2, 00
+                    LOAD s1, 22
+                    LOAD s0, BA
+                    JUMP software_delay
+      delay_ir_bit: LOAD s2, 00
+                    LOAD s1, 22
+                    LOAD s0, BA
+                    JUMP software_delay
+ delay_ir_half_bit: LOAD s2, 00
+                    LOAD s1, 11
+                    LOAD s0, 5D
+                    JUMP software_delay
+  delay_ir_1_8_bit: LOAD s2, 00
+                    LOAD s1, 04
+                    LOAD s0, 57
+                    JUMP software_delay
+       delay_200ms: LOAD s2, 1E
+                    LOAD s1, 84
+                    LOAD s0, 10
+                    JUMP software_delay
+          delay_1s: LOAD s2, 5F
+                    LOAD s1, 5E
+                    LOAD s0, 10
+                    JUMP software_delay
+                    ;
+                    ; 2ms is 10,000 x 200ns     (10,000 = 002710 hex)
+         delay_1ms: LOAD s2, 00                              ;2ms !
+                    LOAD s1, 27
+                    LOAD s0, 10
+                    JUMP software_delay
+                    ;
+                    ; 40ms is 200,000 x 200ns     (200,000 = 030D40 hex)
+                    ;
+        delay_40ms: LOAD s2, 03
+                    LOAD s1, 0D
+                    LOAD s0, 40
+                    JUMP software_delay
+                    ;
+                    ;
+                    ; 2s is 10,000,000 x 200ns     (10,000,000 = 989680 hex)
+                    ;
+          delay_2s: LOAD s2, 98
+                    LOAD s1, 96
+                    LOAD s0, 80
+                    JUMP software_delay
+                    ;
+                    ; The delay loop decrements [s2,s1,s0] until it reaches zero
+                    ; Each decrement cycle is 5 instructions which is 10 clock cycles (100ns at 100MHz)
+                    ;
+    software_delay: LOAD s0, s0                              ;pad loop to make it 10 clock cycles (5 instructions) 200ns u mnie
+                    SUB s0, 1'd
+                    SUBCY s1, 0'd
+                    SUBCY s2, 0'd
+                    JUMP NZ, software_delay
+                    RETURN 
                     ; Include routines that implement interface with UART macros.
                     ; -----------------------------------------------------------
                     ;

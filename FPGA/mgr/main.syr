@@ -3,14 +3,14 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 --> Parameter TMPDIR set to xst/projnav.tmp
 
 
-Total REAL time to Xst completion: 1.00 secs
-Total CPU time to Xst completion: 0.48 secs
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.15 secs
  
 --> Parameter xsthdpdir set to xst
 
 
-Total REAL time to Xst completion: 1.00 secs
-Total CPU time to Xst completion: 0.48 secs
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.15 secs
  
 --> Reading design: main.prj
 
@@ -156,9 +156,9 @@ WARNING:HDLCompiler:92 - "C:\studia\MGR\FPGA\mgr\LCD_driver.vhd" Line 336: reg_s
 WARNING:HDLCompiler:92 - "C:\studia\MGR\FPGA\mgr\LCD_driver.vhd" Line 338: clr_t should be on the sensitivity list of the process
 WARNING:HDLCompiler:92 - "C:\studia\MGR\FPGA\mgr\LCD_driver.vhd" Line 340: set_t should be on the sensitivity list of the process
 INFO:HDLCompiler:679 - "C:\studia\MGR\FPGA\mgr\LCD_driver.vhd" Line 700. Case statement is complete. others clause is never selected
-WARNING:HDLCompiler:1127 - "C:\studia\MGR\FPGA\mgr\main.vhd" Line 556: Assignment to inspector ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "C:\studia\MGR\FPGA\mgr\main.vhd" Line 581: Assignment to inspector ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "C:\studia\MGR\FPGA\mgr\main.vhd" Line 690: Assignment to frame ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "C:\studia\MGR\FPGA\mgr\main.vhd" Line 479: Assignment to inspector ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "C:\studia\MGR\FPGA\mgr\main.vhd" Line 504: Assignment to inspector ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "C:\studia\MGR\FPGA\mgr\main.vhd" Line 613: Assignment to frame ignored, since the identifier is never used
 
 =========================================================================
 *                           HDL Synthesis                               *
@@ -219,9 +219,9 @@ INFO:Xst:1799 - State turnaround is never reached in FSM <stato>.
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 5-bit adder for signal <baud_count[4]_GND_5_o_add_1_OUT> created at line 367.
-    Found 12-bit adder for signal <g_counter[11]_GND_5_o_add_29_OUT> created at line 712.
-    Found 5-bit subtractor for signal <GND_5_o_GND_5_o_sub_61_OUT<4:0>> created at line 803.
+    Found 5-bit adder for signal <baud_count[4]_GND_5_o_add_1_OUT> created at line 368.
+    Found 12-bit adder for signal <g_counter[11]_GND_5_o_add_29_OUT> created at line 633.
+    Found 5-bit subtractor for signal <GND_5_o_GND_5_o_sub_61_OUT<4:0>> created at line 719.
 WARNING:Xst:737 - Found 1-bit latch for signal <uart_tx_data_in<7>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 WARNING:Xst:737 - Found 1-bit latch for signal <uart_tx_data_in<6>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 WARNING:Xst:737 - Found 1-bit latch for signal <uart_tx_data_in<5>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
@@ -238,14 +238,14 @@ WARNING:Xst:737 - Found 1-bit latch for signal <sDATA<3>>. Latches may be genera
 WARNING:Xst:737 - Found 1-bit latch for signal <sDATA<2>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 WARNING:Xst:737 - Found 1-bit latch for signal <sDATA<1>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 WARNING:Xst:737 - Found 1-bit latch for signal <sDATA<0>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
-    Found 1-bit tristate buffer for signal <Ethernet_Lite_MDIO> created at line 690
-    Found 12-bit comparator greater for signal <GND_5_o_g_counter[11]_LessThan_32_o> created at line 716
+    Found 1-bit tristate buffer for signal <Ethernet_Lite_MDIO> created at line 613
+    Found 12-bit comparator greater for signal <GND_5_o_g_counter[11]_LessThan_32_o> created at line 637
     Summary:
 	inferred   3 Adder/Subtractor(s).
 	inferred  60 D-type flip-flop(s).
 	inferred  16 Latch(s).
 	inferred   1 Comparator(s).
-	inferred  28 Multiplexer(s).
+	inferred  29 Multiplexer(s).
 	inferred   1 Tristate(s).
 	inferred   2 Finite State Machine(s).
 Unit <main> synthesized.
@@ -701,14 +701,14 @@ Macro Statistics
  1-bit latch                                           : 16
 # Comparators                                          : 1
  12-bit comparator greater                             : 1
-# Multiplexers                                         : 68
+# Multiplexers                                         : 69
  1-bit 2-to-1 multiplexer                              : 34
  12-bit 2-to-1 multiplexer                             : 1
  18-bit 2-to-1 multiplexer                             : 2
  2-bit 2-to-1 multiplexer                              : 3
  3-bit 2-to-1 multiplexer                              : 3
  5-bit 2-to-1 multiplexer                              : 8
- 8-bit 2-to-1 multiplexer                              : 17
+ 8-bit 2-to-1 multiplexer                              : 18
 # Tristates                                            : 1
  1-bit tristate buffer                                 : 1
 # FSMs                                                 : 3
@@ -751,14 +751,14 @@ Macro Statistics
  Flip-Flops                                            : 225
 # Comparators                                          : 1
  12-bit comparator greater                             : 1
-# Multiplexers                                         : 92
- 1-bit 2-to-1 multiplexer                              : 60
+# Multiplexers                                         : 86
+ 1-bit 2-to-1 multiplexer                              : 52
  12-bit 2-to-1 multiplexer                             : 1
  18-bit 2-to-1 multiplexer                             : 1
  2-bit 2-to-1 multiplexer                              : 3
  3-bit 2-to-1 multiplexer                              : 3
  5-bit 2-to-1 multiplexer                              : 8
- 8-bit 2-to-1 multiplexer                              : 16
+ 8-bit 2-to-1 multiplexer                              : 18
 # FSMs                                                 : 3
 
 =========================================================================
@@ -865,15 +865,15 @@ Top Level Output File Name         : main.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 463
+# BELS                             : 465
 #      GND                         : 1
 #      INV                         : 9
 #      LUT1                        : 42
 #      LUT2                        : 16
 #      LUT3                        : 20
-#      LUT4                        : 18
-#      LUT5                        : 28
-#      LUT6                        : 118
+#      LUT4                        : 20
+#      LUT5                        : 34
+#      LUT6                        : 112
 #      LUT6_2                      : 69
 #      MUXCY                       : 70
 #      MUXF7                       : 4
@@ -896,8 +896,8 @@ Primitive and Black Box Usage:
 #      SRL16E                      : 16
 # Clock Buffers                    : 4
 #      BUFG                        : 4
-# IO Buffers                       : 63
-#      IBUF                        : 22
+# IO Buffers                       : 64
+#      IBUF                        : 23
 #      IOBUF                       : 1
 #      OBUF                        : 40
 # Others                           : 1
@@ -911,22 +911,22 @@ Selected Device : 6slx45fgg676-3
 
 Slice Logic Utilization: 
  Number of Slice Registers:             292  out of  54576     0%  
- Number of Slice LUTs:                  384  out of  27288     1%  
-    Number used as Logic:               320  out of  27288     1%  
+ Number of Slice LUTs:                  386  out of  27288     1%  
+    Number used as Logic:               322  out of  27288     1%  
     Number used as Memory:               64  out of   6408     0%  
        Number used as RAM:               48
        Number used as SRL:               16
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:    473
-   Number with an unused Flip Flop:     181  out of    473    38%  
-   Number with an unused LUT:            89  out of    473    18%  
-   Number of fully used LUT-FF pairs:   203  out of    473    42%  
+ Number of LUT Flip Flop pairs used:    476
+   Number with an unused Flip Flop:     184  out of    476    38%  
+   Number with an unused LUT:            90  out of    476    18%  
+   Number of fully used LUT-FF pairs:   202  out of    476    42%  
    Number of unique control sets:        28
 
 IO Utilization: 
- Number of IOs:                          73
- Number of bonded IOBs:                  63  out of    358    17%  
+ Number of IOs:                          74
+ Number of bonded IOBs:                  64  out of    358    17%  
 
 Specific Feature Utilization:
  Number of Block RAM/FIFO:                1  out of    116     0%  
@@ -956,7 +956,7 @@ Clock Signal                                                            | Clock 
 ------------------------------------------------------------------------+---------------------------------------------------------------------------+-------+
 clk                                                                     | IBUF+BUFG                                                                 | 209   |
 write_to_uart_tx(write_to_uart_tx<0>1:O)                                | NONE(*)(uart_tx_data_in_7)                                                | 8     |
-write_strobe_port_id[2]_AND_19_o(write_strobe_port_id[2]_AND_19_o<1>1:O)| NONE(*)(sDATA_7)                                                          | 8     |
+write_strobe_port_id[2]_AND_19_o(write_strobe_port_id[2]_AND_19_o<1>1:O)| NONE(*)(sDATA_6)                                                          | 8     |
 ENET_MDC                                                                | IBUF+BUFG                                                                 | 24    |
 program_rom/jtag_clk                                                    | NONE(program_rom/instantiate_loader.jtag_loader_6_inst/control_dout_int_7)| 7     |
 program_rom/instantiate_loader.jtag_loader_6_inst/drck                  | BUFG                                                                      | 31    |
@@ -975,9 +975,9 @@ Timing Summary:
 ---------------
 Speed Grade: -3
 
-   Minimum period: 7.954ns (Maximum Frequency: 125.721MHz)
+   Minimum period: 7.857ns (Maximum Frequency: 127.272MHz)
    Minimum input arrival time before clock: 4.665ns
-   Maximum output required time after clock: 8.440ns
+   Maximum output required time after clock: 8.450ns
    Maximum combinational path delay: 4.372ns
 
 Timing Details:
@@ -986,10 +986,10 @@ All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'clk'
-  Clock period: 7.954ns (frequency: 125.721MHz)
-  Total number of paths / destination ports: 9028 / 486
+  Clock period: 7.857ns (frequency: 127.272MHz)
+  Total number of paths / destination ports: 9033 / 486
 -------------------------------------------------------------------------
-Delay:               7.954ns (Levels of Logic = 4)
+Delay:               7.857ns (Levels of Logic = 4)
   Source:            program_rom/ram_1k_generate.s6.kcpsm6_rom (RAM)
   Destination:       tx/pointer0_flop (FF)
   Source Clock:      clk rising
@@ -1000,14 +1000,14 @@ Delay:               7.954ns (Levels of Logic = 4)
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      RAMB16BWER:CLKA->DOA12   16   1.850   1.004  program_rom/ram_1k_generate.s6.kcpsm6_rom (instruction<12>)
-     LUT6_2:I4->O5        24   0.568   1.420  processor/data_path_loop[0].output_data.sy_kk_mux_lut (port_id<0>)
-     LUT4:I0->O           20   0.203   1.092  write_to_uart_tx<0>1 (write_to_uart_tx)
+     LUT6_2:I4->O6        20   0.568   1.321  processor/data_path_loop[0].output_data.sy_kk_mux_lut (port_id<1>)
+     LUT4:I1->O           20   0.205   1.092  write_to_uart_tx<0>1 (write_to_uart_tx)
      LUT6_2:I2->O5         1   0.568   0.579  tx/data_present_lut (tx/en_pointer)
      LUT6_2:I2->O6         1   0.568   0.000  tx/pointer01_lut (tx/pointer_value<1>)
      FDR:D                     0.102          tx/pointer1_flop
     ----------------------------------------
-    Total                      7.954ns (3.859ns logic, 4.095ns route)
-                                       (48.5% logic, 51.5% route)
+    Total                      7.857ns (3.861ns logic, 3.996ns route)
+                                       (49.1% logic, 50.9% route)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'ENET_MDC'
@@ -1033,10 +1033,10 @@ Delay:               6.399ns (Levels of Logic = 12)
      MUXCY:CI->O           1   0.019   0.000  Madd_g_counter[11]_GND_5_o_add_29_OUT_cy<4> (Madd_g_counter[11]_GND_5_o_add_29_OUT_cy<4>)
      MUXCY:CI->O           1   0.019   0.000  Madd_g_counter[11]_GND_5_o_add_29_OUT_cy<5> (Madd_g_counter[11]_GND_5_o_add_29_OUT_cy<5>)
      XORCY:CI->O           1   0.180   0.684  Madd_g_counter[11]_GND_5_o_add_29_OUT_xor<6> (g_counter[11]_GND_5_o_add_29_OUT<6>)
-     LUT2:I0->O            1   0.203   0.580  _n03071_SW0 (N0)
-     LUT6:I5->O            4   0.205   0.684  _n03071 (_n03071)
-     LUT6:I5->O            1   0.205   0.580  _n03073 (_n03073)
-     LUT3:I2->O           12   0.205   0.908  _n03074 (_n0307)
+     LUT2:I0->O            1   0.203   0.580  _n03081_SW0 (N0)
+     LUT6:I5->O            4   0.205   0.684  _n03081 (_n03081)
+     LUT6:I5->O            1   0.205   0.580  _n03083 (_n03083)
+     LUT3:I2->O           12   0.205   0.908  _n03084 (_n0308)
      FDRE:R                    0.430          g_counter_0
     ----------------------------------------
     Total                      6.399ns (2.348ns logic, 4.051ns route)
@@ -1089,7 +1089,7 @@ Delay:               3.385ns (Levels of Logic = 1)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'i_lcd_clk_gen/sCLK_DIV_7'
   Clock period: 6.445ns (frequency: 155.171MHz)
-  Total number of paths / destination ports: 1585 / 59
+  Total number of paths / destination ports: 1589 / 59
 -------------------------------------------------------------------------
 Delay:               6.445ns (Levels of Logic = 5)
   Source:            i_lcd_driver/CNT_SV_2 (FF)
@@ -1102,7 +1102,7 @@ Delay:               6.445ns (Levels of Logic = 5)
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      FDR:C->Q              4   0.447   0.912  i_lcd_driver/CNT_SV_2 (i_lcd_driver/CNT_SV_2)
-     LUT3:I0->O            1   0.205   0.684  i_lcd_driver/REG_SETUP_1T[30]_GND_39_o_equal_12_o<12>1_SW0 (N20)
+     LUT3:I0->O            1   0.205   0.684  i_lcd_driver/REG_SETUP_1T[30]_GND_39_o_equal_12_o<12>1_SW0 (N22)
      LUT6:I4->O            4   0.203   0.684  i_lcd_driver/REG_SETUP_1T[30]_GND_39_o_equal_12_o<12>1 (i_lcd_driver/REG_SETUP_1T[30]_GND_39_o_equal_12_o<12>1)
      LUT4:I3->O            3   0.205   0.755  i_lcd_driver/CNT_MSG[2]_GND_39_o_equal_74_o<2>1 (i_lcd_driver/CNT_MSG[2]_GND_39_o_equal_74_o)
      LUT6:I4->O            1   0.203   0.580  i_lcd_driver/Mmux_CLR_CNT_S22 (i_lcd_driver/Mmux_CLR_CNT_S21)
@@ -1114,23 +1114,25 @@ Delay:               6.445ns (Levels of Logic = 5)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
-  Total number of paths / destination ports: 40 / 30
+  Total number of paths / destination ports: 41 / 30
 -------------------------------------------------------------------------
-Offset:              3.294ns (Levels of Logic = 2)
-  Source:            ENET_TX_EN (PAD)
-  Destination:       tx0_data_0 (FF)
-  Destination Clock: clk falling
+Offset:              3.376ns (Levels of Logic = 4)
+  Source:            LPC_to_LCD_Pico_Ready_Receive (PAD)
+  Destination:       in_port_0 (FF)
+  Destination Clock: clk rising
 
-  Data Path: ENET_TX_EN to tx0_data_0
+  Data Path: LPC_to_LCD_Pico_Ready_Receive to in_port_0
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O             4   1.222   0.931  ENET_TX_EN_IBUF (ENET_TX_EN_IBUF)
-     LUT5:I1->O            2   0.203   0.616  _n0365_inv1 (_n0365_inv)
-     FDE_1:CE                  0.322          tx0_data_0
+     IBUF:I->O             1   1.222   0.924  LPC_to_LCD_Pico_Ready_Receive_IBUF (LPC_to_LCD_Pico_Ready_Receive_IBUF)
+     LUT6:I1->O            1   0.203   0.000  Mmux_port_id[3]_X_5_o_wide_mux_4_OUT_6 (Mmux_port_id[3]_X_5_o_wide_mux_4_OUT_6)
+     MUXF7:I1->O           1   0.140   0.580  Mmux_port_id[3]_X_5_o_wide_mux_4_OUT_5_f7 (Mmux_port_id[3]_X_5_o_wide_mux_4_OUT_5_f7)
+     LUT5:I4->O            1   0.205   0.000  port_id<3> (port_id[3]_X_5_o_wide_mux_4_OUT<0>)
+     FD:D                      0.102          in_port_0
     ----------------------------------------
-    Total                      3.294ns (1.747ns logic, 1.547ns route)
-                                       (53.0% logic, 47.0% route)
+    Total                      3.376ns (1.872ns logic, 1.504ns route)
+                                       (55.5% logic, 44.5% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'ENET_MDC'
@@ -1146,8 +1148,8 @@ Offset:              4.665ns (Levels of Logic = 3)
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      IBUF:I->O             7   1.222   1.118  ENET_MDIO_IBUF (ENET_MDIO_IBUF)
-     LUT6:I1->O            1   0.203   0.580  _n03073 (_n03073)
-     LUT3:I2->O           12   0.205   0.908  _n03074 (_n0307)
+     LUT6:I1->O            1   0.203   0.580  _n03083 (_n03083)
+     LUT3:I2->O           12   0.205   0.908  _n03084 (_n0308)
      FDRE:R                    0.430          g_counter_0
     ----------------------------------------
     Total                      4.665ns (2.060ns logic, 2.605ns route)
@@ -1217,24 +1219,24 @@ Offset:              3.634ns (Levels of Logic = 1)
 Timing constraint: Default OFFSET OUT AFTER for Clock 'i_lcd_clk_gen/sCLK_DIV_7'
   Total number of paths / destination ports: 269 / 6
 -------------------------------------------------------------------------
-Offset:              8.440ns (Levels of Logic = 5)
-  Source:            i_lcd_driver/STATE_FSM_FFd1 (FF)
+Offset:              8.450ns (Levels of Logic = 5)
+  Source:            i_lcd_driver/STATE_FSM_FFd3 (FF)
   Destination:       oLCD_DAT_OPV<3> (PAD)
   Source Clock:      i_lcd_clk_gen/sCLK_DIV_7 rising
 
-  Data Path: i_lcd_driver/STATE_FSM_FFd1 to oLCD_DAT_OPV<3>
+  Data Path: i_lcd_driver/STATE_FSM_FFd3 to oLCD_DAT_OPV<3>
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FD:C->Q              21   0.447   1.458  i_lcd_driver/STATE_FSM_FFd1 (i_lcd_driver/STATE_FSM_FFd1)
-     LUT6:I1->O            1   0.203   0.944  i_lcd_driver/Mmux_SEL_LCD_DAT<0>11 (i_lcd_driver/Mmux_SEL_LCD_DAT<0>1)
+     FD:C->Q              27   0.447   1.468  i_lcd_driver/STATE_FSM_FFd3 (i_lcd_driver/STATE_FSM_FFd3)
+     LUT6:I2->O            1   0.203   0.944  i_lcd_driver/Mmux_SEL_LCD_DAT<0>11 (i_lcd_driver/Mmux_SEL_LCD_DAT<0>1)
      LUT6:I0->O            1   0.203   0.580  i_lcd_driver/Mmux_SEL_LCD_DAT<0>12 (i_lcd_driver/Mmux_SEL_LCD_DAT<0>11)
      LUT6:I5->O            4   0.205   1.048  i_lcd_driver/Mmux_SEL_LCD_DAT<0>13 (i_lcd_driver/SEL_LCD_DAT<0>)
      LUT6:I0->O            1   0.203   0.579  i_lcd_driver/LCD_DAT_OPV<1>1 (oLCD_DAT_OPV_3_OBUF)
      OBUF:I->O                 2.571          oLCD_DAT_OPV_3_OBUF (oLCD_DAT_OPV<3>)
     ----------------------------------------
-    Total                      8.440ns (3.832ns logic, 4.608ns route)
-                                       (45.4% logic, 54.6% route)
+    Total                      8.450ns (3.832ns logic, 4.618ns route)
+                                       (45.3% logic, 54.7% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'ENET_MDC'
@@ -1311,8 +1313,8 @@ Clock to Setup on destination clock clk
                         | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock            |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ------------------------+---------+---------+---------+---------+
-clk                     |    7.954|         |    2.735|         |
-i_lcd_clk_gen/sCLK_DIV_7|    3.336|         |         |         |
+clk                     |    7.857|         |    2.735|         |
+i_lcd_clk_gen/sCLK_DIV_7|    3.131|         |         |         |
 program_rom/jtag_clk    |    1.767|         |         |         |
 write_to_uart_tx        |         |    1.077|         |         |
 ------------------------+---------+---------+---------+---------+
@@ -1322,7 +1324,7 @@ Clock to Setup on destination clock i_lcd_clk_gen/sCLK_DIV_7
                                 | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock                    |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 --------------------------------+---------+---------+---------+---------+
-clk                             |    2.258|         |         |         |
+clk                             |    2.763|         |         |         |
 i_lcd_clk_gen/sCLK_DIV_7        |    6.445|         |         |         |
 write_strobe_port_id[2]_AND_19_o|         |    1.179|         |         |
 --------------------------------+---------+---------+---------+---------+
@@ -1364,12 +1366,12 @@ clk            |         |         |    3.459|         |
 =========================================================================
 
 
-Total REAL time to Xst completion: 29.00 secs
-Total CPU time to Xst completion: 28.34 secs
+Total REAL time to Xst completion: 16.00 secs
+Total CPU time to Xst completion: 16.10 secs
  
 --> 
 
-Total memory usage is 280508 kilobytes
+Total memory usage is 276076 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :   28 (   0 filtered)

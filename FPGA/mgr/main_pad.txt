@@ -1,7 +1,7 @@
 Release 14.7 - par P.20131013 (nt64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-Wed Nov 11 13:13:11 2015
+Fri Nov 27 22:52:24 2015
 
 
 INFO: The IO information is provided in three file formats as part of the Place and Route (PAR) process.  These formats are:
@@ -172,7 +172,7 @@ Pinout by Pin Number:
 |AE20      |                             |         |VCCO_2                       |         |           |2             |          |         |           |         |2.50     |          |           |                |
 |AE21      |led<4>                       |IOB      |IO_L2P_CMPCLK_2              |OUTPUT   |LVCMOS25*  |2             |12        |SLOW     |           |         |         |UNLOCATED |NO         |NONE            |
 |AE22      |                             |         |GND                          |         |           |              |          |         |           |         |         |          |           |                |
-|AE23      |                             |IOBM     |IO_L74P_AWAKE_1              |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
+|AE23      |IR                           |IOB      |IO_L74P_AWAKE_1              |INPUT    |LVCMOS25*  |1             |          |         |           |NONE     |         |LOCATED   |NO         |NONE            |
 |AE24      |reset                        |IOB      |IO_L67P_1                    |INPUT    |LVCMOS25*  |1             |          |         |           |NONE     |         |LOCATED   |NO         |NONE            |
 |AE25      |                             |IOBM     |IO_L52P_M1DQ14_1             |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |AE26      |                             |IOBS     |IO_L52N_M1DQ15_1             |UNUSED   |           |1             |          |         |           |         |         |          |           |                |

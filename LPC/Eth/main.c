@@ -91,8 +91,8 @@ void PicoBlazesThread(){
 		PicoData = (FIO2PIN>>2);
 		PicoDataBuffer[PicoLCDReceiveDataCounter]=PicoData;
 		PicoLCDReceiveDataCounter++;
-		if(PicoData ==35)PicoSendViaTCPReady=1;		//jesli hasz to wyslij bo koniec wiadomosci
-//		if(PicoData ==51)PicoSendViaTCPReady=1;	
+		//if(PicoData ==35)PicoSendViaTCPReady=1;		//jesli hasz to wyslij bo koniec wiadomosci
+		if(PicoLCDReceiveDataCounter ==6)PicoSendViaTCPReady=1;	
 		FIO2PIN &= NotReadyReadFromPico;
 		
 		while(!(FIO2PIN | PicoDataNotValid))

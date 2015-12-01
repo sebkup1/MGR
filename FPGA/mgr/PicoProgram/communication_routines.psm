@@ -176,11 +176,6 @@ reset_Eth_en_status: OUTPUTK LPC_dv_reset, LPC_data_valid_port
                    JUMP NZ, UART_TX                          ;wait if full
                    OUTPUT s5, UART_TX6_output_port
                    RETURN 
-		  UART_TX2: INPUT s0, UART_status_port                ;Check if buffer is full
-                   TEST s0, UART_Tx_full
-                   JUMP NZ, UART_TX2                          ;wait if full
-                   OUTPUT s8, UART_TX6_output_port
-                   RETURN
 				 
 				   ;--------------------------------------------------------------------------------------
                    ; Routine to wywsy³anie znaków do drivera lcd
@@ -198,7 +193,7 @@ reset_Eth_en_status: OUTPUTK LPC_dv_reset, LPC_data_valid_port
 				   OUTPUTK LCD_en_reset, LCD_driver_en_port
 				   RETURN 
 					
-	    LPC_send:  CALL UART_TX
+	    LPC_send:  ;CALL UART_TX
 					INPUT s0, LPC_ready_port	        	       ;Sprawdza czy LPC mo¿e odbieraæ dane
 				   TEST s0, LPC_ready_syg
 				   

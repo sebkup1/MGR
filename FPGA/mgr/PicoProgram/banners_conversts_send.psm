@@ -1,0 +1,373 @@
+		CONSTANT green, 03
+		CONSTANT red, 07
+		CONSTANT blue, 01
+		CONSTANT clear, 0F
+		
+		CONSTANT button0, 3F
+		CONSTANT button1, 3D
+		CONSTANT button2, 3B
+		CONSTANT button3, 39
+		CONSTANT button4, 37
+		CONSTANT button5, 35
+		CONSTANT button6, 33
+		CONSTANT button7, 31
+		CONSTANT button8, 2F
+		CONSTANT button9, 2D
+		CONSTANT buttonON, 27
+		CONSTANT buttonMute, 25
+		CONSTANT buttonUp, 3F
+		CONSTANT buttonDown, 3D
+		CONSTANT buttonCenter, 09
+		CONSTANT buttonLeft, 1D
+		CONSTANT buttonRight, 1F
+					
+					
+	convert_send:
+					load s6, sC
+					sub s6, button0
+					jump C, next_button1
+					TEST s6, 11111111'b	
+					JUMP NZ, next_button1
+					LOAD sF, "0"
+					CALL LCD_send
+					CALL LPC_send
+					SUB s7, 01
+					return
+					
+	next_button1:	load s6, sC
+					sub s6, button1
+					jump C, next_button2
+					TEST s6, 11111111'b	
+					JUMP NZ, next_button2
+					LOAD sF, "1"
+					CALL LCD_send
+					CALL LPC_send
+					SUB s7, 01
+					return
+					
+	next_button2:	load s6, sC
+					sub s6, button2
+					jump C, next_button3
+					TEST s6, 11111111'b	
+					JUMP NZ, next_button3
+					LOAD sF, "2"
+					CALL LCD_send
+					CALL LPC_send
+					SUB s7, 01
+					return
+					
+	next_button3:	load s6, sC
+					sub s6, button3
+					jump C, next_button4
+					TEST s6, 11111111'b	
+					JUMP NZ, next_button4
+					LOAD sF, "3"
+					CALL LCD_send
+					CALL LPC_send
+					SUB s7, 01
+					return
+					
+	next_button4:	load s6, sC
+					sub s6, button4
+					jump C, next_button5
+					TEST s6, 11111111'b	
+					JUMP NZ, next_button5
+					LOAD sF, "4"
+					CALL LCD_send
+					CALL LPC_send
+					SUB s7, 01
+					return
+					
+	next_button5:	load s6, sC
+					sub s6, button5
+					jump C, next_button6
+					TEST s6, 11111111'b	
+					JUMP NZ, next_button6
+					LOAD sF, "5"
+					CALL LCD_send
+					CALL LPC_send
+					SUB s7, 01
+					return
+					
+	next_button6:	load s6, sC
+					sub s6, button6
+					jump C, next_button7
+					TEST s6, 11111111'b	
+					JUMP NZ, next_button7
+					LOAD sF, "6"
+					CALL LCD_send
+					CALL LPC_send
+					SUB s7, 01
+					return
+					
+	next_button7:	load s6, sC
+					sub s6, button7
+					jump C, next_button8
+					TEST s6, 11111111'b	
+					JUMP NZ, next_button8
+					LOAD sF, "7"
+					CALL LCD_send
+					CALL LPC_send
+					SUB s7, 01
+					return
+					
+	next_button8:	load s6, sC
+					sub s6, button8
+					jump C, next_button9
+					TEST s6, 11111111'b	
+					JUMP NZ, next_button9
+					LOAD sF, "8"
+					CALL LCD_send
+					CALL LPC_send
+					SUB s7, 01
+					return
+					
+	next_button9:	load s6, sC
+					sub s6, button9
+					jump C, just_return
+					TEST s6, 11111111'b	
+					JUMP NZ, just_return
+					LOAD sF, "9"
+					CALL LCD_send
+					CALL LPC_send
+					SUB s7, 01
+					return
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+	which_banner:  load s6, s5
+					sub s6, green
+					jump C, next_banner1
+					
+					TEST s6, 11111111'b	;16hex'
+					JUMP NZ, next_banner1
+				   
+				   LOAD sF, ESC
+					CALL LCD_send
+				   
+				   call banner_message
+				   return
+	next_banner1:  load s6, s5
+					sub s6, blue
+					jump C, next_banner2
+					
+					TEST s6, 11111111'b	;16hex'
+					JUMP NZ, next_banner2
+				   
+				   LOAD sF, ESC
+					CALL LCD_send
+				   
+				   call banner2_message
+				   return
+	next_banner2:  load s6, s5
+					sub s6, red
+					jump C, next_banner3
+					
+					TEST s6, 11111111'b	;16hex'
+					JUMP NZ, next_banner3
+				   
+				   LOAD sF, ESC
+					CALL LCD_send
+				   
+				   call banner3_message
+				   return
+	next_banner3:  load s6, s5
+					sub s6, clear
+					JUMP C, just_return
+					
+					TEST s6, 11111111'b	;16hex'
+					JUMP NZ, just_return
+				   
+				   LOAD sF, ESC
+					CALL LCD_send
+				   
+				   call banner4_message
+				   return
+                    
+	just_return: return 
+                   ;
+                    ;
+                    ;------------------------------------------------------------------------------------------
+                    ; Welcome Message.
+                    ;------------------------------------------------------------------------------------------
+                    ;
+                    ; The welcome message includes a display of the version information available from the
+                    ; assembler and the 'hwbuild' from the instantiation of KCPSM6 in the hardware design.
+                    ;
+   welcome_message: LOAD sB, welcome_msg'upper
+                    LOAD sA, welcome_msg'lower
+                    CALL send_message
+                    HWBUILD s5                      ;hardware version defines ASCII letter
+                    CALL UART_TX
+                    CALL send_CR
+                    RETURN 
+                    ;
+                    ; Welcome message
+                    ;
+                    STRING banner1$, "  _  ______ ____  ____  __  __  __"
+                    STRING banner2$, " | |/ / ___|  _ \/ ___||  \/  |/ /_"
+                    STRING banner3$, " | ' / |   | |_) \___ \| |\/| | '_ \"
+                    STRING banner4$, " | . \ |___|  __/ ___) | |  | | (_) )"
+                    STRING banner5$, " |_|\_\____|_|   |____/|_|  |_|\___/"
+                    ;
+                    ; Welcome message
+                    ;
+                    STRING welcome1$, "Przyklad aplikacji obslugujacej portu IR z wykorzystaniem Picoblaze"
+					STRING welcome11$, "Autor: Sebastian Kupis"
+                    STRING welcome2$, "Data zbudoawania: "
+                    STRING welcome3$, "   Czas: "
+                    STRING welcome4$, "Version: "
+                    STRING welcome5$, "Hardware Design: "
+                    ;
+                    ;
+       welcome_msg: LOAD&RETURN s5, banner1$
+                    LOAD&RETURN s5, CR
+                    LOAD&RETURN s5, banner2$
+                    LOAD&RETURN s5, CR
+                    LOAD&RETURN s5, banner3$
+                    LOAD&RETURN s5, CR
+                    LOAD&RETURN s5, banner4$
+                    LOAD&RETURN s5, CR
+                    LOAD&RETURN s5, banner5$
+                    LOAD&RETURN s5, CR
+                    LOAD&RETURN s5, CR
+                    LOAD&RETURN s5, welcome1$
+                    LOAD&RETURN s5, CR
+					LOAD&RETURN s5, welcome11$
+                    LOAD&RETURN s5, CR
+                    LOAD&RETURN s5, CR
+                    LOAD&RETURN s5, welcome2$
+                    LOAD&RETURN s5, datestamp$
+                    LOAD&RETURN s5, welcome3$
+                    LOAD&RETURN s5, timestamp$
+                    LOAD&RETURN s5, CR
+                    LOAD&RETURN s5, welcome4$
+                    LOAD&RETURN s5, KCPSM6_version$
+                    LOAD&RETURN s5, CR
+                    LOAD&RETURN s5, welcome5$
+                    LOAD&RETURN s5, NUL
+                    ;
+                    ;
+                    ;------------------------------------------------------------------------------------------
+                    ; Send a message to the UART
+                    ;------------------------------------------------------------------------------------------
+                    ;
+                    ; A message is transmitted to the USB-UART.
+                    ; The start address of the message must be provided in [sB,sA].
+                    ; Terminate the transmission with a NULL character (00 hex).
+                    ;
+      send_message: CALL@ (sB, sA)
+                    COMPARE s5, 00                  ;terminate on NUL character
+                    RETURN Z
+                    CALL UART_TX
+                    ADD sA, 1'd
+                    ADDCY sB, 0'd
+                    JUMP send_message
+                    ;
+                    ;
+                    ;------------------------------------------------------------------------------------------
+                    ; Send Carriage Return to UART
+                    ;------------------------------------------------------------------------------------------
+                    ;
+                    ; Registers used s0, s1, s2, and s5.
+                    ;
+					
+					
+					banner_message: LOAD sB, banner_msg'upper
+                    LOAD sA, banner_msg'lower
+                    CALL send_banner
+                    HWBUILD sF                      ;hardware version defines ASCII letter
+					
+                    ;CALL send_CR
+                    RETURN 
+                    ;
+                    ; Welcome message
+                    ;
+                    STRING bannert$, "greeen"
+                    ;
+                    ;
+        banner_msg: LOAD&RETURN sF, bannert$
+					LOAD&RETURN sF, NUL
+					
+					
+					;
+					;
+					;
+   banner2_message: LOAD sB, banner2_msg'upper
+                    LOAD sA, banner2_msg'lower
+                    CALL send_banner
+                    HWBUILD sF                      ;hardware version defines ASCII letter
+					
+                    RETURN 
+                    ;
+                    ; Welcome message
+                    ;
+                    STRING bannert2$, "blue"
+                    ;
+                    ;
+       banner2_msg: LOAD&RETURN sF, bannert2$
+					LOAD&RETURN sF, NUL
+					
+					
+					
+   banner3_message: LOAD sB, banner3_msg'upper
+                    LOAD sA, banner3_msg'lower
+                    CALL send_banner
+                    HWBUILD sF                      ;hardware version defines ASCII letter
+					
+                    ;CALL send_CR
+                    RETURN 
+                    ;
+                    ; Welcome message
+                    ;
+                    STRING bannert3$, "red"
+                    ;
+                    ;
+       banner3_msg: LOAD&RETURN sF, bannert3$
+					LOAD&RETURN sF, NUL				
+					
+					
+					
+   banner4_message: LOAD sB, banner4_msg'upper
+                    LOAD sA, banner4_msg'lower
+                    CALL send_banner
+                    HWBUILD sF                      ;hardware version defines ASCII letter
+					
+                    ;CALL send_CR
+                    RETURN 
+                    ;
+                    ; Welcome message
+                    ;
+                    STRING bannert4$, "i czyszcze sobiecale UOP"
+                    ;
+                    ;
+       banner4_msg: LOAD&RETURN sF, bannert4$
+					LOAD&RETURN sF, NUL
+                    ;
+                    ;
+					; Send a banner to LCD
+                    ;------------------------------------------------------------------------------------------
+                    ;
+                    ; A message is transmitted to the USB-UART.
+                    ; The start address of the message must be provided in [sB,sA].
+                    ; Terminate the transmission with a NULL character (00 hex).
+                    ;
+       send_banner: CALL@ (sB, sA)
+                    COMPARE sF, 00                  ;terminate on NUL character
+                    RETURN Z
+					;LOAD sF,s5
+                    CALL LCD_send
+                    ADD sA, 1'd
+                    ADDCY sB, 0'd
+					
+                    JUMP send_banner
+					
+					
+					

@@ -104,10 +104,6 @@
                     CONSTANT decimal2, 04                    ;   65,536
                     CONSTANT decimal3, 05
                     CONSTANT decimal4, 06
-                    CONSTANT green, 03
-                    CONSTANT red, 07
-                    CONSTANT blue, 01
-                    CONSTANT clear, 0F
                     ;
                     ;
                     ;------------------------------------------------------------------------------------------
@@ -163,20 +159,10 @@
                     CALL UART_TX
                     ;jump UART_THREAD
                     ;jump LPC_THREAD
-          IR_petla: 
-                    ;CALL send_CR
-                    ;load s4, sA
-                    ;call send_hex_byte
-                    ;CALL send_space
-                    ;load s4, sB
-                    ;call send_hex_byte
-                    ;CALL send_space
-                    ;load s4, sC
-                    ;call send_hex_byte
-                    LOAD sA, 00000000'b
+         IR_petla1: LOAD s7, 06
+         IR_petla2: LOAD sA, 00000000'b
                     LOAD sB, 00000000'b
                     LOAD sC, 00000000'b
-                    ;CALL delay_200ms
          IR_czekaj: INPUT s0, IR_PORT
                     TEST s0, 00000001'b
                     JUMP C, IR_czekaj
@@ -211,24 +197,18 @@
                     CALL send_space
                     LOAD s4, sC
                     CALL send_hex_byte
-                    LOAD sF, sC
-                    CALL LPC_send
-                    JUMP IR_petla
-                    ;jump LPC_THREAD
-                    ;LOAD s5, sA
-                    ;CALL UART_TX
-                    ;LOAD s5, sB
-                    ;CALL UART_TX
-                    ;LOAD s5, sC
-                    ;CALL UART_TX
-                    LOAD sF, sC
-                    CALL LCD_send
+                    CALL convert_send
+                    ;load sF, sC
+                    ;CALL LPC_send
+                    ;CALL LCD_send
+                    ;SUB s7, 01
+                    JUMP NZ, IR_petla2
         LPC_THREAD: OUTPUTK LPC_ready_syg, LPC_IN_ready_port
                     INPUT s0, LPC_IN_data_valid_port
                     TEST s0, LPC_data_valid_syg              ;Z=0 and C=1 when data present
                     JUMP Z, LPC_THREAD
                     INPUT s5, LPC_IN_data_port
-                    CALL UART_TX
+                    ;CALL UART_TX
                     CALL which_banner
                     ;LOAD s5, "C"
        LPC_DV_down: OUTPUTK 00000000'b, LPC_IN_ready_port
@@ -238,7 +218,7 @@
                     ;CALL LPC_send
                     ;CALL LCD_send
                     ;CALL UART_TX
-                    JUMP IR_czekaj
+                    JUMP IR_petla1
        UART_THREAD: INPUT s0, UART_status_port
                     TEST s0, UART_Rx_data_present            ;Z=0 and C=1 when data present
                     JUMP Z, UART_THREAD
@@ -248,49 +228,6 @@
                     CALL LPC_send
                     CALL LCD_send
                     JUMP UART_THREAD
-      which_banner: LOAD s6, s5
-                    SUB s6, green
-                    JUMP C, next_banner1
-                    TEST s6, 11111111'b                      ;16hex'
-                    JUMP NZ, next_banner1
-                    LOAD sF, ESC
-                    CALL LCD_send
-                    CALL banner_message
-                    RETURN 
-      next_banner1: LOAD s6, s5
-                    SUB s6, blue
-                    JUMP C, next_banner2
-                    TEST s6, 11111111'b                      ;16hex'
-                    JUMP NZ, next_banner2
-                    LOAD sF, ESC
-                    CALL LCD_send
-                    CALL banner2_message
-                    RETURN 
-      next_banner2: LOAD s6, s5
-                    SUB s6, red
-                    JUMP C, next_banner3
-                    TEST s6, 11111111'b                      ;16hex'
-                    JUMP NZ, next_banner3
-                    LOAD sF, ESC
-                    CALL LCD_send
-                    CALL banner3_message
-                    RETURN 
-      next_banner3: LOAD s6, s5
-                    SUB s6, clear
-                    JUMP C, just_return
-                    TEST s6, 11111111'b                      ;16hex'
-                    JUMP NZ, just_return
-                    LOAD sF, ESC
-                    CALL LCD_send
-                    CALL banner4_message
-                    RETURN 
-       just_return: RETURN 
-          UART_RX2: INPUT s0, UART_status_port
-                    TEST s0, UART_Rx_data_present            ;Z=0 and C=1 when data present
-                    JUMP Z, UART_RX2
-                    INPUT s5, UART_RX6_input_port
-                    CALL UART_TX
-                    JUMP UART_RX2
                     ;
      bad_hex_input: CALL send_CR
                     LOAD sB, bad_hex_msg'upper               ;tell user input was invalid hex
@@ -354,167 +291,6 @@
                     CALL UART_TX
                     CALL delay_1ms                           ;Delay for reliable operation
                     RETURN 
-                    ;
-                    ;
-                    ;------------------------------------------------------------------------------------------
-                    ; Welcome Message.
-                    ;------------------------------------------------------------------------------------------
-                    ;
-                    ; The welcome message includes a display of the version information available from the
-                    ; assembler and the 'hwbuild' from the instantiation of KCPSM6 in the hardware design.
-                    ;
-   welcome_message: LOAD sB, welcome_msg'upper
-                    LOAD sA, welcome_msg'lower
-                    CALL send_message
-                    HWBUILD s5                               ;hardware version defines ASCII letter
-                    CALL UART_TX
-                    CALL send_CR
-                    RETURN 
-                    ;
-                    ; Welcome message
-                    ;
-                    STRING banner1$, "  _  ______ ____  ____  __  __  __"
-                    STRING banner2$, " | |/ / ___|  _ \/ ___||  \/  |/ /_"
-                    STRING banner3$, " | ' / |   | |_) \___ \| |\/| | '_ \"
-                    STRING banner4$, " | . \ |___|  __/ ___) | |  | | (_) )"
-                    STRING banner5$, " |_|\_\____|_|   |____/|_|  |_|\___/"
-                    ;
-                    ; Welcome message
-                    ;
-                    STRING welcome1$, "Przyklad aplikacji obslugujacej portu IR z wykorzystaniem Picoblaze"
-                    STRING welcome11$, "Autor: Sebastian Kupis"
-                    STRING welcome2$, "Data zbudoawania: "
-                    STRING welcome3$, "   Czas: "
-                    STRING welcome4$, "Version: "
-                    STRING welcome5$, "Hardware Design: "
-                    ;
-                    ;
-       welcome_msg: LOAD&RETURN s5, banner1$
-                    LOAD&RETURN s5, CR
-                    LOAD&RETURN s5, banner2$
-                    LOAD&RETURN s5, CR
-                    LOAD&RETURN s5, banner3$
-                    LOAD&RETURN s5, CR
-                    LOAD&RETURN s5, banner4$
-                    LOAD&RETURN s5, CR
-                    LOAD&RETURN s5, banner5$
-                    LOAD&RETURN s5, CR
-                    LOAD&RETURN s5, CR
-                    LOAD&RETURN s5, welcome1$
-                    LOAD&RETURN s5, CR
-                    LOAD&RETURN s5, welcome11$
-                    LOAD&RETURN s5, CR
-                    LOAD&RETURN s5, CR
-                    LOAD&RETURN s5, welcome2$
-                    LOAD&RETURN s5, datestamp$
-                    LOAD&RETURN s5, welcome3$
-                    LOAD&RETURN s5, timestamp$
-                    LOAD&RETURN s5, CR
-                    LOAD&RETURN s5, welcome4$
-                    LOAD&RETURN s5, KCPSM6_version$
-                    LOAD&RETURN s5, CR
-                    LOAD&RETURN s5, welcome5$
-                    LOAD&RETURN s5, NUL
-                    ;
-                    ;
-                    ;------------------------------------------------------------------------------------------
-                    ; Send a message to the UART
-                    ;------------------------------------------------------------------------------------------
-                    ;
-                    ; A message is transmitted to the USB-UART.
-                    ; The start address of the message must be provided in [sB,sA].
-                    ; Terminate the transmission with a NULL character (00 hex).
-                    ;
-      send_message: CALL@ (sB, sA)
-                    COMPARE s5, 00                           ;terminate on NUL character
-                    RETURN Z
-                    CALL UART_TX
-                    ADD sA, 1'd
-                    ADDCY sB, 0'd
-                    JUMP send_message
-                    ;
-                    ;
-                    ;------------------------------------------------------------------------------------------
-                    ; Send Carriage Return to UART
-                    ;------------------------------------------------------------------------------------------
-                    ;
-                    ; Registers used s0, s1, s2, and s5.
-                    ;
-    banner_message: LOAD sB, banner_msg'upper
-                    LOAD sA, banner_msg'lower
-                    CALL send_banner
-                    HWBUILD sF                               ;hardware version defines ASCII letter
-                    ;CALL send_CR
-                    RETURN 
-                    ;
-                    ; Welcome message
-                    ;
-                    STRING bannert$, "greeen"
-                    ;
-                    ;
-        banner_msg: LOAD&RETURN sF, bannert$
-                    LOAD&RETURN sF, NUL
-                    ;
-                    ;
-                    ;
-   banner2_message: LOAD sB, banner2_msg'upper
-                    LOAD sA, banner2_msg'lower
-                    CALL send_banner
-                    HWBUILD sF                               ;hardware version defines ASCII letter
-                    RETURN 
-                    ;
-                    ; Welcome message
-                    ;
-                    STRING bannert2$, "blue"
-                    ;
-                    ;
-       banner2_msg: LOAD&RETURN sF, bannert2$
-                    LOAD&RETURN sF, NUL
-   banner3_message: LOAD sB, banner3_msg'upper
-                    LOAD sA, banner3_msg'lower
-                    CALL send_banner
-                    HWBUILD sF                               ;hardware version defines ASCII letter
-                    ;CALL send_CR
-                    RETURN 
-                    ;
-                    ; Welcome message
-                    ;
-                    STRING bannert3$, "red"
-                    ;
-                    ;
-       banner3_msg: LOAD&RETURN sF, bannert3$
-                    LOAD&RETURN sF, NUL
-   banner4_message: LOAD sB, banner4_msg'upper
-                    LOAD sA, banner4_msg'lower
-                    CALL send_banner
-                    HWBUILD sF                               ;hardware version defines ASCII letter
-                    ;CALL send_CR
-                    RETURN 
-                    ;
-                    ; Welcome message
-                    ;
-                    STRING bannert4$, "i czyszcze sobiecale UOP"
-                    ;
-                    ;
-       banner4_msg: LOAD&RETURN sF, bannert4$
-                    LOAD&RETURN sF, NUL
-                    ;
-                    ;
-                    ; Send a banner to LCD
-                    ;------------------------------------------------------------------------------------------
-                    ;
-                    ; A message is transmitted to the USB-UART.
-                    ; The start address of the message must be provided in [sB,sA].
-                    ; Terminate the transmission with a NULL character (00 hex).
-                    ;
-       send_banner: CALL@ (sB, sA)
-                    COMPARE sF, 00                           ;terminate on NUL character
-                    RETURN Z
-                    ;LOAD sF,s5
-                    CALL LCD_send
-                    ADD sA, 1'd
-                    ADDCY sB, 0'd
-                    JUMP send_banner
                     ;
                     ;
                     ;------------------------------------------------------------------------------------------
@@ -815,6 +591,7 @@ divide_16bit_by_10: LOAD sA, s2                              ;copy input value i
                     ; -----------------------------------------------------------
                     ;
                     INCLUDE "communication_routines.psm"
+                    INCLUDE "banners_conversts_send.psm"
                     ;
                     ;
                     ;------------------------------------------------------------------------------------------

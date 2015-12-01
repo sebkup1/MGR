@@ -1,7 +1,7 @@
 Dependencies for Project 'Eth', Target 'Target 1': (DO NOT MODIFY !)
 F (.\Pico.c)(0x5623A31E)(--thumb -c --cpu ARM7TDMI -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork -Iinc -Iscr-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Philips-D__UVISION_VERSION="515"-o .\objects\pico.o --omf_browse .\objects\pico.crf --depend .\objects\pico.d)
 I (Pico.h)(0x565874F5)
-F (.\main.c)(0x56573EB8)(--thumb -c --cpu ARM7TDMI -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork -Iinc -Iscr-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Philips-D__UVISION_VERSION="515"-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\main.c)(0x565DF3C4)(--thumb -c --cpu ARM7TDMI -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork -Iinc -Iscr-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Philips-D__UVISION_VERSION="515"-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x54C29A18)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x54C29A18)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x54C29A18)

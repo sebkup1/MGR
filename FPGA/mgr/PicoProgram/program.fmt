@@ -128,8 +128,8 @@
                     ;
                     ; Initialised terminal display and display welcome messages
                     ;
-                    CALL clear_screen
-                    CALL welcome_message
+                    ;CALL clear_screen
+                    ;CALL welcome_message
                     ;
                     ;
                     ;------------------------------------------------------------------------------------------
@@ -137,29 +137,13 @@
                     ;------------------------------------------------------------------------------------------
                     ;
                     ;
-              main: CALL send_CR
-                    LOAD sF, ESC
-                    LOAD s5, ESC
-                    CALL LCD_send
-                    CALL UART_TX
-                    LOAD sF, "L"
-                    CALL LCD_send
-                    CALL UART_TX
-                    LOAD sF, "P"
-                    CALL LCD_send
-                    CALL UART_TX
-                    LOAD sF, "C"
-                    CALL LCD_send
-                    CALL UART_TX
-                    LOAD sF, "2"
-                    CALL LCD_send
-                    CALL UART_TX
-                    LOAD sF, "3"
-                    CALL LCD_send
-                    CALL UART_TX
+              main: 
                     ;jump UART_THREAD
                     ;jump LPC_THREAD
-         IR_petla1: LOAD s7, 06
+         IR_petla1: LOAD s7, 08
+                    LOAD sF, ESC
+                    CALL LCD_send
+                    CALL ini_banner
          IR_petla2: LOAD sA, 00000000'b
                     LOAD sB, 00000000'b
                     LOAD sC, 00000000'b
@@ -190,35 +174,31 @@
                     JUMP NZ, next_IR_bit3                    ;repeat until last bit
                     CALL send_CR
                     LOAD s4, sA
-                    CALL send_hex_byte
-                    CALL send_space
-                    LOAD s4, sB
-                    CALL send_hex_byte
-                    CALL send_space
-                    LOAD s4, sC
-                    CALL send_hex_byte
+                    ;call send_hex_byte
+                    ;CALL send_space
+                    ;load s4, sB
+                    ;call send_hex_byte
+                    ;CALL send_space
+                    ;load s4, sC
+                    ;call send_hex_byte
                     CALL convert_send
-                    ;load sF, sC
-                    ;CALL LPC_send
-                    ;CALL LCD_send
-                    ;SUB s7, 01
                     JUMP NZ, IR_petla2
         LPC_THREAD: OUTPUTK LPC_ready_syg, LPC_IN_ready_port
                     INPUT s0, LPC_IN_data_valid_port
                     TEST s0, LPC_data_valid_syg              ;Z=0 and C=1 when data present
                     JUMP Z, LPC_THREAD
                     INPUT s5, LPC_IN_data_port
-                    ;CALL UART_TX
-                    CALL which_banner
-                    ;LOAD s5, "C"
        LPC_DV_down: OUTPUTK 00000000'b, LPC_IN_ready_port
                     INPUT s0, LPC_IN_data_valid_port         ;Sprawdza czy driver odebra³ dane
                     TEST s0, LPC_data_valid_syg
                     JUMP C, LPC_DV_down
-                    ;CALL LPC_send
-                    ;CALL LCD_send
-                    ;CALL UART_TX
+                    CALL which_banner
+                    CALL delay_5s
                     JUMP IR_petla1
+      LPC_LCD_send: CALL LCD_send
+                    CALL LPC_send
+                    SUB s7, 01
+                    RETURN 
        UART_THREAD: INPUT s0, UART_status_port
                     TEST s0, UART_Rx_data_present            ;Z=0 and C=1 when data present
                     JUMP Z, UART_THREAD
@@ -228,69 +208,6 @@
                     CALL LPC_send
                     CALL LCD_send
                     JUMP UART_THREAD
-                    ;
-     bad_hex_input: CALL send_CR
-                    LOAD sB, bad_hex_msg'upper               ;tell user input was invalid hex
-                    LOAD sA, bad_hex_msg'lower
-                    CALL send_message
-                    JUMP main
-                    ;
-                    ;
-                    ; Text messages used in main section of the program
-                    ;
-                    STRING prompt$, "Please enter a 4-digit hexadecimal value"
-                    STRING bad_hex$, "Sorry, that was not a valid 4-digit hexadecimal value!"
-                    STRING result$, "The decimal equivalent of "
-                    ;
-        prompt_msg: LOAD&RETURN s5, prompt$
-                    LOAD&RETURN s5, NUL
-                    ;
-       bad_hex_msg: LOAD&RETURN s5, bad_hex$
-                    LOAD&RETURN s5, NUL
-                    ;
-        result_msg: LOAD&RETURN s5, result$
-                    LOAD&RETURN s5, NUL
-                    ;
-                    ;
-                    ;------------------------------------------------------------------------------------------
-                    ; Software Delays
-                    ;------------------------------------------------------------------------------------------
-                    ;
-                    ; All based on 50MHz clock
-                    ; The number of iterations of a delay loop required to form each delay required are
-                    ; loaded into the register set [s2,s1,s0] and then the delay loop is started.
-                    ;
-                    ; Registers used s0, s1, s2
-                    ;
-                    ;1ms is 50,000 clock cycles requiring 6,250 delay iterations
-                    ;
-                    ;
-                    ;
-                    ;------------------------------------------------------------------------------------------
-                    ; Clear terminal and home cursor sequences for HyperTerminal (or similar)
-                    ;------------------------------------------------------------------------------------------
-                    ;
-                    ; ANSI Escape Sequences/codes (VT100)
-                    ;
-      clear_screen: LOAD s5, ESC                             ;clear terminal sequence
-                    CALL UART_TX
-                    LOAD s5, "["
-                    CALL UART_TX
-                    LOAD s5, "2"
-                    CALL UART_TX
-                    LOAD s5, "J"
-                    CALL UART_TX
-                    CALL delay_1ms                           ;Delay for reliable operation
-                    RETURN 
-                    ;
-       cursor_home: LOAD s5, ESC                             ;Send cursor to upper-left of display
-                    CALL UART_TX
-                    LOAD s5, "["
-                    CALL UART_TX
-                    LOAD s5, "H"
-                    CALL UART_TX
-                    CALL delay_1ms                           ;Delay for reliable operation
-                    RETURN 
                     ;
                     ;
                     ;------------------------------------------------------------------------------------------
@@ -320,11 +237,6 @@
                     ; transmitter.
                     ;
                     ; Registers used s0, s1, s2, s4, s5, sA and sB.
-                    ;
-     send_hex_word: LOAD s4, sB
-                    CALL send_hex_byte
-                    LOAD s4, sA
-                    JUMP send_hex_byte                       ;includes RETURN
                     ;
                     ;
                     ;------------------------------------------------------------------------------------------
@@ -577,6 +489,12 @@ divide_16bit_by_10: LOAD sA, s2                              ;copy input value i
                     LOAD s1, 96
                     LOAD s0, 80
                     JUMP software_delay
+          delay_5s: CALL delay_1s
+                    CALL delay_1s
+                    CALL delay_1s
+                    CALL delay_1s
+                    CALL delay_1s
+                    RETURN 
                     ;
                     ; The delay loop decrements [s2,s1,s0] until it reaches zero
                     ; Each decrement cycle is 5 instructions which is 10 clock cycles (100ns at 100MHz)

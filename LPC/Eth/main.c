@@ -91,8 +91,8 @@ void PicoBlazesThread(){
 		PicoData = (FIO2PIN>>2);
 		PicoDataBuffer[PicoLCDReceiveDataCounter]=PicoData;
 		PicoLCDReceiveDataCounter++;
-		//if(PicoData ==35)PicoSendViaTCPReady=1;		//jesli hasz to wyslij bo koniec wiadomosci
-		if(PicoLCDReceiveDataCounter ==6)PicoSendViaTCPReady=1;	
+		if(PicoData ==68)PicoSendViaTCPReady=1;		//jesli D to przejezdza
+		if(PicoLCDReceiveDataCounter ==8)PicoSendViaTCPReady=1;	//8 znaków (7 kod + kierunek)
 		FIO2PIN &= NotReadyReadFromPico;
 		
 		while(!(FIO2PIN | PicoDataNotValid))
@@ -103,77 +103,6 @@ void PicoBlazesThread(){
 	FIO2PIN |= ReadyReadFromPico;
 	SendFromPico();
 	SendEcho();
-}
-
-void SendToPico(short int mes)
-{
-	FIO0CLR=0x00010000;
-	FIO1CLR=0x38000000;
-	if(FIO0PIN & ToPicoPicoReady)
-	{
-		switch(mes)
-		{
-			case 1:
-			{
-		FIO0SET=0x00010000;
-		FIO1SET=0x00000000;
-		FIO0SET = ToPicoDataValid;
-		while ((FIO0PIN & ToPicoPicoReady))
-		{
-			FIO0SET=0x00010000;
-			FIO1SET=0x00000000;
-			FIO0SET = ToPicoDataValid;
-		}
-		FIO0CLR = ToPicoDataValid;
-		break;
-	}
-		
-		case 2:
-		{
-		FIO0SET=0x00010000;
-		FIO1SET=0x08000000;
-		FIO0SET = ToPicoDataValid;
-		while ((FIO0PIN & ToPicoPicoReady))
-		{
-			FIO0SET=0x00010000;
-			FIO1SET=0x08000000;
-			FIO0SET = ToPicoDataValid;
-		}
-		FIO0CLR = ToPicoDataValid;
-		break;
-	}
-		
-		case 3:
-		{
-		FIO0SET=0x00010000;
-		FIO1SET=0x18000000;
-		FIO0SET = ToPicoDataValid;
-		while ((FIO0PIN & ToPicoPicoReady))
-		{
-			FIO0SET=0x00010000;
-			FIO1SET=0x18000000;
-			FIO0SET = ToPicoDataValid;
-		}
-		FIO0CLR = ToPicoDataValid;
-		break;
-		}
-		
-		case 4:
-		{
-		FIO0SET=0x00010000;
-		FIO1SET=0x38000000;
-		FIO0SET = ToPicoDataValid;
-		while ((FIO0PIN & ToPicoPicoReady))
-		{
-			FIO0SET=0x00010000;
-			FIO1SET=0x38000000;
-			FIO0SET = ToPicoDataValid;
-		}
-		FIO0CLR = ToPicoDataValid;
-		break;
-	}
-}
-	}
 }
 
 void SendFromPico(void)
@@ -243,33 +172,159 @@ void ProcessData(void)
 {  
 	if(TCPRxDataCount>0){
 		if (SocketStatus & SOCK_CONNECTED)             // check if somebody has connected to our TCP
-		{
-			//memcpy(JavaSerializationPrompt, _RxTCPBuffer, 3);
-			
-			if(_RxTCPBuffer[3] ==0x62)
+		{			
+			if(_RxTCPBuffer[3] ==0x62)	//Otwieranie szlabanu
 			{
 				FIO1SET2 = 0x20;//niebieska
 				SendToPico(1);
 			}
 			
-			if(_RxTCPBuffer[3] ==0x67)
+			if(_RxTCPBuffer[3] ==0x67)	//Kod w uzyciu
 				{
 					FIO1SET2 = 0x10;//zielony	
 					SendToPico(2);
 				}
 				
-			if(_RxTCPBuffer[3] ==0x72)
+			if(_RxTCPBuffer[3] ==0x72)	//Bledny kod
 				{
 					FIO1SET2 = 0x08;//czerwony	
 					SendToPico(3);
 				}
-			if(_RxTCPBuffer[3] ==0x63)
+			if(_RxTCPBuffer[3] ==0x63)	//Koniec aboanmentu
 				{
 					FIO1CLR2 = 0x38;//clear all	
 					SendToPico(4);
 				}
+			if(_RxTCPBuffer[3] ==0x61)	//Inny samochód uzytkownika juz wjechal
+				{
+					SendToPico(5);
+				}
+			if(_RxTCPBuffer[3] ==0x74)	//Zakaz wyjazdu
+				{
+					SendToPico(6);
+				}
+			if(_RxTCPBuffer[3] ==0x7A)	//Niepoprawny format
+				{
+					SendToPico(7);
+				}
+			if(_RxTCPBuffer[3] ==0x70)	//Blad wewnetrzny
+				{
+					SendToPico(8);
+				}
 		}
+	}
+}
 
+void SendToPico(short int banner)
+{
+	FIO0CLR=0x00010000;
+	FIO1CLR=0x38000000;
+	if(FIO0PIN & ToPicoPicoReady)
+	{
+		switch(banner)
+		{
+				case 1:							//Otwieranie szlabanu
+				{
+				FIO0SET=0x00010000;
+				FIO0SET = ToPicoDataValid;
+				while ((FIO0PIN & ToPicoPicoReady))
+				{
+					FIO0SET=0x00010000;
+					FIO1SET=0x00000000;
+					FIO0SET = ToPicoDataValid;
+				}
+				FIO0CLR = ToPicoDataValid;
+				break;
+				}
+				
+				case 2:								//Kod w uzyciu
+				{
+				FIO0SET=0x00010000;
+				FIO1SET=0x08000000;
+				FIO0SET = ToPicoDataValid;
+				while ((FIO0PIN & ToPicoPicoReady))
+				{
+					FIO0SET=0x00010000;
+					FIO1SET=0x08000000;
+					FIO0SET = ToPicoDataValid;
+				}
+				FIO0CLR = ToPicoDataValid;
+				break;
+			}
+				
+				case 3:								//Bledny kod
+				{
+				FIO0SET=0x00010000;
+				FIO1SET=0x18000000;
+				FIO0SET = ToPicoDataValid;
+				while ((FIO0PIN & ToPicoPicoReady))
+				{
+					FIO0SET=0x00010000;
+					FIO1SET=0x18000000;
+					FIO0SET = ToPicoDataValid;
+				}
+				FIO0CLR = ToPicoDataValid;
+				break;
+				}
+
+				case 4:								//Koniec aboanmentu
+				{
+				FIO0SET=0x00010000;
+				FIO1SET=0x38000000;
+				FIO0SET = ToPicoDataValid;
+				while ((FIO0PIN & ToPicoPicoReady))
+				{
+					FIO0SET=0x00010000;
+					FIO1SET=0x38000000;
+					FIO0SET = ToPicoDataValid;
+				}
+				FIO0CLR = ToPicoDataValid;
+				break;
+			}	
+				
+				case 5:								//Inny samochód uzytkownika juz wjechal
+				{
+				FIO1SET=0x08000000;
+				FIO0SET = ToPicoDataValid;
+				while ((FIO0PIN & ToPicoPicoReady))
+				{
+					FIO1SET=0x08000000;
+					FIO0SET = ToPicoDataValid;
+				}
+				FIO0CLR = ToPicoDataValid;
+				break;
+				}	
+				
+				case 7:								//Niepoprawny format
+				{
+				FIO1SET=0x20000000;
+				FIO0SET = ToPicoDataValid;
+				while ((FIO0PIN & ToPicoPicoReady))
+				{
+					FIO1SET=0x20000000;
+					FIO0SET = ToPicoDataValid;
+				}
+				FIO0CLR = ToPicoDataValid;
+				break;
+				}	
+				
+				case 8:								//Blad wewnetrzny
+				{
+				FIO0SET=0x00010000;
+				FIO1SET=0x10000000;
+				FIO0SET = ToPicoDataValid;
+				while ((FIO0PIN & ToPicoPicoReady))
+				{
+					FIO0SET=0x00010000;
+					FIO1SET=0x10000000;
+					FIO0SET = ToPicoDataValid;
+				}
+				FIO0CLR = ToPicoDataValid;
+				break;
+			}
+				
+				default:{}
+		}
 	}
 }
 

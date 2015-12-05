@@ -1,320 +1,336 @@
-                 CONSTANT green, 03
-                 CONSTANT red, 07
-                 CONSTANT blue, 01
-                 CONSTANT clear, 0F
-                 CONSTANT button0, 3F
-                 CONSTANT button1, 3D
-                 CONSTANT button2, 3B
-                 CONSTANT button3, 39
-                 CONSTANT button4, 37
-                 CONSTANT button5, 35
-                 CONSTANT button6, 33
-                 CONSTANT button7, 31
-                 CONSTANT button8, 2F
-                 CONSTANT button9, 2D
-                 CONSTANT buttonON, 27
-                 CONSTANT buttonMute, 25
-                 CONSTANT buttonUp, 3F
-                 CONSTANT buttonDown, 3D
-                 CONSTANT buttonCenter, 09
-                 CONSTANT buttonLeft, 1D
-                 CONSTANT buttonRight, 1F
-   convert_send: 
-                 LOAD s6, sC
-                 SUB s6, button0
-                 JUMP C, next_button1
-                 TEST s6, 11111111'b
-                 JUMP NZ, next_button1
-                 LOAD sF, "0"
-                 CALL LCD_send
-                 CALL LPC_send
-                 SUB s7, 01
-                 RETURN 
-   next_button1: LOAD s6, sC
-                 SUB s6, button1
-                 JUMP C, next_button2
-                 TEST s6, 11111111'b
-                 JUMP NZ, next_button2
-                 LOAD sF, "1"
-                 CALL LCD_send
-                 CALL LPC_send
-                 SUB s7, 01
-                 RETURN 
-   next_button2: LOAD s6, sC
-                 SUB s6, button2
-                 JUMP C, next_button3
-                 TEST s6, 11111111'b
-                 JUMP NZ, next_button3
-                 LOAD sF, "2"
-                 CALL LCD_send
-                 CALL LPC_send
-                 SUB s7, 01
-                 RETURN 
-   next_button3: LOAD s6, sC
-                 SUB s6, button3
-                 JUMP C, next_button4
-                 TEST s6, 11111111'b
-                 JUMP NZ, next_button4
-                 LOAD sF, "3"
-                 CALL LCD_send
-                 CALL LPC_send
-                 SUB s7, 01
-                 RETURN 
-   next_button4: LOAD s6, sC
-                 SUB s6, button4
-                 JUMP C, next_button5
-                 TEST s6, 11111111'b
-                 JUMP NZ, next_button5
-                 LOAD sF, "4"
-                 CALL LCD_send
-                 CALL LPC_send
-                 SUB s7, 01
-                 RETURN 
-   next_button5: LOAD s6, sC
-                 SUB s6, button5
-                 JUMP C, next_button6
-                 TEST s6, 11111111'b
-                 JUMP NZ, next_button6
-                 LOAD sF, "5"
-                 CALL LCD_send
-                 CALL LPC_send
-                 SUB s7, 01
-                 RETURN 
-   next_button6: LOAD s6, sC
-                 SUB s6, button6
-                 JUMP C, next_button7
-                 TEST s6, 11111111'b
-                 JUMP NZ, next_button7
-                 LOAD sF, "6"
-                 CALL LCD_send
-                 CALL LPC_send
-                 SUB s7, 01
-                 RETURN 
-   next_button7: LOAD s6, sC
-                 SUB s6, button7
-                 JUMP C, next_button8
-                 TEST s6, 11111111'b
-                 JUMP NZ, next_button8
-                 LOAD sF, "7"
-                 CALL LCD_send
-                 CALL LPC_send
-                 SUB s7, 01
-                 RETURN 
-   next_button8: LOAD s6, sC
-                 SUB s6, button8
-                 JUMP C, next_button9
-                 TEST s6, 11111111'b
-                 JUMP NZ, next_button9
-                 LOAD sF, "8"
-                 CALL LCD_send
-                 CALL LPC_send
-                 SUB s7, 01
-                 RETURN 
-   next_button9: LOAD s6, sC
-                 SUB s6, button9
-                 JUMP C, just_return
-                 TEST s6, 11111111'b
-                 JUMP NZ, just_return
-                 LOAD sF, "9"
-                 CALL LCD_send
-                 CALL LPC_send
-                 SUB s7, 01
-                 RETURN 
-   which_banner: LOAD s6, s5
-                 SUB s6, green
-                 JUMP C, next_banner1
-                 TEST s6, 11111111'b             ;16hex'
-                 JUMP NZ, next_banner1
-                 LOAD sF, ESC
-                 CALL LCD_send
-                 CALL banner_message
-                 RETURN 
-   next_banner1: LOAD s6, s5
-                 SUB s6, blue
-                 JUMP C, next_banner2
-                 TEST s6, 11111111'b             ;16hex'
-                 JUMP NZ, next_banner2
-                 LOAD sF, ESC
-                 CALL LCD_send
-                 CALL banner2_message
-                 RETURN 
-   next_banner2: LOAD s6, s5
-                 SUB s6, red
-                 JUMP C, next_banner3
-                 TEST s6, 11111111'b             ;16hex'
-                 JUMP NZ, next_banner3
-                 LOAD sF, ESC
-                 CALL LCD_send
-                 CALL banner3_message
-                 RETURN 
-   next_banner3: LOAD s6, s5
-                 SUB s6, clear
-                 JUMP C, just_return
-                 TEST s6, 11111111'b             ;16hex'
-                 JUMP NZ, just_return
-                 LOAD sF, ESC
-                 CALL LCD_send
-                 CALL banner4_message
-                 RETURN 
-    just_return: RETURN 
-                 ;
-                 ;
-                 ;------------------------------------------------------------------------------------------
-                 ; Welcome Message.
-                 ;------------------------------------------------------------------------------------------
-                 ;
-                 ; The welcome message includes a display of the version information available from the
-                 ; assembler and the 'hwbuild' from the instantiation of KCPSM6 in the hardware design.
-                 ;
-welcome_message: LOAD sB, welcome_msg'upper
-                 LOAD sA, welcome_msg'lower
-                 CALL send_message
-                 HWBUILD s5                      ;hardware version defines ASCII letter
-                 CALL UART_TX
-                 CALL send_CR
-                 RETURN 
-                 ;
-                 ; Welcome message
-                 ;
-                 STRING banner1$, "  _  ______ ____  ____  __  __  __"
-                 STRING banner2$, " | |/ / ___|  _ \/ ___||  \/  |/ /_"
-                 STRING banner3$, " | ' / |   | |_) \___ \| |\/| | '_ \"
-                 STRING banner4$, " | . \ |___|  __/ ___) | |  | | (_) )"
-                 STRING banner5$, " |_|\_\____|_|   |____/|_|  |_|\___/"
-                 ;
-                 ; Welcome message
-                 ;
-                 STRING welcome1$, "Przyklad aplikacji obslugujacej portu IR z wykorzystaniem Picoblaze"
-                 STRING welcome11$, "Autor: Sebastian Kupis"
-                 STRING welcome2$, "Data zbudoawania: "
-                 STRING welcome3$, "   Czas: "
-                 STRING welcome4$, "Version: "
-                 STRING welcome5$, "Hardware Design: "
-                 ;
-                 ;
-    welcome_msg: LOAD&RETURN s5, banner1$
-                 LOAD&RETURN s5, CR
-                 LOAD&RETURN s5, banner2$
-                 LOAD&RETURN s5, CR
-                 LOAD&RETURN s5, banner3$
-                 LOAD&RETURN s5, CR
-                 LOAD&RETURN s5, banner4$
-                 LOAD&RETURN s5, CR
-                 LOAD&RETURN s5, banner5$
-                 LOAD&RETURN s5, CR
-                 LOAD&RETURN s5, CR
-                 LOAD&RETURN s5, welcome1$
-                 LOAD&RETURN s5, CR
-                 LOAD&RETURN s5, welcome11$
-                 LOAD&RETURN s5, CR
-                 LOAD&RETURN s5, CR
-                 LOAD&RETURN s5, welcome2$
-                 LOAD&RETURN s5, datestamp$
-                 LOAD&RETURN s5, welcome3$
-                 LOAD&RETURN s5, timestamp$
-                 LOAD&RETURN s5, CR
-                 LOAD&RETURN s5, welcome4$
-                 LOAD&RETURN s5, KCPSM6_version$
-                 LOAD&RETURN s5, CR
-                 LOAD&RETURN s5, welcome5$
-                 LOAD&RETURN s5, NUL
-                 ;
-                 ;
-                 ;------------------------------------------------------------------------------------------
-                 ; Send a message to the UART
-                 ;------------------------------------------------------------------------------------------
-                 ;
-                 ; A message is transmitted to the USB-UART.
-                 ; The start address of the message must be provided in [sB,sA].
-                 ; Terminate the transmission with a NULL character (00 hex).
-                 ;
-   send_message: CALL@ (sB, sA)
-                 COMPARE s5, 00                  ;terminate on NUL character
-                 RETURN Z
-                 CALL UART_TX
-                 ADD sA, 1'd
-                 ADDCY sB, 0'd
-                 JUMP send_message
-                 ;
-                 ;
-                 ;------------------------------------------------------------------------------------------
-                 ; Send Carriage Return to UART
-                 ;------------------------------------------------------------------------------------------
-                 ;
-                 ; Registers used s0, s1, s2, and s5.
-                 ;
- banner_message: LOAD sB, banner_msg'upper
-                 LOAD sA, banner_msg'lower
-                 CALL send_banner
-                 HWBUILD sF                      ;hardware version defines ASCII letter
-                 ;CALL send_CR
-                 RETURN 
-                 ;
-                 ; Welcome message
-                 ;
-                 STRING bannert$, "greeen"
-                 ;
-                 ;
-     banner_msg: LOAD&RETURN sF, bannert$
-                 LOAD&RETURN sF, NUL
-                 ;
-                 ;
-                 ;
-banner2_message: LOAD sB, banner2_msg'upper
-                 LOAD sA, banner2_msg'lower
-                 CALL send_banner
-                 HWBUILD sF                      ;hardware version defines ASCII letter
-                 RETURN 
-                 ;
-                 ; Welcome message
-                 ;
-                 STRING bannert2$, "blue"
-                 ;
-                 ;
-    banner2_msg: LOAD&RETURN sF, bannert2$
-                 LOAD&RETURN sF, NUL
-banner3_message: LOAD sB, banner3_msg'upper
-                 LOAD sA, banner3_msg'lower
-                 CALL send_banner
-                 HWBUILD sF                      ;hardware version defines ASCII letter
-                 ;CALL send_CR
-                 RETURN 
-                 ;
-                 ; Welcome message
-                 ;
-                 STRING bannert3$, "red"
-                 ;
-                 ;
-    banner3_msg: LOAD&RETURN sF, bannert3$
-                 LOAD&RETURN sF, NUL
-banner4_message: LOAD sB, banner4_msg'upper
-                 LOAD sA, banner4_msg'lower
-                 CALL send_banner
-                 HWBUILD sF                      ;hardware version defines ASCII letter
-                 ;CALL send_CR
-                 RETURN 
-                 ;
-                 ; Welcome message
-                 ;
-                 STRING bannert4$, "i czyszcze sobiecale UOP"
-                 ;
-                 ;
-    banner4_msg: LOAD&RETURN sF, bannert4$
-                 LOAD&RETURN sF, NUL
-                 ;
-                 ;
-                 ; Send a banner to LCD
-                 ;------------------------------------------------------------------------------------------
-                 ;
-                 ; A message is transmitted to the USB-UART.
-                 ; The start address of the message must be provided in [sB,sA].
-                 ; Terminate the transmission with a NULL character (00 hex).
-                 ;
-    send_banner: CALL@ (sB, sA)
-                 COMPARE sF, 00                  ;terminate on NUL character
-                 RETURN Z
-                 ;LOAD sF,s5
-                 CALL LCD_send
-                 ADD sA, 1'd
-                 ADDCY sB, 0'd
-                 JUMP send_banner
+                       CONSTANT code_in_use, 03
+                       CONSTANT invalid_code, 07
+                       CONSTANT opening, 01
+                       CONSTANT no_money, 0F
+                       CONSTANT other_car, 02
+                       CONSTANT bad_format, 08
+                       CONSTANT internal_error, 05
+                       CONSTANT button0, 3F
+                       CONSTANT button1, 3D
+                       CONSTANT button2, 3B
+                       CONSTANT button3, 39
+                       CONSTANT button4, 37
+                       CONSTANT button5, 35
+                       CONSTANT button6, 33
+                       CONSTANT button7, 31
+                       CONSTANT button8, 2F
+                       CONSTANT button9, 2D
+                       CONSTANT buttonON, 27
+                       CONSTANT buttonMute, 25
+                       CONSTANT buttonUp, 3F
+                       CONSTANT buttonDown, 3D
+                       CONSTANT buttonCenter, 09
+                       CONSTANT buttonLeft, 1D
+                       CONSTANT buttonRight, 1F
+                       CONSTANT driveIN, 29
+                       CONSTANT driveOUT, 2B
+                dummy: 
+                       LOAD s6, sC
+                       SUB s6, button0
+                       JUMP C, next_button1
+                       TEST s6, 11111111'b
+                       JUMP NZ, next_button1
+                       LOAD sF, "0"
+                       CALL LPC_LCD_send
+                       RETURN 
+         convert_send: 
+         next_button1: LOAD s6, sC
+                       SUB s6, button1
+                       JUMP C, next_button2
+                       TEST s6, 11111111'b
+                       JUMP NZ, next_button2
+                       LOAD sF, "1"
+                       CALL LPC_LCD_send
+                       RETURN 
+         next_button2: LOAD s6, sC
+                       SUB s6, button2
+                       JUMP C, next_button3
+                       TEST s6, 11111111'b
+                       JUMP NZ, next_button3
+                       LOAD sF, "2"
+                       CALL LPC_LCD_send
+                       RETURN 
+         next_button3: LOAD s6, sC
+                       SUB s6, button3
+                       JUMP C, next_button4
+                       TEST s6, 11111111'b
+                       JUMP NZ, next_button4
+                       LOAD sF, "3"
+                       CALL LPC_LCD_send
+                       RETURN 
+         next_button4: LOAD s6, sC
+                       SUB s6, button4
+                       JUMP C, next_button5
+                       TEST s6, 11111111'b
+                       JUMP NZ, next_button5
+                       LOAD sF, "4"
+                       CALL LPC_LCD_send
+                       RETURN 
+         next_button5: LOAD s6, sC
+                       SUB s6, button5
+                       JUMP C, next_button6
+                       TEST s6, 11111111'b
+                       JUMP NZ, next_button6
+                       LOAD sF, "5"
+                       CALL LPC_LCD_send
+                       RETURN 
+         next_button6: LOAD s6, sC
+                       SUB s6, button6
+                       JUMP C, next_button7
+                       TEST s6, 11111111'b
+                       JUMP NZ, next_button7
+                       LOAD sF, "6"
+                       CALL LPC_LCD_send
+                       RETURN 
+         next_button7: LOAD s6, sC
+                       SUB s6, button7
+                       JUMP C, next_button8
+                       TEST s6, 11111111'b
+                       JUMP NZ, next_button8
+                       LOAD sF, "7"
+                       CALL LPC_LCD_send
+                       RETURN 
+         next_button8: LOAD s6, sC
+                       SUB s6, button8
+                       JUMP C, next_button9
+                       TEST s6, 11111111'b
+                       JUMP NZ, next_button9
+                       LOAD sF, "8"
+                       CALL LPC_LCD_send
+                       RETURN 
+         next_button9: LOAD s6, sC
+                       SUB s6, button9
+                       JUMP C, next_button10
+                       TEST s6, 11111111'b
+                       JUMP NZ, next_button10
+                       LOAD sF, "9"
+                       CALL LPC_LCD_send
+                       RETURN 
+        next_button10: LOAD s6, sC
+                       SUB s6, driveIN
+                       JUMP C, next_button11
+                       TEST s6, 11111111'b
+                       JUMP NZ, next_button11
+                       LOAD sF, sC
+                       CALL LPC_LCD_send
+                       RETURN 
+        next_button11: LOAD s6, sC
+                       SUB s6, driveOUT
+                       JUMP C, just_return
+                       TEST s6, 11111111'b
+                       JUMP NZ, just_return
+                       LOAD sF, sC
+                       CALL LPC_LCD_send
+                       RETURN 
+         which_banner: LOAD s6, s5
+                       SUB s6, code_in_use
+                       JUMP C, next_banner1
+                       TEST s6, 11111111'b
+                       JUMP NZ, next_banner1
+                       LOAD sF, ESC
+                       CALL LCD_send
+                       CALL banner_message
+                       RETURN 
+         next_banner1: LOAD s6, s5
+                       SUB s6, opening
+                       JUMP C, next_banner2
+                       TEST s6, 11111111'b
+                       JUMP NZ, next_banner2
+                       LOAD sF, ESC
+                       CALL LCD_send
+                       CALL banner2_message
+IR_czekaj_na_przejazd: INPUT s0, IR_PORT
+                       TEST s0, 00000001'b
+                       JUMP C, IR_czekaj_na_przejazd
+                       LOAD sF, "D"
+                       CALL LPC_send
+                       RETURN 
+         next_banner2: LOAD s6, s5
+                       SUB s6, invalid_code
+                       JUMP C, next_banner3
+                       TEST s6, 11111111'b
+                       JUMP NZ, next_banner3
+                       LOAD sF, ESC
+                       CALL LCD_send
+                       CALL banner3_message
+                       RETURN 
+         next_banner3: LOAD s6, s5
+                       SUB s6, no_money
+                       JUMP C, next_banner4
+                       TEST s6, 11111111'b
+                       JUMP NZ, next_banner4
+                       LOAD sF, ESC
+                       CALL LCD_send
+                       CALL banner4_message
+                       RETURN 
+         next_banner4: LOAD s6, s5
+                       SUB s6, other_car
+                       JUMP C, next_banner5
+                       TEST s6, 11111111'b
+                       JUMP NZ, next_banner5
+                       LOAD sF, ESC
+                       CALL LCD_send
+                       CALL banner5_message
+                       RETURN 
+         next_banner5: LOAD s6, s5
+                       SUB s6, bad_format
+                       JUMP C, next_banner6
+                       TEST s6, 11111111'b
+                       JUMP NZ, next_banner6
+                       LOAD sF, ESC
+                       CALL LCD_send
+                       CALL banner6_message
+                       RETURN 
+         next_banner6: LOAD s6, s5
+                       SUB s6, internal_error
+                       JUMP C, just_return
+                       TEST s6, 11111111'b
+                       JUMP NZ, just_return
+                       LOAD sF, ESC
+                       CALL LCD_send
+                       CALL banner7_message
+                       RETURN 
+          just_return: RETURN 
+                       ;
+                       ;------------------------------------------------------------------------------------------
+                       ; Send a message to the UART
+                       ;------------------------------------------------------------------------------------------
+                       ;
+                       ; A message is transmitted to the USB-UART.
+                       ; The start address of the message must be provided in [sB,sA].
+                       ; Terminate the transmission with a NULL character (00 hex).
+                       ;
+         send_message: CALL@ (sB, sA)
+                       COMPARE s5, 00                  ;terminate on NUL character
+                       RETURN Z
+                       CALL UART_TX
+                       ADD sA, 1'd
+                       ADDCY sB, 0'd
+                       JUMP send_message
+                       ;
+                       ;
+                       ;------------------------------------------------------------------------------------------
+                       ; Send Carriage Return to UART
+                       ;------------------------------------------------------------------------------------------
+                       ;
+                       ; Registers used s0, s1, s2, and s5.
+                       ;
+       banner_message: LOAD sB, banner_msg'upper
+                       LOAD sA, banner_msg'lower
+                       CALL send_banner
+                       HWBUILD sF                      ;hardware version defines ASCII letter
+                       RETURN 
+                       ;
+                       STRING bannert$, "Kod w uzyciu"
+                       ;
+                       ;
+           banner_msg: LOAD&RETURN sF, bannert$
+                       LOAD&RETURN sF, NUL
+                       ;
+                       ;
+                       ;
+      banner2_message: LOAD sB, banner2_msg'upper
+                       LOAD sA, banner2_msg'lower
+                       CALL send_banner
+                       HWBUILD sF                      ;hardware version defines ASCII letter
+                       RETURN 
+                       ;
+                       STRING bannert2$, "     Prosze        przejezdzac"
+                       ;
+                       ;
+          banner2_msg: LOAD&RETURN sF, bannert2$
+                       LOAD&RETURN sF, NUL
+      banner3_message: LOAD sB, banner3_msg'upper
+                       LOAD sA, banner3_msg'lower
+                       CALL send_banner
+                       HWBUILD sF                      ;hardware version defines ASCII letter
+                       RETURN 
+                       ;
+                       STRING bannert3$, " Niewazny  kod  "
+                       ;
+                       ;
+          banner3_msg: LOAD&RETURN sF, bannert3$
+                       LOAD&RETURN sF, NUL
+      banner4_message: LOAD sB, banner4_msg'upper
+                       LOAD sA, banner4_msg'lower
+                       CALL send_banner
+                       HWBUILD sF                      ;hardware version defines ASCII letter
+                       RETURN 
+                       ;
+                       STRING bannert4$, "Twoj abonament  nie jest wazny"
+                       ;
+                       ;
+          banner4_msg: LOAD&RETURN sF, bannert4$
+                       LOAD&RETURN sF, NUL
+                       ;
+      banner5_message: LOAD sB, banner5_msg'upper
+                       LOAD sA, banner5_msg'lower
+                       CALL send_banner
+                       HWBUILD sF                      ;hardware version defines ASCII letter
+                       RETURN 
+                       ;
+                       STRING bannert5$, "Inne Twoje auto juz wjechalo"
+                       ;
+                       ;
+          banner5_msg: LOAD&RETURN sF, bannert5$
+                       LOAD&RETURN sF, NUL
+                       ;
+                       ;
+                       ;
+      banner6_message: LOAD sB, banner6_msg'upper
+                       LOAD sA, banner6_msg'lower
+                       CALL send_banner
+                       HWBUILD sF                      ;hardware version defines ASCII letter
+                       RETURN 
+                       ;
+                       STRING bannert6$, "  Nie poprawny    format kodu"
+                       ;
+                       ;
+          banner6_msg: LOAD&RETURN sF, bannert6$
+                       LOAD&RETURN sF, NUL
+                       ;
+                       ;
+                       ;
+      banner7_message: LOAD sB, banner7_msg'upper
+                       LOAD sA, banner7_msg'lower
+                       CALL send_banner
+                       HWBUILD sF                      ;hardware version defines ASCII letter
+                       RETURN 
+                       ;
+                       STRING bannert7$, "Blad wewnetrzny  Przepraszamy"
+                       ;
+                       ;
+          banner7_msg: LOAD&RETURN sF, bannert7$
+                       LOAD&RETURN sF, NUL
+                       ;
+                       ;
+                       ;
+           ini_banner: LOAD sB, ini_banner_lr'upper
+                       LOAD sA, ini_banner_lr'lower
+                       CALL send_banner
+                       HWBUILD sF                      ;hardware version defines ASCII letter
+                       RETURN 
+                       ;
+                       STRING ini_banner_msg$, "Podaj kod wjazdu>>"
+                       ;
+                       ;
+        ini_banner_lr: LOAD&RETURN sF, ini_banner_msg$
+                       LOAD&RETURN sF, NUL
+                       ;
+                       ;
+                       ;
+                       ; Send a banner to LCD
+                       ;------------------------------------------------------------------------------------------
+                       ;
+                       ; A message is transmitted to the USB-UART.
+                       ; The start address of the message must be provided in [sB,sA].
+                       ; Terminate the transmission with a NULL character (00 hex).
+                       ;
+          send_banner: CALL@ (sB, sA)
+                       COMPARE sF, 00                  ;terminate on NUL character
+                       RETURN Z
+                       ;LOAD sF,s5
+                       CALL LCD_send
+                       ADD sA, 1'd
+                       ADDCY sB, 0'd
+                       JUMP send_banner

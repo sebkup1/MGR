@@ -66,7 +66,7 @@ int main (void) {
 	
   TCPLocalPort = 50001;
 
-	TCPRemotePort = 50000;
+	TCPRemotePort = 50002;
 
   while (1)                                       					// repeat forever
   {
@@ -294,6 +294,20 @@ void SendToPico(short int banner)
 				FIO0CLR = ToPicoDataValid;
 				break;
 				}	
+				
+				case 6:								//Zakaz wyjazdu
+				{
+				FIO1SET=0x10000000;
+				FIO0SET = ToPicoDataValid;
+				while ((FIO0PIN & ToPicoPicoReady))
+				{
+					FIO1SET=0x10000000;
+					FIO0SET = ToPicoDataValid;
+				}
+				FIO0CLR = ToPicoDataValid;
+				break;
+				}	
+				
 				
 				case 7:								//Niepoprawny format
 				{

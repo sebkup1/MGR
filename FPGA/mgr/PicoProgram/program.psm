@@ -178,26 +178,40 @@
 					   
 				IR_rx3: LOAD s4, 06                  ;8-bits to transmit and receive
           next_IR_bit3: CALL my_delay_ir_bit         ;prepare next bit to transmit
-                       INPUT s3, IR_PORT             ;read input bit
-                       TEST s3, 00000001'b           ;carry flag becomes value of received bit
-                       SLA sC                        ;shift new data into result and move to next transmit bit
-                       SUB s4, 01                    ;count bits
-                       JUMP NZ, next_IR_bit3   		 ;repeat until last bit
+						INPUT s3, IR_PORT             ;read input bit
+						TEST s3, 00000001'b           ;carry flag becomes value of received bit
+						SLA sC                        ;shift new data into result and move to next transmit bit
+						SUB s4, 01                    ;count bits
+						JUMP NZ, next_IR_bit3   		 ;repeat until last bit
 					   
-					   CALL send_CR
-					   load s4, sA
+					   
+						CALL send_CR
 						
-				    ;call send_hex_byte
-					;CALL send_space 
-					;load s4, sB
-					;call send_hex_byte
-					;CALL send_space 
-					;load s4, sC
+						load s4, sA
+						call send_hex_byte
+						CALL send_space 
+						load s4, sB
+						call send_hex_byte
+						CALL send_space 
+						load s4, sC
+						call send_hex_byte
+						
+			; Filtr "0"
+						load s6, sA
+						sub s6, 07
+						jump NC, IR_petla2	;jesli nie zero to idü dalej
+						
+					;CALL send_space
+					;load s4, s6
 					;call send_hex_byte
 						
-					call convert_send
-					
-                    JUMP NZ, IR_petla2   		 
+						;TEST s6, 11111111'b	
+						;JUMP NZ, IR_petla2
+						;
+						
+		  after_filter:	call convert_send
+						JUMP NZ, IR_petla2   
+						
 					   
 	LPC_THREAD:   OUTPUTK LPC_ready_syg, LPC_IN_ready_port
 					INPUT s0, LPC_IN_data_valid_port

@@ -5,6 +5,7 @@
                        CONSTANT other_car, 02
                        CONSTANT bad_format, 08
                        CONSTANT internal_error, 05
+                       CONSTANT dont_let_him_go, 04
                        CONSTANT button0, 3F
                        CONSTANT button1, 3D
                        CONSTANT button2, 3B
@@ -24,8 +25,7 @@
                        CONSTANT buttonRight, 1F
                        CONSTANT driveIN, 29
                        CONSTANT driveOUT, 2B
-                dummy: 
-                       LOAD s6, sC
+         convert_send: LOAD s6, sC
                        SUB s6, button0
                        JUMP C, next_button1
                        TEST s6, 11111111'b
@@ -33,7 +33,6 @@
                        LOAD sF, "0"
                        CALL LPC_LCD_send
                        RETURN 
-         convert_send: 
          next_button1: LOAD s6, sC
                        SUB s6, button1
                        JUMP C, next_button2
@@ -183,12 +182,21 @@ IR_czekaj_na_przejazd: INPUT s0, IR_PORT
                        RETURN 
          next_banner6: LOAD s6, s5
                        SUB s6, internal_error
+                       JUMP C, next_banner7
+                       TEST s6, 11111111'b
+                       JUMP NZ, next_banner7
+                       LOAD sF, ESC
+                       CALL LCD_send
+                       CALL banner7_message
+                       RETURN 
+         next_banner7: LOAD s6, s5
+                       SUB s6, dont_let_him_go
                        JUMP C, just_return
                        TEST s6, 11111111'b
                        JUMP NZ, just_return
                        LOAD sF, ESC
                        CALL LCD_send
-                       CALL banner7_message
+                       CALL banner8_message
                        RETURN 
           just_return: RETURN 
                        ;
@@ -221,7 +229,7 @@ IR_czekaj_na_przejazd: INPUT s0, IR_PORT
                        HWBUILD sF                      ;hardware version defines ASCII letter
                        RETURN 
                        ;
-                       STRING bannert$, "Kod w uzyciu"
+                       STRING bannert$, "  Kod w uzyciu"
                        ;
                        ;
            banner_msg: LOAD&RETURN sF, bannert$
@@ -283,7 +291,7 @@ IR_czekaj_na_przejazd: INPUT s0, IR_PORT
                        HWBUILD sF                      ;hardware version defines ASCII letter
                        RETURN 
                        ;
-                       STRING bannert6$, "  Nie poprawny    format kodu"
+                       STRING bannert6$, "  Niepoprawny     format kodu"
                        ;
                        ;
           banner6_msg: LOAD&RETURN sF, bannert6$
@@ -301,6 +309,20 @@ IR_czekaj_na_przejazd: INPUT s0, IR_PORT
                        ;
                        ;
           banner7_msg: LOAD&RETURN sF, bannert7$
+                       LOAD&RETURN sF, NUL
+                       ;
+                       ;
+                       ;
+      banner8_message: LOAD sB, banner8_msg'upper
+                       LOAD sA, banner8_msg'lower
+                       CALL send_banner
+                       HWBUILD sF                      ;hardware version defines ASCII letter
+                       RETURN 
+                       ;
+                       STRING bannert8$, "     Zakaz          wyjazdu"
+                       ;
+                       ;
+          banner8_msg: LOAD&RETURN sF, bannert8$
                        LOAD&RETURN sF, NUL
                        ;
                        ;

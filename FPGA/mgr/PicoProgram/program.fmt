@@ -174,14 +174,24 @@
                     JUMP NZ, next_IR_bit3                    ;repeat until last bit
                     CALL send_CR
                     LOAD s4, sA
-                    ;call send_hex_byte
+                    CALL send_hex_byte
+                    CALL send_space
+                    LOAD s4, sB
+                    CALL send_hex_byte
+                    CALL send_space
+                    LOAD s4, sC
+                    CALL send_hex_byte
+                    ; Filtr "0"
+                    LOAD s6, sA
+                    SUB s6, 07
+                    JUMP NC, IR_petla2
                     ;CALL send_space
-                    ;load s4, sB
+                    ;load s4, s6
                     ;call send_hex_byte
-                    ;CALL send_space
-                    ;load s4, sC
-                    ;call send_hex_byte
-                    CALL convert_send
+                    ;TEST s6, 11111111'b
+                    ;JUMP NZ, IR_petla2
+                    ;
+      after_filter: CALL convert_send
                     JUMP NZ, IR_petla2
         LPC_THREAD: OUTPUTK LPC_ready_syg, LPC_IN_ready_port
                     INPUT s0, LPC_IN_data_valid_port

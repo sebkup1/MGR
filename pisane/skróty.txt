@@ -6,3 +6,5 @@ ARP
 DMA
 AHB
 FMC
+XML
+AJAX

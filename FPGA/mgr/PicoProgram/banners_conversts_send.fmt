@@ -6,6 +6,7 @@
                        CONSTANT bad_format, 08
                        CONSTANT internal_error, 05
                        CONSTANT dont_let_him_go, 04
+                       CONSTANT this_person_or_car_already_in, 06
                        CONSTANT button0, 3F
                        CONSTANT button1, 3D
                        CONSTANT button2, 3B
@@ -191,12 +192,21 @@ IR_czekaj_na_przejazd: INPUT s0, IR_PORT
                        RETURN 
          next_banner7: LOAD s6, s5
                        SUB s6, dont_let_him_go
+                       JUMP C, next_banner8
+                       TEST s6, 11111111'b
+                       JUMP NZ, next_banner8
+                       LOAD sF, ESC
+                       CALL LCD_send
+                       CALL banner8_message
+                       RETURN 
+         next_banner8: LOAD s6, s5
+                       SUB s6, this_person_or_car_already_in
                        JUMP C, just_return
                        TEST s6, 11111111'b
                        JUMP NZ, just_return
                        LOAD sF, ESC
                        CALL LCD_send
-                       CALL banner8_message
+                       CALL banner9_message
                        RETURN 
           just_return: RETURN 
                        ;
@@ -209,7 +219,7 @@ IR_czekaj_na_przejazd: INPUT s0, IR_PORT
                        ; Terminate the transmission with a NULL character (00 hex).
                        ;
          send_message: CALL@ (sB, sA)
-                       COMPARE s5, 00                  ;terminate on NUL character
+                       COMPARE s5, 00                             ;terminate on NUL character
                        RETURN Z
                        CALL UART_TX
                        ADD sA, 1'd
@@ -226,7 +236,7 @@ IR_czekaj_na_przejazd: INPUT s0, IR_PORT
        banner_message: LOAD sB, banner_msg'upper
                        LOAD sA, banner_msg'lower
                        CALL send_banner
-                       HWBUILD sF                      ;hardware version defines ASCII letter
+                       HWBUILD sF                                 ;hardware version defines ASCII letter
                        RETURN 
                        ;
                        STRING bannert$, "  Kod w uzyciu"
@@ -240,7 +250,7 @@ IR_czekaj_na_przejazd: INPUT s0, IR_PORT
       banner2_message: LOAD sB, banner2_msg'upper
                        LOAD sA, banner2_msg'lower
                        CALL send_banner
-                       HWBUILD sF                      ;hardware version defines ASCII letter
+                       HWBUILD sF                                 ;hardware version defines ASCII letter
                        RETURN 
                        ;
                        STRING bannert2$, "     Prosze        przejezdzac"
@@ -251,7 +261,7 @@ IR_czekaj_na_przejazd: INPUT s0, IR_PORT
       banner3_message: LOAD sB, banner3_msg'upper
                        LOAD sA, banner3_msg'lower
                        CALL send_banner
-                       HWBUILD sF                      ;hardware version defines ASCII letter
+                       HWBUILD sF                                 ;hardware version defines ASCII letter
                        RETURN 
                        ;
                        STRING bannert3$, " Niewazny  kod  "
@@ -262,7 +272,7 @@ IR_czekaj_na_przejazd: INPUT s0, IR_PORT
       banner4_message: LOAD sB, banner4_msg'upper
                        LOAD sA, banner4_msg'lower
                        CALL send_banner
-                       HWBUILD sF                      ;hardware version defines ASCII letter
+                       HWBUILD sF                                 ;hardware version defines ASCII letter
                        RETURN 
                        ;
                        STRING bannert4$, "Twoj abonament  nie jest wazny"
@@ -274,7 +284,7 @@ IR_czekaj_na_przejazd: INPUT s0, IR_PORT
       banner5_message: LOAD sB, banner5_msg'upper
                        LOAD sA, banner5_msg'lower
                        CALL send_banner
-                       HWBUILD sF                      ;hardware version defines ASCII letter
+                       HWBUILD sF                                 ;hardware version defines ASCII letter
                        RETURN 
                        ;
                        STRING bannert5$, "Inne Twoje auto juz wjechalo"
@@ -288,7 +298,7 @@ IR_czekaj_na_przejazd: INPUT s0, IR_PORT
       banner6_message: LOAD sB, banner6_msg'upper
                        LOAD sA, banner6_msg'lower
                        CALL send_banner
-                       HWBUILD sF                      ;hardware version defines ASCII letter
+                       HWBUILD sF                                 ;hardware version defines ASCII letter
                        RETURN 
                        ;
                        STRING bannert6$, "  Niepoprawny     format kodu"
@@ -302,7 +312,7 @@ IR_czekaj_na_przejazd: INPUT s0, IR_PORT
       banner7_message: LOAD sB, banner7_msg'upper
                        LOAD sA, banner7_msg'lower
                        CALL send_banner
-                       HWBUILD sF                      ;hardware version defines ASCII letter
+                       HWBUILD sF                                 ;hardware version defines ASCII letter
                        RETURN 
                        ;
                        STRING bannert7$, "Blad wewnetrzny  Przepraszamy"
@@ -316,7 +326,7 @@ IR_czekaj_na_przejazd: INPUT s0, IR_PORT
       banner8_message: LOAD sB, banner8_msg'upper
                        LOAD sA, banner8_msg'lower
                        CALL send_banner
-                       HWBUILD sF                      ;hardware version defines ASCII letter
+                       HWBUILD sF                                 ;hardware version defines ASCII letter
                        RETURN 
                        ;
                        STRING bannert8$, "     Zakaz          wyjazdu"
@@ -324,13 +334,24 @@ IR_czekaj_na_przejazd: INPUT s0, IR_PORT
                        ;
           banner8_msg: LOAD&RETURN sF, bannert8$
                        LOAD&RETURN sF, NUL
+      banner9_message: LOAD sB, banner9_msg'upper
+                       LOAD sA, banner9_msg'lower
+                       CALL send_banner
+                       HWBUILD sF                                 ;hardware version defines ASCII letter
+                       RETURN 
+                       ;
+                       STRING bannert9$, "Ta osoba lub auto juz wjechalo"
+                       ;
+                       ;
+          banner9_msg: LOAD&RETURN sF, bannert9$
+                       LOAD&RETURN sF, NUL
                        ;
                        ;
                        ;
            ini_banner: LOAD sB, ini_banner_lr'upper
                        LOAD sA, ini_banner_lr'lower
                        CALL send_banner
-                       HWBUILD sF                      ;hardware version defines ASCII letter
+                       HWBUILD sF                                 ;hardware version defines ASCII letter
                        RETURN 
                        ;
                        STRING ini_banner_msg$, "Podaj kod wjazdu>>"
@@ -349,7 +370,7 @@ IR_czekaj_na_przejazd: INPUT s0, IR_PORT
                        ; Terminate the transmission with a NULL character (00 hex).
                        ;
           send_banner: CALL@ (sB, sA)
-                       COMPARE sF, 00                  ;terminate on NUL character
+                       COMPARE sF, 00                             ;terminate on NUL character
                        RETURN Z
                        ;LOAD sF,s5
                        CALL LCD_send

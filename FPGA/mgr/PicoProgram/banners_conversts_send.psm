@@ -6,6 +6,7 @@
 		CONSTANT bad_format, 08
 		CONSTANT internal_error, 05
 		CONSTANT dont_let_him_go, 04
+		CONSTANT this_person_or_car_already_in, 06
 		
 		CONSTANT button0, 3F
 		CONSTANT button1, 3D
@@ -239,6 +240,19 @@ IR_czekaj_na_przejazd: INPUT s0, IR_PORT
 				   
 	next_banner7:  load s6, s5
 					sub s6, dont_let_him_go
+					JUMP C, next_banner8
+					
+					TEST s6, 11111111'b	
+					JUMP NZ, next_banner8
+				   
+				   LOAD sF, ESC
+					CALL LCD_send
+				   
+				   call banner8_message
+				   return
+				   
+	next_banner8:  load s6, s5
+					sub s6, this_person_or_car_already_in
 					JUMP C, just_return
 					
 					TEST s6, 11111111'b	
@@ -247,7 +261,7 @@ IR_czekaj_na_przejazd: INPUT s0, IR_PORT
 				   LOAD sF, ESC
 					CALL LCD_send
 				   
-				   call banner8_message
+				   call banner9_message
 				   return
                     
 	just_return: return 
@@ -387,6 +401,19 @@ IR_czekaj_na_przejazd: INPUT s0, IR_PORT
                     ;
                     ;
        banner8_msg: LOAD&RETURN sF, bannert8$
+					LOAD&RETURN sF, NUL
+					
+				
+   banner9_message: LOAD sB, banner9_msg'upper
+                    LOAD sA, banner9_msg'lower
+                    CALL send_banner
+                    HWBUILD sF                      ;hardware version defines ASCII letter
+                    RETURN 
+                    ;
+                    STRING bannert9$, "Ta osoba lub auto juz wjechalo"
+                    ;
+                    ;
+       banner9_msg: LOAD&RETURN sF, bannert9$
 					LOAD&RETURN sF, NUL
 					;
 					;

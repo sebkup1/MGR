@@ -447,35 +447,35 @@ Image Symbol Table
     .ARM.Collect$$$$00002712                 0x00000240   Section        4  entry2.o(.ARM.Collect$$$$00002712)
     __lit__00000000                          0x00000240   Data           4  entry2.o(.ARM.Collect$$$$00002712)
     .text                                    0x00000244   Section        0  main.o(.text)
-    .text                                    0x000006a4   Section        0  emac.o(.text)
-    .text                                    0x00000988   Section        0  tcpip.o(.text)
-    .text                                    0x000009d4   Section        0  tcpip.o(.text)
-    .text                                    0x00001760   Section        0  uidiv.o(.text)
-    .text                                    0x0000178e   Section        0  memcpya.o(.text)
-    .text                                    0x000017b2   Section        0  memseta.o(.text)
-    .text                                    0x000017dc   Section        0  memcmp.o(.text)
-    .text                                    0x00001800   Section       32  init.o(.text)
-    i.__0sprintf$6                           0x00001828   Section        0  printf6.o(i.__0sprintf$6)
-    i.__ARM_common_call_via_r2               0x00001850   Section        0  printf1.o(i.__ARM_common_call_via_r2)
-    i.__ARM_common_call_via_r3               0x00001852   Section        2  init.o(i.__ARM_common_call_via_r3)
-    i.__ARM_common_call_via_r6               0x00001854   Section        0  printfb.o(i.__ARM_common_call_via_r6)
-    i.__ARM_common_switch8                   0x0000185c   Section        0  main.o(i.__ARM_common_switch8)
-    i.__scatterload_copy                     0x00001874   Section       28  handlers.o(i.__scatterload_copy)
-    i.__scatterload_null                     0x00001890   Section        4  handlers.o(i.__scatterload_null)
-    i.__scatterload_zeroinit                 0x00001894   Section       24  handlers.o(i.__scatterload_zeroinit)
-    i._printf_core                           0x000018ac   Section        0  printf6.o(i._printf_core)
-    _printf_core                             0x000018ad   Thumb Code   792  printf6.o(i._printf_core)
-    i._printf_post_padding                   0x00001bc8   Section        0  printf6.o(i._printf_post_padding)
-    _printf_post_padding                     0x00001bc9   Thumb Code    38  printf6.o(i._printf_post_padding)
-    i._printf_pre_padding                    0x00001bee   Section        0  printf6.o(i._printf_pre_padding)
-    _printf_pre_padding                      0x00001bef   Thumb Code    50  printf6.o(i._printf_pre_padding)
-    i._sputc                                 0x00001c20   Section        0  printf6.o(i._sputc)
-    _sputc                                   0x00001c21   Thumb Code    10  printf6.o(i._sputc)
-    .constdata                               0x00001c2a   Section      957  main.o(.constdata)
-    .constdata                               0x00001fe8   Section        4  main.o(.constdata)
+    .text                                    0x000006a8   Section        0  emac.o(.text)
+    .text                                    0x0000098c   Section        0  tcpip.o(.text)
+    .text                                    0x000009d8   Section        0  tcpip.o(.text)
+    .text                                    0x00001764   Section        0  uidiv.o(.text)
+    .text                                    0x00001792   Section        0  memcpya.o(.text)
+    .text                                    0x000017b6   Section        0  memseta.o(.text)
+    .text                                    0x000017e0   Section        0  memcmp.o(.text)
+    .text                                    0x00001804   Section       32  init.o(.text)
+    i.__0sprintf$6                           0x0000182c   Section        0  printf6.o(i.__0sprintf$6)
+    i.__ARM_common_call_via_r2               0x00001854   Section        0  printf1.o(i.__ARM_common_call_via_r2)
+    i.__ARM_common_call_via_r3               0x00001856   Section        2  init.o(i.__ARM_common_call_via_r3)
+    i.__ARM_common_call_via_r6               0x00001858   Section        0  printfb.o(i.__ARM_common_call_via_r6)
+    i.__ARM_common_switch8                   0x00001860   Section        0  main.o(i.__ARM_common_switch8)
+    i.__scatterload_copy                     0x00001878   Section       28  handlers.o(i.__scatterload_copy)
+    i.__scatterload_null                     0x00001894   Section        4  handlers.o(i.__scatterload_null)
+    i.__scatterload_zeroinit                 0x00001898   Section       24  handlers.o(i.__scatterload_zeroinit)
+    i._printf_core                           0x000018b0   Section        0  printf6.o(i._printf_core)
+    _printf_core                             0x000018b1   Thumb Code   792  printf6.o(i._printf_core)
+    i._printf_post_padding                   0x00001bcc   Section        0  printf6.o(i._printf_post_padding)
+    _printf_post_padding                     0x00001bcd   Thumb Code    38  printf6.o(i._printf_post_padding)
+    i._printf_pre_padding                    0x00001bf2   Section        0  printf6.o(i._printf_pre_padding)
+    _printf_pre_padding                      0x00001bf3   Thumb Code    50  printf6.o(i._printf_pre_padding)
+    i._sputc                                 0x00001c24   Section        0  printf6.o(i._sputc)
+    _sputc                                   0x00001c25   Thumb Code    10  printf6.o(i._sputc)
+    .constdata                               0x00001c2e   Section      957  main.o(.constdata)
     .constdata                               0x00001fec   Section        4  main.o(.constdata)
     .constdata                               0x00001ff0   Section        4  main.o(.constdata)
-    .constdata                               0x00001ff4   Section        6  tcpip.o(.constdata)
+    .constdata                               0x00001ff4   Section        4  main.o(.constdata)
+    .constdata                               0x00001ff8   Section        6  tcpip.o(.constdata)
     .data                                    0x40000000   Section        4  main.o(.data)
     .data                                    0x40000004   Section       40  main.o(.data)
     .data                                    0x4000002c   Section        1  main.o(.data)
@@ -575,98 +575,98 @@ Image Symbol Table
     __rt_final_exit                          0x00000240   ARM Code       0  entry11a.o(.ARM.Collect$$$$0000000F)
     SendEcho                                 0x00000245   Thumb Code    98  main.o(.text)
     SendFromPico                             0x000002a7   Thumb Code    86  main.o(.text)
-    SendToPico                               0x000002fd   Thumb Code   178  main.o(.text)
-    ProcessData                              0x000003af   Thumb Code   140  main.o(.text)
-    PicoBlazesThread                         0x0000043b   Thumb Code    90  main.o(.text)
-    main                                     0x00000495   Thumb Code   126  main.o(.text)
-    GetTempVal                               0x00000513   Thumb Code    34  main.o(.text)
-    GetAD7Val                                0x00000535   Thumb Code    38  main.o(.text)
-    InsertDynamicValues                      0x0000055b   Thumb Code    94  main.o(.text)
-    HTTPServer                               0x000005b9   Thumb Code   234  main.o(.text)
-    write_PHY                                0x000006a5   Thumb Code    26  emac.o(.text)
-    read_PHY                                 0x000006bf   Thumb Code    38  emac.o(.text)
-    rx_descr_init                            0x000006e5   Thumb Code    60  emac.o(.text)
-    tx_descr_init                            0x00000721   Thumb Code    64  emac.o(.text)
-    Init_EMAC                                0x00000761   Thumb Code   216  emac.o(.text)
-    ReadFrame_EMAC                           0x00000839   Thumb Code    12  emac.o(.text)
-    ReadFrameBE_EMAC                         0x00000845   Thumb Code    22  emac.o(.text)
-    CopyFromFrame_EMAC                       0x0000085b   Thumb Code    38  emac.o(.text)
-    DummyReadFrame_EMAC                      0x00000881   Thumb Code    24  emac.o(.text)
-    StartReadFrame                           0x00000899   Thumb Code    32  emac.o(.text)
-    EndReadFrame                             0x000008b9   Thumb Code    16  emac.o(.text)
-    CheckFrameReceived                       0x000008c9   Thumb Code    18  emac.o(.text)
-    RequestSend                              0x000008db   Thumb Code    32  emac.o(.text)
-    Rdy4Tx                                   0x000008fb   Thumb Code     4  emac.o(.text)
-    WriteFrame_EMAC                          0x000008ff   Thumb Code    12  emac.o(.text)
-    CopyToFrame_EMAC                         0x0000090b   Thumb Code    48  emac.o(.text)
-    TCPClockHandler                          0x00000988   ARM Code      64  tcpip.o(.text)
-    TCPLowLevelInit                          0x000009d5   Thumb Code    56  tcpip.o(.text)
-    TCPPassiveOpen                           0x00000a0d   Thumb Code    26  tcpip.o(.text)
-    TCPStartRetryTimer                       0x00000a29   Thumb Code    26  tcpip.o(.text)
-    PrepareARP_REQUEST                       0x00000a45   Thumb Code   148  tcpip.o(.text)
-    TCPActiveOpen_obsolete                   0x00000ad9   Thumb Code    48  tcpip.o(.text)
-    TCPActiveOpen                            0x00000b09   Thumb Code    72  tcpip.o(.text)
-    TCPClose                                 0x00000b51   Thumb Code    42  tcpip.o(.text)
-    TCPReleaseRxBuffer                       0x00000b7d   Thumb Code    12  tcpip.o(.text)
-    TCPTransmitTxBuffer                      0x00000b89   Thumb Code    64  tcpip.o(.text)
-    IsBroadcast                              0x00000bc9   Thumb Code    64  tcpip.o(.text)
-    CalcChecksum                             0x00000c09   Thumb Code    94  tcpip.o(.text)
-    WriteDWBE                                0x00000c69   Thumb Code    16  tcpip.o(.text)
-    WriteWBE                                 0x00000c79   Thumb Code     8  tcpip.o(.text)
-    PrepareTCP_FRAME                         0x00000c81   Thumb Code   254  tcpip.o(.text)
-    TCPRestartTimer                          0x00000d81   Thumb Code     8  tcpip.o(.text)
-    TCPStartTimeWaitTimer                    0x00000d89   Thumb Code    22  tcpip.o(.text)
-    TCPStopTimer                             0x00000da1   Thumb Code    12  tcpip.o(.text)
-    ProcessTCPFrame                          0x00000dad   Thumb Code   872  tcpip.o(.text)
-    PrepareICMP_ECHO_REPLY                   0x00001115   Thumb Code   168  tcpip.o(.text)
-    ProcessICMPFrame                         0x000011bd   Thumb Code    24  tcpip.o(.text)
-    ProcessEthIAFrame                        0x000011d5   Thumb Code   282  tcpip.o(.text)
-    PrepareARP_ANSWER                        0x000012f1   Thumb Code   116  tcpip.o(.text)
-    ProcessEthBroadcastFrame                 0x00001365   Thumb Code   102  tcpip.o(.text)
-    ReadFrame                                0x000013cd   Thumb Code    50  tcpip.o(.text)
-    SendFrame1                               0x00001401   Thumb Code    14  tcpip.o(.text)
-    PrepareTCP_DATA_FRAME                    0x00001411   Thumb Code   186  tcpip.o(.text)
-    SendFrame2                               0x000014cd   Thumb Code    14  tcpip.o(.text)
-    TCPHandleTimeout                         0x000014dd   Thumb Code    32  tcpip.o(.text)
-    TCPHandleRetransmission                  0x000014fd   Thumb Code    54  tcpip.o(.text)
-    DoNetworkStuff                           0x00001535   Thumb Code   540  tcpip.o(.text)
-    SwapBytes                                0x00001751   Thumb Code    12  tcpip.o(.text)
-    __aeabi_uidiv                            0x00001761   Thumb Code     0  uidiv.o(.text)
-    __aeabi_uidivmod                         0x00001761   Thumb Code    46  uidiv.o(.text)
-    __aeabi_memcpy                           0x0000178f   Thumb Code    36  memcpya.o(.text)
-    __aeabi_memcpy4                          0x0000178f   Thumb Code     0  memcpya.o(.text)
-    __aeabi_memcpy8                          0x0000178f   Thumb Code     0  memcpya.o(.text)
-    __aeabi_memset                           0x000017b3   Thumb Code    16  memseta.o(.text)
-    __aeabi_memset4                          0x000017b3   Thumb Code     0  memseta.o(.text)
-    __aeabi_memset8                          0x000017b3   Thumb Code     0  memseta.o(.text)
-    __aeabi_memclr                           0x000017c3   Thumb Code     4  memseta.o(.text)
-    __aeabi_memclr4                          0x000017c3   Thumb Code     0  memseta.o(.text)
-    __aeabi_memclr8                          0x000017c3   Thumb Code     0  memseta.o(.text)
-    _memset$wrapper                          0x000017c7   Thumb Code    22  memseta.o(.text)
-    memcmp                                   0x000017dd   Thumb Code    28  memcmp.o(.text)
-    Inline ARM to Thumb Veneer to __scatterload 0x000017f8   ARM Code       8  init.o(.text)
-    __scatterload                            0x00001801   Thumb Code    24  init.o(.text)
-    __scatterload_rt2                        0x00001801   Thumb Code     0  init.o(.text)
-    Short Thumb to ARM Veneer to __main_after_scatterload 0x00001821   Thumb Code     8  anon$$obj.o(Veneer$$Code)
-    __0sprintf$6                             0x00001829   Thumb Code    36  printf6.o(i.__0sprintf$6)
-    __1sprintf$6                             0x00001829   Thumb Code     0  printf6.o(i.__0sprintf$6)
-    __2sprintf                               0x00001829   Thumb Code     0  printf6.o(i.__0sprintf$6)
-    __ARM_common_call_via_r2                 0x00001851   Thumb Code     2  printf1.o(i.__ARM_common_call_via_r2)
-    __ARM_common_call_via_r3                 0x00001853   Thumb Code     2  init.o(i.__ARM_common_call_via_r3)
-    __ARM_common_call_via_r6                 0x00001855   Thumb Code     2  printfb.o(i.__ARM_common_call_via_r6)
-    Inline Thumb to ARM Veneer to __ARM_common_switch8 0x00001859   Thumb Code     4  main.o(i.__ARM_common_switch8)
-    __ARM_common_switch8                     0x0000185c   ARM Code      24  main.o(i.__ARM_common_switch8)
-    __scatterload_copy                       0x00001874   ARM Code      28  handlers.o(i.__scatterload_copy)
-    __scatterload_null                       0x00001890   ARM Code       4  handlers.o(i.__scatterload_null)
-    __scatterload_zeroinit                   0x00001894   ARM Code      24  handlers.o(i.__scatterload_zeroinit)
-    GetResponse                              0x00001c2a   Data          45  main.o(.constdata)
-    WebSide                                  0x00001c57   Data         912  main.o(.constdata)
-    MyIP                                     0x00001fe8   Data           4  main.o(.constdata)
-    SubnetMask                               0x00001fec   Data           4  main.o(.constdata)
-    GatewayIP                                0x00001ff0   Data           4  main.o(.constdata)
-    MyMAC                                    0x00001ff4   Data           6  tcpip.o(.constdata)
-    Region$$Table$$Base                      0x00001ffc   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x0000201c   Number         0  anon$$obj.o(Region$$Table)
+    SendToPico                               0x000002fd   Thumb Code   194  main.o(.text)
+    ProcessData                              0x000003bf   Thumb Code   128  main.o(.text)
+    PicoBlazesThread                         0x0000043f   Thumb Code    90  main.o(.text)
+    main                                     0x00000499   Thumb Code   126  main.o(.text)
+    GetTempVal                               0x00000517   Thumb Code    34  main.o(.text)
+    GetAD7Val                                0x00000539   Thumb Code    38  main.o(.text)
+    InsertDynamicValues                      0x0000055f   Thumb Code    94  main.o(.text)
+    HTTPServer                               0x000005bd   Thumb Code   234  main.o(.text)
+    write_PHY                                0x000006a9   Thumb Code    26  emac.o(.text)
+    read_PHY                                 0x000006c3   Thumb Code    38  emac.o(.text)
+    rx_descr_init                            0x000006e9   Thumb Code    60  emac.o(.text)
+    tx_descr_init                            0x00000725   Thumb Code    64  emac.o(.text)
+    Init_EMAC                                0x00000765   Thumb Code   216  emac.o(.text)
+    ReadFrame_EMAC                           0x0000083d   Thumb Code    12  emac.o(.text)
+    ReadFrameBE_EMAC                         0x00000849   Thumb Code    22  emac.o(.text)
+    CopyFromFrame_EMAC                       0x0000085f   Thumb Code    38  emac.o(.text)
+    DummyReadFrame_EMAC                      0x00000885   Thumb Code    24  emac.o(.text)
+    StartReadFrame                           0x0000089d   Thumb Code    32  emac.o(.text)
+    EndReadFrame                             0x000008bd   Thumb Code    16  emac.o(.text)
+    CheckFrameReceived                       0x000008cd   Thumb Code    18  emac.o(.text)
+    RequestSend                              0x000008df   Thumb Code    32  emac.o(.text)
+    Rdy4Tx                                   0x000008ff   Thumb Code     4  emac.o(.text)
+    WriteFrame_EMAC                          0x00000903   Thumb Code    12  emac.o(.text)
+    CopyToFrame_EMAC                         0x0000090f   Thumb Code    48  emac.o(.text)
+    TCPClockHandler                          0x0000098c   ARM Code      64  tcpip.o(.text)
+    TCPLowLevelInit                          0x000009d9   Thumb Code    56  tcpip.o(.text)
+    TCPPassiveOpen                           0x00000a11   Thumb Code    26  tcpip.o(.text)
+    TCPStartRetryTimer                       0x00000a2d   Thumb Code    26  tcpip.o(.text)
+    PrepareARP_REQUEST                       0x00000a49   Thumb Code   148  tcpip.o(.text)
+    TCPActiveOpen_obsolete                   0x00000add   Thumb Code    48  tcpip.o(.text)
+    TCPActiveOpen                            0x00000b0d   Thumb Code    72  tcpip.o(.text)
+    TCPClose                                 0x00000b55   Thumb Code    42  tcpip.o(.text)
+    TCPReleaseRxBuffer                       0x00000b81   Thumb Code    12  tcpip.o(.text)
+    TCPTransmitTxBuffer                      0x00000b8d   Thumb Code    64  tcpip.o(.text)
+    IsBroadcast                              0x00000bcd   Thumb Code    64  tcpip.o(.text)
+    CalcChecksum                             0x00000c0d   Thumb Code    94  tcpip.o(.text)
+    WriteDWBE                                0x00000c6d   Thumb Code    16  tcpip.o(.text)
+    WriteWBE                                 0x00000c7d   Thumb Code     8  tcpip.o(.text)
+    PrepareTCP_FRAME                         0x00000c85   Thumb Code   254  tcpip.o(.text)
+    TCPRestartTimer                          0x00000d85   Thumb Code     8  tcpip.o(.text)
+    TCPStartTimeWaitTimer                    0x00000d8d   Thumb Code    22  tcpip.o(.text)
+    TCPStopTimer                             0x00000da5   Thumb Code    12  tcpip.o(.text)
+    ProcessTCPFrame                          0x00000db1   Thumb Code   872  tcpip.o(.text)
+    PrepareICMP_ECHO_REPLY                   0x00001119   Thumb Code   168  tcpip.o(.text)
+    ProcessICMPFrame                         0x000011c1   Thumb Code    24  tcpip.o(.text)
+    ProcessEthIAFrame                        0x000011d9   Thumb Code   282  tcpip.o(.text)
+    PrepareARP_ANSWER                        0x000012f5   Thumb Code   116  tcpip.o(.text)
+    ProcessEthBroadcastFrame                 0x00001369   Thumb Code   102  tcpip.o(.text)
+    ReadFrame                                0x000013d1   Thumb Code    50  tcpip.o(.text)
+    SendFrame1                               0x00001405   Thumb Code    14  tcpip.o(.text)
+    PrepareTCP_DATA_FRAME                    0x00001415   Thumb Code   186  tcpip.o(.text)
+    SendFrame2                               0x000014d1   Thumb Code    14  tcpip.o(.text)
+    TCPHandleTimeout                         0x000014e1   Thumb Code    32  tcpip.o(.text)
+    TCPHandleRetransmission                  0x00001501   Thumb Code    54  tcpip.o(.text)
+    DoNetworkStuff                           0x00001539   Thumb Code   540  tcpip.o(.text)
+    SwapBytes                                0x00001755   Thumb Code    12  tcpip.o(.text)
+    __aeabi_uidiv                            0x00001765   Thumb Code     0  uidiv.o(.text)
+    __aeabi_uidivmod                         0x00001765   Thumb Code    46  uidiv.o(.text)
+    __aeabi_memcpy                           0x00001793   Thumb Code    36  memcpya.o(.text)
+    __aeabi_memcpy4                          0x00001793   Thumb Code     0  memcpya.o(.text)
+    __aeabi_memcpy8                          0x00001793   Thumb Code     0  memcpya.o(.text)
+    __aeabi_memset                           0x000017b7   Thumb Code    16  memseta.o(.text)
+    __aeabi_memset4                          0x000017b7   Thumb Code     0  memseta.o(.text)
+    __aeabi_memset8                          0x000017b7   Thumb Code     0  memseta.o(.text)
+    __aeabi_memclr                           0x000017c7   Thumb Code     4  memseta.o(.text)
+    __aeabi_memclr4                          0x000017c7   Thumb Code     0  memseta.o(.text)
+    __aeabi_memclr8                          0x000017c7   Thumb Code     0  memseta.o(.text)
+    _memset$wrapper                          0x000017cb   Thumb Code    22  memseta.o(.text)
+    memcmp                                   0x000017e1   Thumb Code    28  memcmp.o(.text)
+    Inline ARM to Thumb Veneer to __scatterload 0x000017fc   ARM Code       8  init.o(.text)
+    __scatterload                            0x00001805   Thumb Code    24  init.o(.text)
+    __scatterload_rt2                        0x00001805   Thumb Code     0  init.o(.text)
+    Short Thumb to ARM Veneer to __main_after_scatterload 0x00001825   Thumb Code     8  anon$$obj.o(Veneer$$Code)
+    __0sprintf$6                             0x0000182d   Thumb Code    36  printf6.o(i.__0sprintf$6)
+    __1sprintf$6                             0x0000182d   Thumb Code     0  printf6.o(i.__0sprintf$6)
+    __2sprintf                               0x0000182d   Thumb Code     0  printf6.o(i.__0sprintf$6)
+    __ARM_common_call_via_r2                 0x00001855   Thumb Code     2  printf1.o(i.__ARM_common_call_via_r2)
+    __ARM_common_call_via_r3                 0x00001857   Thumb Code     2  init.o(i.__ARM_common_call_via_r3)
+    __ARM_common_call_via_r6                 0x00001859   Thumb Code     2  printfb.o(i.__ARM_common_call_via_r6)
+    Inline Thumb to ARM Veneer to __ARM_common_switch8 0x0000185d   Thumb Code     4  main.o(i.__ARM_common_switch8)
+    __ARM_common_switch8                     0x00001860   ARM Code      24  main.o(i.__ARM_common_switch8)
+    __scatterload_copy                       0x00001878   ARM Code      28  handlers.o(i.__scatterload_copy)
+    __scatterload_null                       0x00001894   ARM Code       4  handlers.o(i.__scatterload_null)
+    __scatterload_zeroinit                   0x00001898   ARM Code      24  handlers.o(i.__scatterload_zeroinit)
+    GetResponse                              0x00001c2e   Data          45  main.o(.constdata)
+    WebSide                                  0x00001c5b   Data         912  main.o(.constdata)
+    MyIP                                     0x00001fec   Data           4  main.o(.constdata)
+    SubnetMask                               0x00001ff0   Data           4  main.o(.constdata)
+    GatewayIP                                0x00001ff4   Data           4  main.o(.constdata)
+    MyMAC                                    0x00001ff8   Data           6  tcpip.o(.constdata)
+    Region$$Table$$Base                      0x00002000   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x00002020   Number         0  anon$$obj.o(Region$$Table)
     RemoteIP                                 0x40000000   Data           4  main.o(.data)
     HTTPStatus                               0x40000004   Data           1  main.o(.data)
     SocketStatus                             0x40000005   Data           1  main.o(.data)
@@ -714,9 +714,9 @@ Memory Map of the image
 
   Image Entry point : 0x0000022c
 
-  Load Region LR_IROM1 (Base: 0x00000000, Size: 0x0000207c, Max: 0x00080000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x00000000, Size: 0x00002080, Max: 0x00080000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Base: 0x00000000, Size: 0x0000201c, Max: 0x00080000, ABSOLUTE)
+    Execution Region ER_IROM1 (Base: 0x00000000, Size: 0x00002020, Max: 0x00080000, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -730,40 +730,40 @@ Memory Map of the image
     0x00000240   0x00000000   Code   RO          479    .ARM.Collect$$$$0000000D  mc_t.l(entry10a.o)
     0x00000240   0x00000000   Code   RO          481    .ARM.Collect$$$$0000000F  mc_t.l(entry11a.o)
     0x00000240   0x00000004   Code   RO          471    .ARM.Collect$$$$00002712  mc_t.l(entry2.o)
-    0x00000244   0x0000045e   Code   RO           13    .text               main.o
-    0x000006a2   0x00000002   PAD
-    0x000006a4   0x000002e4   Code   RO           96    .text               emac.o
-    0x00000988   0x0000004c   Code   RO          136    .text               tcpip.o
-    0x000009d4   0x00000d8c   Code   RO          137    .text               tcpip.o
-    0x00001760   0x0000002e   Code   RO          195    .text               mc_t.l(uidiv.o)
-    0x0000178e   0x00000024   Code   RO          197    .text               mc_t.l(memcpya.o)
-    0x000017b2   0x0000002a   Code   RO          199    .text               mc_t.l(memseta.o)
-    0x000017dc   0x0000001c   Code   RO          201    .text               mc_t.l(memcmp.o)
-    0x000017f8   0x00000008   Ven    RO          499    .text               mc_t.l(init.o)
-    0x00001800   0x00000020   Code   RO          499    .text               mc_t.l(init.o)
-    0x00001820   0x00000008   Ven    RO          525    Veneer$$Code        anon$$obj.o
-    0x00001828   0x00000028   Code   RO          366    i.__0sprintf$6      mc_t.l(printf6.o)
-    0x00001850   0x00000002   Code   RO          273    i.__ARM_common_call_via_r2  mc_t.l(printf1.o)
-    0x00001852   0x00000002   Code   RO          501    i.__ARM_common_call_via_r3  mc_t.l(init.o)
-    0x00001854   0x00000002   Code   RO          227    i.__ARM_common_call_via_r6  mc_t.l(printfb.o)
-    0x00001856   0x00000002   PAD
-    0x00001858   0x00000004   Ven    RO           53    i.__ARM_common_switch8  main.o
-    0x0000185c   0x00000018   Code   RO           53    i.__ARM_common_switch8  main.o
-    0x00001874   0x0000001c   Code   RO          517    i.__scatterload_copy  mc_t.l(handlers.o)
-    0x00001890   0x00000004   Code   RO          518    i.__scatterload_null  mc_t.l(handlers.o)
-    0x00001894   0x00000018   Code   RO          519    i.__scatterload_zeroinit  mc_t.l(handlers.o)
-    0x000018ac   0x0000031c   Code   RO          371    i._printf_core      mc_t.l(printf6.o)
-    0x00001bc8   0x00000026   Code   RO          372    i._printf_post_padding  mc_t.l(printf6.o)
-    0x00001bee   0x00000032   Code   RO          373    i._printf_pre_padding  mc_t.l(printf6.o)
-    0x00001c20   0x0000000a   Code   RO          375    i._sputc            mc_t.l(printf6.o)
-    0x00001c2a   0x000003bd   Data   RO           16    .constdata          main.o
-    0x00001fe7   0x00000001   PAD
-    0x00001fe8   0x00000004   Data   RO           17    .constdata          main.o
-    0x00001fec   0x00000004   Data   RO           18    .constdata          main.o
-    0x00001ff0   0x00000004   Data   RO           19    .constdata          main.o
-    0x00001ff4   0x00000006   Data   RO          138    .constdata          tcpip.o
-    0x00001ffa   0x00000002   PAD
-    0x00001ffc   0x00000020   Data   RO          515    Region$$Table       anon$$obj.o
+    0x00000244   0x00000462   Code   RO           13    .text               main.o
+    0x000006a6   0x00000002   PAD
+    0x000006a8   0x000002e4   Code   RO           96    .text               emac.o
+    0x0000098c   0x0000004c   Code   RO          136    .text               tcpip.o
+    0x000009d8   0x00000d8c   Code   RO          137    .text               tcpip.o
+    0x00001764   0x0000002e   Code   RO          195    .text               mc_t.l(uidiv.o)
+    0x00001792   0x00000024   Code   RO          197    .text               mc_t.l(memcpya.o)
+    0x000017b6   0x0000002a   Code   RO          199    .text               mc_t.l(memseta.o)
+    0x000017e0   0x0000001c   Code   RO          201    .text               mc_t.l(memcmp.o)
+    0x000017fc   0x00000008   Ven    RO          499    .text               mc_t.l(init.o)
+    0x00001804   0x00000020   Code   RO          499    .text               mc_t.l(init.o)
+    0x00001824   0x00000008   Ven    RO          525    Veneer$$Code        anon$$obj.o
+    0x0000182c   0x00000028   Code   RO          366    i.__0sprintf$6      mc_t.l(printf6.o)
+    0x00001854   0x00000002   Code   RO          273    i.__ARM_common_call_via_r2  mc_t.l(printf1.o)
+    0x00001856   0x00000002   Code   RO          501    i.__ARM_common_call_via_r3  mc_t.l(init.o)
+    0x00001858   0x00000002   Code   RO          227    i.__ARM_common_call_via_r6  mc_t.l(printfb.o)
+    0x0000185a   0x00000002   PAD
+    0x0000185c   0x00000004   Ven    RO           53    i.__ARM_common_switch8  main.o
+    0x00001860   0x00000018   Code   RO           53    i.__ARM_common_switch8  main.o
+    0x00001878   0x0000001c   Code   RO          517    i.__scatterload_copy  mc_t.l(handlers.o)
+    0x00001894   0x00000004   Code   RO          518    i.__scatterload_null  mc_t.l(handlers.o)
+    0x00001898   0x00000018   Code   RO          519    i.__scatterload_zeroinit  mc_t.l(handlers.o)
+    0x000018b0   0x0000031c   Code   RO          371    i._printf_core      mc_t.l(printf6.o)
+    0x00001bcc   0x00000026   Code   RO          372    i._printf_post_padding  mc_t.l(printf6.o)
+    0x00001bf2   0x00000032   Code   RO          373    i._printf_pre_padding  mc_t.l(printf6.o)
+    0x00001c24   0x0000000a   Code   RO          375    i._sputc            mc_t.l(printf6.o)
+    0x00001c2e   0x000003bd   Data   RO           16    .constdata          main.o
+    0x00001feb   0x00000001   PAD
+    0x00001fec   0x00000004   Data   RO           17    .constdata          main.o
+    0x00001ff0   0x00000004   Data   RO           18    .constdata          main.o
+    0x00001ff4   0x00000004   Data   RO           19    .constdata          main.o
+    0x00001ff8   0x00000006   Data   RO          138    .constdata          tcpip.o
+    0x00001ffe   0x00000002   PAD
+    0x00002000   0x00000020   Data   RO          515    Region$$Table       anon$$obj.o
 
 
     Execution Region RW_IRAM1 (Base: 0x40000000, Size: 0x00000968, Max: 0x00008000, ABSOLUTE)
@@ -805,12 +805,12 @@ Image component sizes
 
        740         78          0          8          0       4171   emac.o
        556         80          0          0       1288        372   lpc2300.o
-      1142         74        969         87       1024      10263   main.o
+      1146         74        969         87       1024      10227   main.o
          0          0          0          0          0       1444   pico.o
       3544        410          6          0          0       8993   tcpip.o
 
     ----------------------------------------------------------------------
-      5996        642       1010         96       2312      25243   Object Totals
+      6000        642       1010         96       2312      25207   Object Totals
         12          0         32          0          0          0   (incl. Generated)
          2          0          3          1          0          0   (incl. Padding)
 
@@ -856,15 +856,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      7210        666       1010         96       2312      25683   Grand Totals
-      7210        666       1010         96       2312      25683   ELF Image Totals
-      7210        666       1010         96          0          0   ROM Totals
+      7214        666       1010         96       2312      25647   Grand Totals
+      7214        666       1010         96       2312      25647   ELF Image Totals
+      7214        666       1010         96          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 8220 (   8.03kB)
+    Total RO  Size (Code + RO Data)                 8224 (   8.03kB)
     Total RW  Size (RW Data + ZI Data)              2408 (   2.35kB)
-    Total ROM Size (Code + RO Data + RW Data)       8316 (   8.12kB)
+    Total ROM Size (Code + RO Data + RW Data)       8320 (   8.13kB)
 
 ==============================================================================
 

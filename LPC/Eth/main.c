@@ -175,24 +175,24 @@ void ProcessData(void)
 		{			
 			if(_RxTCPBuffer[3] ==0x62)	//Otwieranie szlabanu
 			{
-				FIO1SET2 = 0x20;//niebieska
+				//FIO1SET2 = 0x20;//niebieska
 				SendToPico(1);
 			}
 			
 			if(_RxTCPBuffer[3] ==0x67)	//Kod w uzyciu
 				{
-					FIO1SET2 = 0x10;//zielony	
+					//FIO1SET2 = 0x10;//zielony	
 					SendToPico(2);
 				}
 				
 			if(_RxTCPBuffer[3] ==0x72)	//Bledny kod
 				{
-					FIO1SET2 = 0x08;//czerwony	
+					//FIO1SET2 = 0x08;//czerwony	
 					SendToPico(3);
 				}
 			if(_RxTCPBuffer[3] ==0x63)	//Koniec aboanmentu
 				{
-					FIO1CLR2 = 0x38;//clear all	
+					//FIO1CLR2 = 0x38;//clear all	
 					SendToPico(4);
 				}
 			if(_RxTCPBuffer[3] ==0x61)	//Inny samochód uzytkownika juz wjechal
@@ -210,6 +210,10 @@ void ProcessData(void)
 			if(_RxTCPBuffer[3] ==0x70)	//Blad wewnetrzny
 				{
 					SendToPico(8);
+				}
+			if(_RxTCPBuffer[3] ==0x6f)	//Osoba lub auto juz wjechalo
+				{
+					SendToPico(9);
 				}
 		}
 	}
@@ -335,7 +339,20 @@ void SendToPico(short int banner)
 				}
 				FIO0CLR = ToPicoDataValid;
 				break;
-			}
+				}
+				
+				case 9:								//Ta osoba lub auto juz wjechalo
+				{
+				FIO1SET=0x18000000;
+				FIO0SET = ToPicoDataValid;
+				while ((FIO0PIN & ToPicoPicoReady))
+				{
+					FIO1SET=0x18000000;
+					FIO0SET = ToPicoDataValid;
+				}
+				FIO0CLR = ToPicoDataValid;
+				break;
+				}
 				
 				default:{}
 		}

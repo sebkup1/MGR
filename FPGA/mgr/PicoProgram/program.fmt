@@ -181,10 +181,10 @@
                     CALL send_space
                     LOAD s4, sC
                     CALL send_hex_byte
-                    ; Filtr "0"
+       Filter_zero: ; Filtr "0"
                     LOAD s6, sA
                     SUB s6, 07
-                    JUMP NC, IR_petla2
+                    JUMP NC, IR_petla2                       ;jesli nie zero to idü dalej
                     ;CALL send_space
                     ;load s4, s6
                     ;call send_hex_byte

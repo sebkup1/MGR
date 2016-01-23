@@ -28,10 +28,19 @@ Project File Date:  11/01/2015
 *** Using Compiler 'V5.05 update 2 (build 169)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Target 1'
 compiling main.c...
+compiling EMAC.c...
+EMAC.c(113): warning:  #177-D: variable "regv" was declared but never referenced
+    unsigned int regv,tout,id1,id2;
+EMAC.c(113): warning:  #177-D: variable "id1" was declared but never referenced
+    unsigned int regv,tout,id1,id2;
+EMAC.c(113): warning:  #177-D: variable "id2" was declared but never referenced
+    unsigned int regv,tout,id1,id2;
+EMAC.c: 3 warnings, 0 errors
+compiling tcpip.c...
 linking...
 Program Size: Code=7214 RO-data=1010 RW-data=96 ZI-data=2312  
 FromELF: creating hex file...
-".\Objects\test3.axf" - 0 Error(s), 0 Warning(s).
+".\Objects\test3.axf" - 0 Error(s), 3 Warning(s).
 </pre>
 </body>
 </html>

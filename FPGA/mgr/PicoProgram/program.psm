@@ -225,7 +225,7 @@
 					
 					
 	LPC_DV_down:   	OUTPUTK 00000000'b, LPC_IN_ready_port
-					INPUT s0, LPC_IN_data_valid_port             ;Sprawdza czy driver odebra³ dane
+					INPUT s0, LPC_IN_data_valid_port             ;Sprawdza czy LPC odebra³ dane
 					TEST s0, LPC_data_valid_syg
 				    JUMP C, LPC_DV_down
 					

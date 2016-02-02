@@ -234,7 +234,6 @@
 					call delay_5s
 					
 					
-					
 					JUMP IR_petla1
 					
 	LPC_LCD_send: CALL LCD_send

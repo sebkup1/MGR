@@ -3,7 +3,7 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 promgen -w -p mcs -c FF -o C:\studia\MGR\FPGA\mgr//main -x xcf16p -u 00000000 C:/studia/MGR/FPGA/mgr/main.bit 
 
-PROM C:\studia\MGR\FPGA\mgr\main.prm map: Sun Jan 10 22:00:57 2016
+PROM C:\studia\MGR\FPGA\mgr\main.prm map: Sat Feb 06 18:05:31 2016
 
 Calculating PROM checksum with fill value ff
 
